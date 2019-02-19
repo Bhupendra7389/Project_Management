@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class AdminLogin extends Component {
   constructor() {
@@ -12,6 +13,13 @@ class AdminLogin extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+  };
+  handleClick = () => {
+    const loginData = {
+      Email: this.state.Email,
+      Password: this.state.Password
+    };
+    this.props.AdminLogin(loginData);
   };
   render() {
     return (
@@ -51,5 +59,12 @@ class AdminLogin extends Component {
     );
   }
 }
-
-export default AdminLogin;
+const mapDispatchToProps = dispatch => {
+  return {
+    AdminLogin: admin => dispatch({ type: "ADMINLOGIN", admin })
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(AdminLogin);

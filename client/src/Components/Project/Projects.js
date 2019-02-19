@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class Projects extends Component {
   constructor() {
@@ -22,6 +23,13 @@ class Projects extends Component {
       Submission_Date: this.state.Submission_Date,
       Project_Discription: this.state.Project_Discription
     };
+    this.props.AddProject(formData);
+    this.setState({
+      Project_Name: "",
+      Start_Date: "",
+      Submission_Date: "",
+      Project_Discription: ""
+    });
   };
   render() {
     return (
@@ -31,7 +39,7 @@ class Projects extends Component {
             <div className="col-lg" />
             <div className="col-lg m-5 p-5">
               <div className="form-group shadow-textarea">
-                <h4>Task Details</h4>
+                <h4>Project Details</h4>
                 <input
                   type="text"
                   name="Project_Name"
@@ -81,5 +89,12 @@ class Projects extends Component {
     );
   }
 }
-
-export default Projects;
+const mapDispatchToProps = dispatch => {
+  return {
+    AddProject: project => dispatch({ type: "ADDPROJECT", project })
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(Projects);

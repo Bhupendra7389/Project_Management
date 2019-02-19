@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class AddTask extends Component {
   constructor() {
@@ -24,6 +25,14 @@ class AddTask extends Component {
       Total_Developers: this.state.Total_Developers,
       Task_Discription: this.state.Task_Discription
     };
+    this.props.AddTask(formData);
+    this.setState({
+      Task_Name: "",
+      Start_Date: "",
+      Submission_Date: "",
+      Total_Developers: [],
+      Task_Discription: ""
+    });
   };
   render() {
     return (
@@ -92,5 +101,12 @@ class AddTask extends Component {
     );
   }
 }
-
-export default AddTask;
+const mapDispatchToProps = dispatch => {
+  return {
+    AddTask: task => dispatch({ type: "ADDTASK", task })
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddTask);

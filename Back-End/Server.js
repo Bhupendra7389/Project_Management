@@ -61,6 +61,7 @@ app.post("/Login/AdminLogin", (req, res) => {
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "30 min"
             });
+            console.log("LoggedIn");
             res.send({ token: token });
           }
         });
