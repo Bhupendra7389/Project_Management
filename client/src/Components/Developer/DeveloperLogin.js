@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class DeveloperLogin extends Component {
   constructor() {
@@ -11,6 +12,17 @@ class DeveloperLogin extends Component {
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
+    });
+  };
+  handleClick = () => {
+    const formData = {
+      Email: this.state.Email,
+      Password: this.state.Password
+    };
+    this.props.DeveloperLogin(formData);
+    this.setState({
+      Email: "",
+      Password: ""
     });
   };
   render() {
@@ -51,5 +63,17 @@ class DeveloperLogin extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    DeveloperLogin: developer =>
+      dispatch({
+        type: "DEVELOPERLOGIN",
+        developer
+      })
+  };
+};
 
-export default DeveloperLogin;
+export default connect(
+  null,
+  mapDispatchToProps
+)(DeveloperLogin);

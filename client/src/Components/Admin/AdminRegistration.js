@@ -68,14 +68,19 @@ class AdminRegistration extends Component {
                   value={this.state.Name}
                 />
                 <br />
-                <input
+                <select
                   className="form-control"
                   type="text"
                   name="Position"
                   onChange={this.onChange}
                   placeholder="Profession..."
                   value={this.state.Position}
-                />
+                >
+                  <option value="" disabled selected>
+                    Designation...
+                  </option>
+                  <option value="saab">Admin</option>
+                </select>
                 <br />
 
                 <button className="btn btn-primary " onClick={this.handleClick}>

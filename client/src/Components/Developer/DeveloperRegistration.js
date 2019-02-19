@@ -17,7 +17,7 @@ class DeveloperRegistration extends Component {
     });
   };
   handleClick = () => {
-    var formData = {
+    const formData = {
       Email: this.state.Email,
       Password: this.state.Password,
       Name: this.state.Name,
@@ -67,14 +67,17 @@ class DeveloperRegistration extends Component {
                   value={this.state.Name}
                 />
                 <br />
-                <input
+                <select
                   className="form-control"
                   type="text"
                   name="Position"
                   onChange={this.onChange}
-                  placeholder="Designation..."
-                  value={this.state.Position}
-                />
+                >
+                  <option value="" disabled selected>
+                    Designation...
+                  </option>
+                  <option value="fiat">Developer</option>
+                </select>
                 <br />
 
                 <button className="btn btn-primary " onClick={this.handleClick}>

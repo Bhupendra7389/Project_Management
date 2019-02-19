@@ -114,6 +114,7 @@ app.post("/Login/DeveloperLogin", (req, res) => {
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "30 min"
             });
+            console.log("Developer Loged In");
             res.send({ token: token });
           }
         });

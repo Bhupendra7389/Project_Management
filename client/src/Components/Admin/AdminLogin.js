@@ -17,9 +17,14 @@ class AdminLogin extends Component {
   handleClick = () => {
     const loginData = {
       Email: this.state.Email,
-      Password: this.state.Password
+      Password: this.state.Password,
+      history: this.props.history
     };
     this.props.AdminLogin(loginData);
+    this.setState({
+      Email: "",
+      Password: ""
+    });
   };
   render() {
     return (
