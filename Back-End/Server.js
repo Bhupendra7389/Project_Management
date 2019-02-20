@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const express = require("express");
 const app = new express();
 const jwt = require("jsonwebtoken");
+
 app.use(bodyParser.json()).use(morgan());
 var cors = require("cors");
 require("./Models/Mongo");
@@ -61,8 +62,11 @@ app.post("/Login/AdminLogin", (req, res) => {
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "30 min"
             });
-            console.log("LoggedIn");
-            res.send({ token: token });
+            const data = {
+              token,
+              user
+            };
+            res.send(data);
           }
         });
       }
@@ -114,7 +118,7 @@ app.post("/Login/DeveloperLogin", (req, res) => {
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "30 min"
             });
-            console.log("Developer Loged In");
+
             res.send({ token: token });
           }
         });
@@ -179,6 +183,15 @@ app.post("/Add/AddProject", async (req, res) => {
     });
   } catch (error) {
     console.error(500);
+  }
+});
+app.get("/Get/ProjectList", async (req, res) => {
+  try {
+    const ProjectList = await AddProject.find({});
+
+    res.json(ProjectList);
+  } catch (error) {
+    res.status(500);
   }
 });
 

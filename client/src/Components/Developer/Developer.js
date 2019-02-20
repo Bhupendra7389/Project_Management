@@ -5,12 +5,17 @@ class Developer extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar  navbar-light bg-light">
-          <div class="navbar-nav">
-            <Link to="/DeveloperReg">Developer-Reg</Link>
-            <br />
-            <Link to="/DeveloperLog">Devlop-LogIn</Link>
-          </div>
+        <nav className="nav bg-light">
+          <li className="nav-item">
+            <Link to="/DeveloperReg" className="nav-link active">
+              Registration
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/DeveloperLog" className="nav-link active">
+              Login
+            </Link>
+          </li>
         </nav>
         <h1>Welcome Developer</h1>
       </div>

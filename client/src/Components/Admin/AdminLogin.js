@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 class AdminLogin extends Component {
   constructor() {
@@ -8,6 +7,7 @@ class AdminLogin extends Component {
       Email: "",
       Password: ""
     };
+    //localStorage.setItem("token", "sbsdcbsdbbsdv");
   }
   onChange = e => {
     this.setState({
@@ -64,12 +64,4 @@ class AdminLogin extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    AdminLogin: admin => dispatch({ type: "ADMINLOGIN", admin })
-  };
-};
-export default connect(
-  null,
-  mapDispatchToProps
-)(AdminLogin);
+export default AdminLogin;

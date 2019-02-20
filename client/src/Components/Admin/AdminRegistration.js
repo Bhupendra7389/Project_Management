@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 class AdminRegistration extends Component {
   constructor() {
@@ -40,7 +39,6 @@ class AdminRegistration extends Component {
             <div className="col-lg m-5 p-5">
               <div className="form-group shadow-textarea">
                 <h4>Welcome Admin</h4>
-
                 <input
                   type="email"
                   name="Email"
@@ -73,8 +71,6 @@ class AdminRegistration extends Component {
                   type="text"
                   name="Position"
                   onChange={this.onChange}
-                  placeholder="Profession..."
-                  value={this.state.Position}
                 >
                   <option value="" disabled selected>
                     Designation...
@@ -84,7 +80,7 @@ class AdminRegistration extends Component {
                 <br />
 
                 <button className="btn btn-primary " onClick={this.handleClick}>
-                  ADD-ADMIN
+                  REGISTER
                 </button>
               </div>
             </div>
@@ -95,13 +91,4 @@ class AdminRegistration extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    AdminRegistration: admin => dispatch({ type: "ADMINREGISTRATION", admin })
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(AdminRegistration);
+export default AdminRegistration;

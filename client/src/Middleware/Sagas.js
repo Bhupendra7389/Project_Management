@@ -5,7 +5,7 @@ import addTask from "./SagaMethods/AddTask";
 import addProject from "./SagaMethods/AddProject";
 import adminLogin from "./SagaMethods/AdminLogin";
 import developerLogin from "./SagaMethods/DeveloperLogin";
-
+import listProject from "./SagaMethods/ListProject";
 export default function* rootSaga() {
   yield all([
     yield takeLatest("ADMINREGISTRATION", adminRegistration),
@@ -13,6 +13,7 @@ export default function* rootSaga() {
     yield takeLatest("ADDTASK", addTask),
     yield takeLatest("ADDPROJECT", addProject),
     yield takeLatest("ADMINLOGIN", adminLogin),
-    yield takeLatest("DEVELOPERLOGIN", developerLogin)
+    yield takeLatest("DEVELOPERLOGIN", developerLogin),
+    yield takeLatest("LISTPROJECT", listProject)
   ]);
 }

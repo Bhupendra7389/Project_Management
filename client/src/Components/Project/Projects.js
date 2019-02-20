@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import { Redirect } from "react-router-dom";
 class Projects extends Component {
   constructor() {
     super();
@@ -32,61 +32,71 @@ class Projects extends Component {
     });
   };
   render() {
-    return (
-      <div>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg" />
-            <div className="col-lg m-5 p-5">
-              <div className="form-group shadow-textarea">
-                <h4>Project Details</h4>
-                <input
-                  type="text"
-                  name="Project_Name"
-                  onChange={this.onChange}
-                  className="form-control"
-                  placeholder="Title..."
-                  value={this.state.Project_Name}
-                />
-                <br />
-                <input
-                  type="date"
-                  name="Start_Date"
-                  onChange={this.onChange}
-                  className="form-control"
-                  placeholder="../../...."
-                  value={this.state.Start_Date}
-                />
-                <br />
-                <input
-                  type="date"
-                  name="Submission_Date"
-                  onChange={this.onChange}
-                  className="form-control"
-                  placeholder="../../...."
-                  value={this.state.Submission_Date}
-                />
-                <br />
-                <textarea
-                  className="form-control"
-                  type="text"
-                  name="Project_Discription"
-                  onChange={this.onChange}
-                  placeholder="Project_Discription..."
-                  value={this.state.Project_Discription}
-                />
-                <br />
+    if (
+      localStorage.getItem("Token") !== "undefined" &&
+      localStorage.getItem("Token")
+    ) {
+      return (
+        <div>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg" />
+              <div className="col-lg m-5 p-5">
+                <div className="form-group shadow-textarea">
+                  <h4>Project Details</h4>
+                  <input
+                    type="text"
+                    name="Project_Name"
+                    onChange={this.onChange}
+                    className="form-control"
+                    placeholder="Title..."
+                    value={this.state.Project_Name}
+                  />
+                  <br />
+                  <input
+                    type="date"
+                    name="Start_Date"
+                    onChange={this.onChange}
+                    className="form-control"
+                    placeholder="../../...."
+                    value={this.state.Start_Date}
+                  />
+                  <br />
+                  <input
+                    type="date"
+                    name="Submission_Date"
+                    onChange={this.onChange}
+                    className="form-control"
+                    placeholder="../../...."
+                    value={this.state.Submission_Date}
+                  />
+                  <br />
+                  <textarea
+                    className="form-control"
+                    type="text"
+                    name="Project_Discription"
+                    onChange={this.onChange}
+                    placeholder="Project_Discription..."
+                    value={this.state.Project_Discription}
+                  />
+                  <br />
 
-                <button className="btn btn-primary " onClick={this.handleClick}>
-                  SUBMIT
-                </button>
+                  <button
+                    className="btn btn-primary "
+                    onClick={this.handleClick}
+                  >
+                    SUBMIT
+                  </button>
+                </div>
               </div>
+              <div className="col-lg" />
             </div>
-            <div className="col-lg" />
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <Redirect to="AdminLog" />;
+    }
   }
 }
 const mapDispatchToProps = dispatch => {

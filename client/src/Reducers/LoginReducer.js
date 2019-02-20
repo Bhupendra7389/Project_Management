@@ -1,5 +1,6 @@
 const initialState = {
-  data: []
+  data: [],
+  ProjectList: []
 };
 const reducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -10,11 +11,10 @@ const reducer = (state = initialState, action) => {
       newState.data = action.payload;
       break;
     }
-    // case "SENDDATA": {
-    //   console.log(action.payload);
-    //   newState.data = action.payload;
-    //   break;
-    // }
+    case "GETLISTPROJECT": {
+      newState.ProjectList = action.payload;
+      break;
+    }
 
     default:
   }

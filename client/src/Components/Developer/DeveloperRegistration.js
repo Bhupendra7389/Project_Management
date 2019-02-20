@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 class DeveloperRegistration extends Component {
   constructor() {
@@ -81,7 +80,7 @@ class DeveloperRegistration extends Component {
                 <br />
 
                 <button className="btn btn-primary " onClick={this.handleClick}>
-                  ADD-ADMIN
+                  REGISTER
                 </button>
               </div>
             </div>
@@ -92,17 +91,5 @@ class DeveloperRegistration extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    DeveloperRegistration: developer =>
-      dispatch({
-        type: "DEVELOPERREGISTRATION",
-        developer
-      })
-  };
-};
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(DeveloperRegistration);
+export default DeveloperRegistration;
