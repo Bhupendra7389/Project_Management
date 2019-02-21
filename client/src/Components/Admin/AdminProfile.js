@@ -15,7 +15,7 @@ class AdminProfile extends Component {
       return (
         <div>
           <nav className="navbar  navbar-light bg-light">
-            <div class="nav">
+            <div className="nav">
               <li className="nav item">
                 <Link to="/AdminProfile" className="nav-link active">
                   Profile
