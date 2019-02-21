@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class AddTask extends Component {
   constructor() {
@@ -42,6 +42,13 @@ class AddTask extends Component {
     ) {
       return (
         <div>
+          <nav className="nav bg-light">
+            <li className="nav-item">
+              <Link to="/AdminProfile" className="nav-link active">
+                Profile
+              </Link>
+            </li>
+          </nav>
           <div className="container">
             <div className="row">
               <div className="col-lg" />

@@ -118,8 +118,12 @@ app.post("/Login/DeveloperLogin", (req, res) => {
             const token = jwt.sign(payload, secretKey, {
               expiresIn: "30 min"
             });
+            const developer = {
+              token: token,
+              user: user
+            };
 
-            res.send({ token: token });
+            res.send(developer);
           }
         });
       }
@@ -193,6 +197,47 @@ app.get("/Get/ProjectList", async (req, res) => {
   } catch (error) {
     res.status(500);
   }
+});
+app.get("/Get/TaskList", async (req, res) => {
+  try {
+    const TaskList = await AddTask.find({});
+
+    res.json(TaskList);
+  } catch (error) {
+    res.status(500);
+  }
+});
+app.patch("/Edit/EditTask/:TaskId", async (req, res) => {
+  try {
+    const {
+      Task_Name,
+      Start_Date,
+      Submission_Date,
+      Total_Developers,
+      Task_Discription
+    } = await req.body;
+    await AddTask.findByIdAndUpdate(
+      {
+        _id: req.params.TaskId
+      },
+      {
+        Task_Name,
+        Start_Date,
+        Submission_Date,
+        Total_Developers,
+        Task_Discription
+      }
+    );
+
+    res.json("Done");
+  } catch (error) {
+    res.status(500);
+  }
+});
+app.delete("/Delete/DeleteTask/:Id", async (req, res) => {
+  try {
+    await AddTask.findByIdAndDelete({ _id: req.params.Id });
+  } catch (error) {}
 });
 
 //Server Run

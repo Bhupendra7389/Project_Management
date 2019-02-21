@@ -7,52 +7,61 @@ class ListProject extends Component {
   }
 
   render() {
-    console.log(this.props.getListProject);
-
     return (
       <div>
         <div className="container -fluid">
           <h1>Project List</h1>
 
           {this.props.getListProject.map(post => (
-            <ul className="lighten-3 m-2">
-              <div className="p-3 border border-primary">
-                <div className="container">
-                  <div className="row justify-content-start">
-                    <div className="col p-1 border border-danger">
-                      <label>Project title</label>
-                      <div>
-                        <p>{post.Project_Name}</p>
+            <ul key={post._id}>
+              <ul className="lighten-3 m-2">
+                <div className="p-3 border border-primary">
+                  <div className="container">
+                    <div className="row justify-content-start">
+                      <div className="col p-1 border border-danger">
+                        <label>Project title</label>
+                        <div>
+                          <p>
+                            <b>{post.Project_Name}</b>
+                          </p>
+                        </div>
                       </div>
                     </div>
+                    <hr />
+                    <div className="row justify-content-start">
+                      <div className="col p-1 border border-danger">
+                        <label>Project Start</label>
+                        <div>
+                          <b>{post.Start_Date}</b>
+                        </div>
+                      </div>
 
-                    <div className="col p-1 border border-danger">
-                      <label>Project Start</label>
-                      <p>
-                        <div>{post.Start_Date}</div>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="row justify-content-start ">
-                    <div className="col p-1 border border-danger">
-                      <label>Project Submit</label>
-                      <div>
-                        <p>{post.Submission_Date}</p>
+                      <hr />
+
+                      <div className="col p-1 border border-danger">
+                        <label>Project Submit</label>
+                        <div>
+                          <p>
+                            <b>{post.Submission_Date}</b>
+                          </p>
+                        </div>
                       </div>
                     </div>
 
                     <br />
-                    <div className="col p-1 border border-danger">
-                      <label>Project Details</label>
-                      <div>
-                        <p>{post.Project_Discription}</p>
+                    <div className="row justify-content-start">
+                      <div className="col p-1 border border-danger">
+                        <label>Project Details</label>
+                        <div>
+                          <p>
+                            <b>{post.Project_Discription}</b>
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <br />
-                  <button className="btn btn-danger sm">DELETE</button>
                 </div>
-              </div>
+              </ul>
             </ul>
           ))}
         </div>

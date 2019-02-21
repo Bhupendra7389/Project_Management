@@ -17,7 +17,8 @@ class DeveloperLogin extends Component {
   handleClick = () => {
     const formData = {
       Email: this.state.Email,
-      Password: this.state.Password
+      Password: this.state.Password,
+      history: this.props.history
     };
     this.props.DeveloperLogin(formData);
     this.setState({

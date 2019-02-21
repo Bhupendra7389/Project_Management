@@ -72,7 +72,7 @@ class AdminRegistration extends Component {
                   name="Position"
                   onChange={this.onChange}
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     Designation...
                   </option>
                   <option value="saab">Admin</option>

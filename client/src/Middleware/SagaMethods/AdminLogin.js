@@ -7,6 +7,10 @@ export default function* adminLogin(action) {
     action.admin
   );
   localStorage.setItem("Token", Data.data.token);
+  localStorage.setItem("Email", Data.data.user.Email);
+  localStorage.setItem("Name", Data.data.user.Name);
+  localStorage.setItem("Id", Data.data.user._id);
+  localStorage.setItem("Position", Data.data.user.Position);
   if (localStorage.getItem("Token") !== "undefined") {
     action.admin.history.push("/AdminProfile");
   } else {
@@ -14,6 +18,4 @@ export default function* adminLogin(action) {
   }
 
   yield put({ type: "SENDDATA", payload: Data.data });
-  //console.log("Data", Data.data);
-  // action.admin.history.push("/Admin");
 }

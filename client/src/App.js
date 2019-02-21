@@ -15,6 +15,8 @@ import ProjectDetails from "./Components/Project/ProjectDetails";
 import AddTask from "./Components/Project/AddTask";
 import AdminProfile from "./Components/Admin/AdminProfile";
 import ListProject from "./Components/Project/ListProject";
+import DeveloperProfile from "./Components/Developer/DeveloperProfile";
+import ListTask from "./Components/Project/ListTask";
 
 class App extends Component {
   render() {
@@ -22,12 +24,12 @@ class App extends Component {
       <div className="App">
         <div>
           <nav className="nav bg-dark">
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/" className="nav-link active">
                 Home
               </Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/Admin" className="nav-link active">
                 Admin
               </Link>
@@ -38,12 +40,13 @@ class App extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/ProjectDetails" className="nav-link active">
+              <Link to="/ProjectList" className="nav-link active">
                 Projects
               </Link>
             </li>
           </nav>
           <Switch>
+            <Route path="/DeveloperProfile" component={DeveloperProfile} />
             <Route path="/Admin" component={Admin} />
             <Route path="/Developer" component={Developer} />
             <Route path="/Projects" component={Projects} />
@@ -56,6 +59,7 @@ class App extends Component {
             <Route path="/AddTask" component={AddTask} />
             <Route path="/AdminProfile" component={AdminProfile} />
             <Route path="/ProjectList" component={ListProject} />
+            <Route path="/TaskList" component={ListTask} />
           </Switch>
         </div>
       </div>

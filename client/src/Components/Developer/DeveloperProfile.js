@@ -15,20 +15,15 @@ class AdminProfile extends Component {
       return (
         <div>
           <nav className="navbar  navbar-light bg-light">
-            <div class="nav">
+            <div className="nav">
               <li className="nav item">
-                <Link to="/AdminProfile" className="nav-link active">
+                <Link to="/DeveloperProfile" className="nav-link active">
                   Profile
                 </Link>
               </li>
               <li className="nav item">
                 <Link to="/AddTask" className="nav-link active">
                   Add-Task
-                </Link>
-              </li>
-              <li className="nav item">
-                <Link to="/Projects" className="nav-link active">
-                  Add-Projects
                 </Link>
               </li>
               <li className="nav item">
@@ -55,8 +50,10 @@ class AdminProfile extends Component {
     }
     return (
       <div>
-        <h1>Session Out</h1>
-        <Link className="btn btn-danger" to="/AdminLog">
+        <div>
+          <h1>Session Out</h1>
+        </div>
+        <Link className="btn btn-danger" to="/DeveloperLog">
           Log-In
         </Link>
       </div>

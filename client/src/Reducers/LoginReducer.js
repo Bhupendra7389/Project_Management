@@ -1,6 +1,7 @@
 const initialState = {
   data: [],
-  ProjectList: []
+  ProjectList: [],
+  TaskList: []
 };
 const reducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -11,8 +12,18 @@ const reducer = (state = initialState, action) => {
       newState.data = action.payload;
       break;
     }
+    case "DEVELOPERSENDDATA": {
+      console.log(action.payload);
+      newState.data = action.payload;
+      break;
+    }
+
     case "GETLISTPROJECT": {
       newState.ProjectList = action.payload;
+      break;
+    }
+    case "GETLISTTASK": {
+      newState.TaskList = action.payload;
       break;
     }
 
