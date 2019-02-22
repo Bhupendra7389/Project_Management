@@ -21,11 +21,7 @@ class AdminProfile extends Component {
                   Profile
                 </Link>
               </li>
-              <li className="nav item">
-                <Link to="/AddTask" className="nav-link active">
-                  Add-Task
-                </Link>
-              </li>
+
               <li className="nav item">
                 <Link to="/TaskList" className="nav-link active">
                   Task
@@ -62,7 +58,7 @@ class AdminProfile extends Component {
 }
 const mapStateToProps = state => {
   return {
-    Token: state.data
+    Token: state.DeveloperData
   };
 };
 

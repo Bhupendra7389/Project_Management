@@ -65,7 +65,7 @@ class AdminProfile extends Component {
 }
 const mapStateToProps = state => {
   return {
-    Token: state.data
+    Token: state.AdminData
   };
 };
 
