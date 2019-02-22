@@ -1,23 +1,16 @@
 import React, { Component } from "react";
-
 import { Switch, Link, Route } from "react-router-dom";
 import "./App.css";
-import AdminRegistration from "./Container/AdminRegistration";
-import AdminLogin from "./Container/AdminLogin";
 import DeveloperLogin from "./Components/Developer/DeveloperLogin";
 import DeveloperRegistration from "./Container/DeveloperRegistration";
-import Admin from "./Components/Admin/Admin";
-import Developer from "./Components/Developer/Developer";
 import Projects from "./Components/Project/Projects";
 import Home from "./Home";
 import "./bootstrap.css";
-import ProjectDetails from "./Components/Project/ProjectDetails";
 import AddTask from "./Components/Project/AddTask";
 import AdminProfile from "./Components/Admin/AdminProfile";
 import ListProject from "./Components/Project/ListProject";
 import DeveloperProfile from "./Components/Developer/DeveloperProfile";
 import ListTask from "./Components/Project/ListTask";
-
 class App extends Component {
   render() {
     return (
@@ -25,18 +18,8 @@ class App extends Component {
         <div>
           <nav className="nav bg-dark">
             <li className="nav-item">
-              <Link to="/" className="nav-link active">
+              <Link to="/Home" className="nav-link active">
                 Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/Admin" className="nav-link active">
-                Admin
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/Developer" className="nav-link active">
-                Developer
               </Link>
             </li>
             <li className="nav-item">
@@ -47,13 +30,8 @@ class App extends Component {
           </nav>
           <Switch>
             <Route path="/DeveloperProfile" component={DeveloperProfile} />
-            <Route path="/Admin" component={Admin} />
-            <Route path="/Developer" component={Developer} />
             <Route path="/Projects" component={Projects} />
-            <Route path="/ProjectDetails" component={ProjectDetails} />
-            <Route path="/" exact render={Home.render} />
-            <Route path="/AdminReg" component={AdminRegistration} />
-            <Route path="/AdminLog" component={AdminLogin} />
+            <Route path="/Home" component={Home} />
             <Route path="/DeveloperReg" component={DeveloperRegistration} />
             <Route path="/DeveloperLog" component={DeveloperLogin} />
             <Route path="/AddTask" component={AddTask} />

@@ -1,5 +1,5 @@
 require("mongoose");
-const AddAdmin = require("./Models/Admin/AddAdmin");
+
 const AddDeveloper = require("./Models/Developer/AddDeveloper");
 const AddProject = require("./Models/TaskDetails/AddProject");
 const AddTask = require("./Models/TaskDetails/AddTask");
@@ -20,65 +20,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("Hello Friends");
 });
-app.post("/Register/AdminRegistration", async (req, res) => {
-  try {
-    const { Email, Password, Name, Position } = await req.body;
-    const addAdmin = new AddAdmin({
-      Email,
-      Password,
-      Name,
-      Position
-    });
-    addAdmin.save((error, user) => {
-      if (error) {
-        res.send(error);
-      } else if (!user) {
-        res.send("Data not found");
-      } else {
-        res.status(200).send(user);
-      }
-    });
-  } catch (error) {
-    console.error(500);
-  }
-});
-app.post("/Login/AdminLogin", (req, res) => {
-  try {
-    const { Email, Password } = req.body;
 
-    AddAdmin.findOne({ Email }, (err, user) => {
-      if (err) {
-        res.status(500).json({ error: "Internal Error" });
-      } else if (!user) {
-        res.send("Wrong Email or Password");
-      } else {
-        user.isCorrectPassword(Password, (err, Data) => {
-          if (err) {
-            res.status(400).send("Internal Methos Error");
-          } else if (!Data) {
-            res.status(402).send("Password is Incorrect");
-          } else {
-            const payload = { Email };
-            const token = jwt.sign(payload, secretKey, {
-              expiresIn: "30 min"
-            });
-            const data = {
-              token,
-              user
-            };
-            res.send(data);
-          }
-        });
-      }
-    });
-  } catch (error) {
-    res.status(401);
-    res.send("Error");
-  }
-});
 app.post("/Register/DeveloperRegistration", async (req, res) => {
+  console.log(req.body);
   try {
     const { Email, Password, Name, Position } = await req.body;
+
     const addDeveloper = new AddDeveloper({
       Email,
       Password,

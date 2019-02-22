@@ -20,7 +20,8 @@ class DeveloperRegistration extends Component {
       Email: this.state.Email,
       Password: this.state.Password,
       Name: this.state.Name,
-      Position: this.state.Position
+      Position: this.state.Position,
+      history: this.props.history
     };
     this.props.DeveloperRegistration(formData);
     this.setState({
@@ -33,12 +34,12 @@ class DeveloperRegistration extends Component {
   render() {
     return (
       <div>
-        <div className="container">
+        <div>
           <div className="row">
             <div className="col-lg" />
             <div className="col-lg m-5 p-5">
               <div className="form-group shadow-textarea">
-                <h4>Welcome Developer</h4>
+                <h4>Welcome User</h4>
                 <input
                   type="email"
                   name="Email"
@@ -72,10 +73,11 @@ class DeveloperRegistration extends Component {
                   name="Position"
                   onChange={this.onChange}
                 >
-                  <option value="" disabled>
+                  <option value="" disabled selected>
                     Designation...
                   </option>
-                  <option value="fiat">Developer</option>
+                  <option value="Developer">Developer</option>
+                  <option value="Admin">Admin</option>
                 </select>
                 <br />
 

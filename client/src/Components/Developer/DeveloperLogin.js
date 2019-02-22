@@ -26,15 +26,18 @@ class DeveloperLogin extends Component {
       Password: ""
     });
   };
+  componentDidMount = () => {
+    localStorage.clear();
+  };
   render() {
     return (
       <div>
-        <div className="container">
+        <div>
           <div className="row">
             <div className="col-lg" />
             <div className="col-lg m-5 p-5">
               <div className="form-group shadow-textarea" />
-              <h3>Developer Login</h3>
+              <h3>Login User</h3>
               <input
                 type="text"
                 name="Email"

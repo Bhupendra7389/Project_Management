@@ -55,6 +55,7 @@ class ListTask extends Component {
       Total_Developers: [],
       Task_Discription: ""
     });
+    this.setState({ show: false });
   };
 
   handleShow = () => {
@@ -88,6 +89,7 @@ class ListTask extends Component {
       Total_Developers: [],
       Task_Discription: ""
     });
+    this.setState({ show: false });
   };
 
   componentWillMount() {
@@ -247,7 +249,7 @@ class ListTask extends Component {
                       onClick={this.handleShowButton}
                       value={post._id}
                     >
-                      EDIT
+                      UPDATE
                     </Button>
                     .....
                     <Button

@@ -45,7 +45,7 @@ class Projects extends Component {
               </Link>
             </li>
           </nav>
-          <div className="container">
+          <div>
             <div className="row">
               <div className="col-lg" />
               <div className="col-lg m-5 p-5">

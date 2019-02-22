@@ -9,12 +9,10 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case "SENDDATA": {
-      console.log(action.payload);
-      newState.AdminData = action.payload;
+      newState.DeveloperData = action.payload;
       break;
     }
     case "DEVELOPERSENDDATA": {
-      console.log(action.payload);
       newState.DeveloperData = action.payload;
       break;
     }

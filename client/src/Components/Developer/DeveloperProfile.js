@@ -13,8 +13,8 @@ class AdminProfile extends Component {
   render() {
     if (this.props.Token.user) {
       return (
-        <div>
-          <nav className="navbar  navbar-light bg-light">
+        <div className="container">
+          <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
               <li className="nav item">
                 <Link to="/DeveloperProfile" className="nav-link active">

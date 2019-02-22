@@ -11,26 +11,29 @@ class AdminProfile extends Component {
   }
 
   render() {
-    if (this.props.Token.user) {
+    if (this.props.Token.user && localStorage.getItem("Token")) {
       return (
-        <div>
-          <nav className="navbar  navbar-light bg-light">
+        <div className="container">
+          <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
               <li className="nav item">
                 <Link to="/AdminProfile" className="nav-link active">
                   Profile
                 </Link>
               </li>
+              ...
               <li className="nav item">
                 <Link to="/AddTask" className="nav-link active">
                   Add-Task
                 </Link>
               </li>
+              ...
               <li className="nav item">
                 <Link to="/Projects" className="nav-link active">
                   Add-Projects
                 </Link>
               </li>
+              ...
               <li className="nav item">
                 <Link to="/TaskList" className="nav-link active">
                   Task
@@ -52,20 +55,22 @@ class AdminProfile extends Component {
           </div>
         </div>
       );
+    } else {
+      return (
+        <div>
+          <h1>Session Out</h1>
+
+          <Link className="btn btn-danger" to="/DeveloperLog">
+            Log-In
+          </Link>
+        </div>
+      );
     }
-    return (
-      <div>
-        <h1>Session Out</h1>
-        <Link className="btn btn-danger" to="/AdminLog">
-          Log-In
-        </Link>
-      </div>
-    );
   }
 }
 const mapStateToProps = state => {
   return {
-    Token: state.AdminData
+    Token: state.DeveloperData
   };
 };
 
