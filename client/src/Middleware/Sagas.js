@@ -9,6 +9,7 @@ import listProject from "./SagaMethods/ListProject";
 import listTask from "./SagaMethods/ListTask";
 import editTask from "./SagaMethods/EditTask";
 import deleteTask from "./SagaMethods/DeleteTask";
+import listDeveloper from "./SagaMethods/ListDeveloper";
 export default function* rootSaga() {
   yield all([
     yield takeLatest("ADMINREGISTRATION", adminRegistration),
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     yield takeLatest("LISTPROJECT", listProject),
     yield takeLatest("LISTTASK", listTask),
     yield takeLatest("EDITTASK", editTask),
-    yield takeLatest("DELETETASK", deleteTask)
+    yield takeLatest("DELETETASK", deleteTask),
+    yield takeLatest("LISTDEVELOPER", listDeveloper)
   ]);
 }

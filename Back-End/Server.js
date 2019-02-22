@@ -1,8 +1,8 @@
 require("mongoose");
 
-const AddDeveloper = require("./Models/Developer/AddDeveloper");
-const AddProject = require("./Models/TaskDetails/AddProject");
-const AddTask = require("./Models/TaskDetails/AddTask");
+const AddDeveloper = require("./Models/Developer/Register");
+const AddProject = require("./Models/TaskDetails/Project");
+const AddTask = require("./Models/TaskDetails/Task");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const express = require("express");
@@ -150,6 +150,15 @@ app.get("/Get/TaskList", async (req, res) => {
     const TaskList = await AddTask.find({});
 
     res.json(TaskList);
+  } catch (error) {
+    res.status(500);
+  }
+});
+app.get("/Get/ListDeveloper", async (req, res) => {
+  try {
+    const ListDeveloper = await AddDeveloper.find({ Position: "Developer" });
+
+    res.json(ListDeveloper);
   } catch (error) {
     res.status(500);
   }

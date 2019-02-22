@@ -44,13 +44,22 @@ class AdminProfile extends Component {
           <h3>Profile</h3>
           <div className="row">
             <div className="col">
-              <p>Name:-{this.props.Token.user.Name}</p>
+              <h1>{this.props.Token.user.Name}</h1>
             </div>
+          </div>
+          <div className="row">
             <div className="col">
               <p>Profession:-{this.props.Token.user.Position}</p>
             </div>
+          </div>
+          <div className="row">
             <div className="col">
               <p>Id:-{this.props.Token.user._id}</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <p>Email-Id:-{this.props.Token.user.Email}</p>
             </div>
           </div>
         </div>

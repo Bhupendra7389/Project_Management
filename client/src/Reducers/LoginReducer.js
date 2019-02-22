@@ -1,5 +1,5 @@
 const initialState = {
-  AdminData: [],
+  ListDeveloper: [],
   DeveloperData: [],
   ProjectList: [],
   TaskList: []
@@ -8,10 +8,6 @@ const reducer = (state = initialState, action) => {
   const newState = { ...state };
 
   switch (action.type) {
-    case "SENDDATA": {
-      newState.DeveloperData = action.payload;
-      break;
-    }
     case "DEVELOPERSENDDATA": {
       newState.DeveloperData = action.payload;
       break;
@@ -23,6 +19,10 @@ const reducer = (state = initialState, action) => {
     }
     case "GETLISTTASK": {
       newState.TaskList = action.payload;
+      break;
+    }
+    case "GETLISTDEVELOPER": {
+      newState.ListDeveloper = action.payload;
       break;
     }
 

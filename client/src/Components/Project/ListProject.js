@@ -4,14 +4,13 @@ import { connect } from "react-redux";
 class ListProject extends Component {
   componentWillMount() {
     this.props.ListProject();
+    this.props.ListDeveloper();
   }
-
   render() {
     return (
       <div>
         <div className="container -fluid">
           <h1>Project List</h1>
-
           {this.props.getListProject.map(post => (
             <ul key={post._id}>
               <ul className="lighten-3 m-2">
@@ -35,9 +34,7 @@ class ListProject extends Component {
                           <b>{post.Start_Date}</b>
                         </div>
                       </div>
-
                       <hr />
-
                       <div className="col p-1 border border-danger">
                         <label>Project Submit</label>
                         <div>
@@ -47,7 +44,6 @@ class ListProject extends Component {
                         </div>
                       </div>
                     </div>
-
                     <br />
                     <div className="row justify-content-start">
                       <div className="col p-1 border border-danger">
@@ -61,6 +57,9 @@ class ListProject extends Component {
                     </div>
                   </div>
                 </div>
+                {this.props.getListDeveloper.map(developer => (
+                  <li>{developer.Name}</li>
+                ))}
               </ul>
             </ul>
           ))}
@@ -71,12 +70,14 @@ class ListProject extends Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    ListProject: () => dispatch({ type: "LISTPROJECT" })
+    ListProject: () => dispatch({ type: "LISTPROJECT" }),
+    ListDeveloper: () => dispatch({ type: "LISTDEVELOPER" })
   };
 };
 const mapStateToProps = state => {
   return {
-    getListProject: state.ProjectList
+    getListProject: state.ProjectList,
+    getListDeveloper: state.ListDeveloper
   };
 };
 export default connect(

@@ -1,4 +1,4 @@
-import DeveloperRegistration from "../Components/Developer/DeveloperRegistration";
+import DeveloperRegistration from "../Components/Developer/Registration";
 import { connect } from "react-redux";
 const mapDispatchToProps = dispatch => {
   return {
