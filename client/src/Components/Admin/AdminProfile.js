@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 class AdminProfile extends Component {
@@ -9,9 +9,13 @@ class AdminProfile extends Component {
       Name: ""
     };
   }
+  handleLogout = () => {
+    localStorage.clear();
+    this.props.history.push("/DeveloperLog");
+  };
 
   render() {
-    if (this.props.Token.user && localStorage.getItem("Token")) {
+    if (localStorage.getItem("Name") && localStorage.getItem("Token")) {
       return (
         <div className="container">
           <nav className="nav justify-content-end nav nav-tabs">
@@ -39,27 +43,33 @@ class AdminProfile extends Component {
                   Task
                 </Link>
               </li>
+              ...
+              <li className="nav item">
+                <button onClick={this.handleLogout} className="nav-link active">
+                  Log-Out
+                </button>
+              </li>
             </div>
           </nav>
           <h3>Profile</h3>
           <div className="row">
             <div className="col">
-              <h1>{this.props.Token.user.Name}</h1>
+              <h1>{localStorage.getItem("Name")}</h1>
             </div>
           </div>
           <div className="row">
             <div className="col">
-              <p>Profession:-{this.props.Token.user.Position}</p>
+              <p>Profession:-{localStorage.getItem("Position")}</p>
             </div>
           </div>
           <div className="row">
             <div className="col">
-              <p>Id:-{this.props.Token.user._id}</p>
+              <p>Id:-{localStorage.getItem("_id")}</p>
             </div>
           </div>
           <div className="row">
             <div className="col">
-              <p>Email-Id:-{this.props.Token.user.Email}</p>
+              <p>Email-Id:-{localStorage.getItem("Email")}</p>
             </div>
           </div>
         </div>
@@ -67,11 +77,7 @@ class AdminProfile extends Component {
     } else {
       return (
         <div>
-          <h1>Session Out</h1>
-
-          <Link className="btn btn-danger" to="/DeveloperLog">
-            Log-In
-          </Link>
+          <Redirect to="/DeveloperLog" />
         </div>
       );
     }

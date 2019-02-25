@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { Modal, Button } from "react-bootstrap";
 
@@ -7,7 +8,7 @@ class ListTask extends Component {
   constructor() {
     super();
     this.state = {
-      showButton: true,
+      Show_Button: true,
       Task_Name: "",
       Start_Date: "",
       Submission_Date: "",
@@ -59,10 +60,10 @@ class ListTask extends Component {
   };
 
   handleShow = () => {
-    this.setState({ show: true, showButton: true });
+    this.setState({ show: true, Show_Button: true });
   };
   handleShowButton = e => {
-    this.setState({ show: true, showButton: false, Id: e.target.value });
+    this.setState({ show: true, Show_Button: false, Id: e.target.value });
   };
   onChange = e => {
     this.setState({
@@ -99,6 +100,21 @@ class ListTask extends Component {
   render() {
     return (
       <div>
+        <nav className="nav bg-light">
+          {localStorage.getItem("Position") === "Developer" ? (
+            <li className="nav-item">
+              <Link to="/DeveloperProfile" className="nav-link active">
+                Profile
+              </Link>
+            </li>
+          ) : (
+            <li className="nav-item">
+              <Link to="/AdminProfile" className="nav-link active">
+                Profile
+              </Link>
+            </li>
+          )}
+        </nav>
         <Modal
           show={this.state.show}
           onHide={this.handleClose}
@@ -158,7 +174,7 @@ class ListTask extends Component {
                     />
                     <br />
 
-                    {this.state.showButton ? (
+                    {this.state.Show_Button ? (
                       <button
                         className="btn btn-primary "
                         onClick={this.handleClick}
@@ -170,9 +186,81 @@ class ListTask extends Component {
                         className="btn btn-primary "
                         onClick={this.handleEdit}
                       >
-                        EDIT
+                        UPDATE
                       </button>
                     )}
+                  </div>
+                </div>
+                <div className="col-lg" />
+              </div>
+            </div>
+          </div>
+        </Modal>
+        <Modal
+          show={this.state.showEdit}
+          onHide={this.handleClose}
+          aria-labelledby="contained-modal-title-vcenter"
+        >
+          <div>
+            <nav className="nav bg-light" />
+            <div className="container">
+              <div className="row">
+                <div className="col-lg" />
+                <div className="col-lg m-5 p-5">
+                  <div className="form-group shadow-textarea">
+                    <h4>Task Details</h4>
+                    <input
+                      type="text"
+                      name="Task_Name"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="Title..."
+                      value={this.state.Task_Name}
+                    />
+                    <br />
+                    <input
+                      type="date"
+                      name="Start_Date"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="../../...."
+                      value={this.state.Start_Date}
+                    />
+                    <br />
+                    <input
+                      type="date"
+                      name="Submission_Date"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="../../...."
+                      value={this.state.Submission_Date}
+                    />
+                    <br />
+                    <textarea
+                      className="form-control"
+                      type="text"
+                      name="Total_Developers"
+                      onChange={this.onChange}
+                      placeholder="Task Assign To"
+                      value={this.state.Total_Developers}
+                    />
+                    <br />
+                    <textarea
+                      className="form-control"
+                      type="text"
+                      name="Task_Discription"
+                      onChange={this.onChange}
+                      placeholder="Task_Discription"
+                      value={this.state.Task_Discription}
+                    />
+                    <br />
+
+                    <button
+                      className="badge-success "
+                      onClick={this.handleEdit}
+                    >
+                      EDIT
+                    </button>
                   </div>
                 </div>
                 <div className="col-lg" />
@@ -190,7 +278,7 @@ class ListTask extends Component {
                   <div className="container">
                     <div className="row justify-content-start">
                       <div className="col p-1 border border-danger">
-                        <label>Project title</label>
+                        <label>Task title</label>
                         <div>
                           <p>
                             <b>{post.Task_Name}</b>
@@ -201,7 +289,7 @@ class ListTask extends Component {
                     <hr />
                     <div className="row justify-content-start">
                       <div className="col p-1 border border-danger">
-                        <label>Project Start</label>
+                        <label>Task Start</label>
                         <div>
                           <b>{post.Start_Date}</b>
                         </div>
@@ -210,7 +298,7 @@ class ListTask extends Component {
                       <hr />
 
                       <div className="col p-1 border border-danger">
-                        <label>Project Submit</label>
+                        <label>Task Submit</label>
                         <div>
                           <p>
                             <b>{post.Submission_Date}</b>
@@ -221,7 +309,7 @@ class ListTask extends Component {
                     <br />
                     <div className="row justify-content-start">
                       <div className="col p-1 border border-danger">
-                        <label>Project Details</label>
+                        <label>Task Details</label>
                         <div>
                           <p>
                             <b>{post.Task_Discription}</b>
@@ -231,7 +319,7 @@ class ListTask extends Component {
                     </div>
                     <div className="row justify-content-start">
                       <div className="col p-1 border border-danger">
-                        <label>Project Assigned To</label>
+                        <label>Task Assigned To</label>
                         <div>
                           <p>
                             <b>{post.Total_Developers}</b>
@@ -240,12 +328,12 @@ class ListTask extends Component {
                       </div>
                     </div>
                     <br />
-                    <Button variant="primary" onClick={this.handleShow}>
+                    <Button className="badge-success" onClick={this.handleShow}>
                       ADDTASK
                     </Button>
                     .....
                     <Button
-                      variant="primary"
+                      variant="badge-warning"
                       onClick={this.handleShowButton}
                       value={post._id}
                     >

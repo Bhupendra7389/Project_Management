@@ -26,9 +26,7 @@ class DeveloperLogin extends Component {
       Password: ""
     });
   };
-  componentDidMount = () => {
-    localStorage.clear();
-  };
+
   render() {
     return (
       <div>

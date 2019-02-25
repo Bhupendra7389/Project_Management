@@ -34,6 +34,11 @@ class AddTask extends Component {
       Total_Developers: [],
       Task_Discription: ""
     });
+    if (localStorage.getItem("Position") === "Developer") {
+      this.props.history.push("/DeveloperProfile");
+    } else {
+      this.props.history.push("/AdminProfile");
+    }
   };
   render() {
     if (
@@ -43,11 +48,17 @@ class AddTask extends Component {
       return (
         <div>
           <nav className="nav bg-light">
-            <li className="nav-item">
+            {localStorage.getItem("Position") === "Developer" ? (
+              <li className="nav-item">
+                <Link to="/DeveloperProfile" className="nav-link active">
+                  Profile
+                </Link>
+              </li>
+            ) : (
               <Link to="/AdminProfile" className="nav-link active">
                 Profile
               </Link>
-            </li>
+            )}
           </nav>
           <div>
             <div className="row">
@@ -115,7 +126,7 @@ class AddTask extends Component {
         </div>
       );
     } else {
-      return <Redirect to="AdminLog" />;
+      return <Redirect to="DeveloperLog" />;
     }
   }
 }

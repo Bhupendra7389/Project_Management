@@ -1,11 +1,30 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Modal } from "react-bootstrap";
 
 class ListProject extends Component {
+  constructor() {
+    super();
+    this.state = {
+      Show: false
+    };
+  }
+  handleClose = () => {
+    this.setState({ Show: false });
+  };
+  inviteDeveloper = () => {
+    this.setState({
+      Show: true
+    });
+  };
+  handleInvite = e => {
+    this.props.InviteDeveloper(e.target.value);
+  };
   componentWillMount() {
     this.props.ListProject();
     this.props.ListDeveloper();
   }
+
   render() {
     return (
       <div>
@@ -57,9 +76,42 @@ class ListProject extends Component {
                     </div>
                   </div>
                 </div>
-                {this.props.getListDeveloper.map(developer => (
-                  <li>{developer.Name}</li>
-                ))}
+                <Modal
+                  className="container"
+                  show={this.state.Show}
+                  onHide={this.handleClose}
+                >
+                  {" "}
+                  {this.props.getListDeveloper.map(developer => (
+                    <div key={developer._id}>
+                      <li>
+                        Name:{developer.Name}
+                        <br />
+                        Email:{developer.Email}
+                      </li>
+                      <button
+                        className="badge-warning"
+                        value={developer._id}
+                        onClick={this.handleInvite}
+                      >
+                        Invite
+                      </button>
+                    </div>
+                  ))}
+                  <br />
+                  <button onClick={this.handleClose} className="badge-primary">
+                    Done
+                  </button>
+                </Modal>
+
+                <div>
+                  <button
+                    onClick={this.inviteDeveloper}
+                    className="badge-success"
+                  >
+                    Invite Developers
+                  </button>
+                </div>
               </ul>
             </ul>
           ))}
@@ -71,7 +123,8 @@ class ListProject extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     ListProject: () => dispatch({ type: "LISTPROJECT" }),
-    ListDeveloper: () => dispatch({ type: "LISTDEVELOPER" })
+    ListDeveloper: () => dispatch({ type: "LISTDEVELOPER" }),
+    InviteDeveloper: () => dispatch({ type: "INVITEDEVELOPER" })
   };
 };
 const mapStateToProps = state => {

@@ -12,6 +12,10 @@ import ListProject from "./Components/Project/ListProject";
 import DeveloperProfile from "./Components/Developer/DeveloperProfile";
 import ListTask from "./Components/Project/ListTask";
 class App extends Component {
+  constructor() {
+    super();
+  }
+
   render() {
     return (
       <div className="App">

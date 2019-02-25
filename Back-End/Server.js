@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const express = require("express");
 const app = new express();
 const jwt = require("jsonwebtoken");
+const Invite = require("./Models/Invite/Invite");
 
 app.use(bodyParser.json()).use(morgan());
 var cors = require("cors");
@@ -19,6 +20,24 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("Hello Friends");
+});
+app.post("/Invite/Developer", async (req, res) => {
+  try {
+    const { ProjectId, DeveloperId } = await req.body;
+    const invite = new Invite({
+      ProjectId,
+      DeveloperId
+    });
+    invite.save();
+  } catch {
+    console.error(500);
+  }
+
+  res.send();
+});
+app.get("/Get/InvitedDeveloper/:DeveloperId", async (req, res) => {
+  const developer = await AddDeveloper.find({ _id: req.params.DeveloperId });
+  res.send(developer);
 });
 
 app.post("/Register/DeveloperRegistration", async (req, res) => {
