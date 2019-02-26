@@ -6,19 +6,31 @@ class ListProject extends Component {
   constructor() {
     super();
     this.state = {
-      Show: false
+      Show: false,
+      Project_Id: "",
+      Developer_Id: ""
     };
   }
   handleClose = () => {
     this.setState({ Show: false });
   };
-  inviteDeveloper = () => {
-    this.setState({
+  inviteDeveloper = async e => {
+    console.log(e.target.value);
+    await this.setState({
+      Project_Id: e.target.value,
       Show: true
     });
   };
-  handleInvite = e => {
-    this.props.InviteDeveloper(e.target.value);
+  handleInvite = async e => {
+    await this.setState({
+      Developer_Id: e.target.value
+    });
+    const values = {
+      ProjectId: this.state.Project_Id,
+      DeveloperId: this.state.Developer_Id
+    };
+
+    this.props.InviteDeveloper(values);
   };
   componentWillMount() {
     this.props.ListProject();
@@ -66,6 +78,17 @@ class ListProject extends Component {
                     <br />
                     <div className="row justify-content-start">
                       <div className="col p-1 border border-danger">
+                        <label>Project Id</label>
+                        <div>
+                          <p>
+                            <b>{post._id}</b>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <div className="row justify-content-start">
+                      <div className="col p-1 border border-danger">
                         <label>Project Details</label>
                         <div>
                           <p>
@@ -76,26 +99,29 @@ class ListProject extends Component {
                     </div>
                   </div>
                 </div>
+
                 <Modal
                   className="container"
                   show={this.state.Show}
                   onHide={this.handleClose}
                 >
-                  {" "}
                   {this.props.getListDeveloper.map(developer => (
                     <div key={developer._id}>
+                      <br />
                       <li>
                         Name:{developer.Name}
                         <br />
                         Email:{developer.Email}
                       </li>
+
                       <button
-                        className="badge-warning"
                         value={developer._id}
+                        id={post._id}
                         onClick={this.handleInvite}
                       >
                         Invite
                       </button>
+                      <br />
                     </div>
                   ))}
                   <br />
@@ -107,6 +133,7 @@ class ListProject extends Component {
                 <div>
                   <button
                     onClick={this.inviteDeveloper}
+                    value={post._id}
                     className="badge-success"
                   >
                     Invite Developers
@@ -124,7 +151,7 @@ const mapDispatchToProps = dispatch => {
   return {
     ListProject: () => dispatch({ type: "LISTPROJECT" }),
     ListDeveloper: () => dispatch({ type: "LISTDEVELOPER" }),
-    InviteDeveloper: () => dispatch({ type: "INVITEDEVELOPER" })
+    InviteDeveloper: Ids => dispatch({ type: "INVITEDEVELOPER", Ids })
   };
 };
 const mapStateToProps = state => {

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { put } from "redux-saga/effects";
 
-export default function* developerLogin(action) {
-  let Data = yield axios.post("/Login/DeveloperLogin", action.developer);
+export default function* userLogin(action) {
+  let Data = yield axios.post("/Login/UserLogin", action.developer);
 
   localStorage.setItem("Token", Data.data.token);
   localStorage.setItem("Email", Data.data.user.Email);

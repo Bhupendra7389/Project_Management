@@ -1,8 +1,8 @@
 require("mongoose");
 
-const AddDeveloper = require("./Models/Developer/Register");
-const AddProject = require("./Models/TaskDetails/Project");
-const AddTask = require("./Models/TaskDetails/Task");
+const User = require("./Models/Register");
+const Project = require("./Models/Projects/Project");
+const Task = require("./Models/Projects/Task");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const express = require("express");
@@ -35,23 +35,33 @@ app.post("/Invite/Developer", async (req, res) => {
 
   res.send();
 });
-app.get("/Get/InvitedDeveloper/:DeveloperId", async (req, res) => {
-  const developer = await AddDeveloper.find({ _id: req.params.DeveloperId });
-  res.send(developer);
+app.get("/Get/InvitedByProject/:DeveloperId", async (req, res) => {
+  const project = await Invite.find({ DeveloperId: req.params.DeveloperId });
+  res.json(project);
+});
+app.get("/Invite/InvitesById/:ProjectId", async (req, res) => {
+  console.log(req.params.ProjectId);
+  try {
+    let project = await Project.find({ _id: req.params.ProjectId });
+    console.log(project);
+    res.json(project);
+  } catch (error) {
+    res.status(error);
+  }
 });
 
-app.post("/Register/DeveloperRegistration", async (req, res) => {
+app.post("/Register/UserRegistration", async (req, res) => {
   console.log(req.body);
   try {
     const { Email, Password, Name, Position } = await req.body;
 
-    const addDeveloper = new AddDeveloper({
+    const user = new User({
       Email,
       Password,
       Name,
       Position
     });
-    addDeveloper.save((error, user) => {
+    user.save((error, user) => {
       if (error) {
         res.send(error);
       } else if (!user) {
@@ -64,11 +74,11 @@ app.post("/Register/DeveloperRegistration", async (req, res) => {
     console.error(500);
   }
 });
-app.post("/Login/DeveloperLogin", (req, res) => {
+app.post("/Login/UserLogin", (req, res) => {
   try {
     const { Email, Password } = req.body;
 
-    AddDeveloper.findOne({ Email }, (err, user) => {
+    User.findOne({ Email }, (err, user) => {
       if (err) {
         res.status(500).json({ error: "Internal Error" });
       } else if (!user) {
@@ -99,7 +109,7 @@ app.post("/Login/DeveloperLogin", (req, res) => {
     res.send("Error");
   }
 });
-app.post("/Add/AddTask", async (req, res) => {
+app.post("/Add/Task", async (req, res) => {
   try {
     const {
       Task_Name,
@@ -108,14 +118,14 @@ app.post("/Add/AddTask", async (req, res) => {
       Total_Developers,
       Task_Discription
     } = await req.body;
-    const addProject = new AddTask({
+    const task = new Task({
       Task_Name,
       Start_Date,
       Submission_Date,
       Total_Developers,
       Task_Discription
     });
-    addProject.save((error, user) => {
+    task.save((error, user) => {
       if (error) {
         res.send(error);
       } else if (!user) {
@@ -128,7 +138,7 @@ app.post("/Add/AddTask", async (req, res) => {
     console.error(500);
   }
 });
-app.post("/Add/AddProject", async (req, res) => {
+app.post("/Add/Project", async (req, res) => {
   try {
     const {
       Project_Name,
@@ -136,13 +146,13 @@ app.post("/Add/AddProject", async (req, res) => {
       Submission_Date,
       Project_Discription
     } = await req.body;
-    const addProject = new AddProject({
+    const project = new Project({
       Project_Name,
       Start_Date,
       Submission_Date,
       Project_Discription
     });
-    addProject.save((error, user) => {
+    project.save((error, user) => {
       if (error) {
         res.send(error);
       } else if (!user) {
@@ -157,7 +167,7 @@ app.post("/Add/AddProject", async (req, res) => {
 });
 app.get("/Get/ProjectList", async (req, res) => {
   try {
-    const ProjectList = await AddProject.find({});
+    const ProjectList = await Project.find({});
 
     res.json(ProjectList);
   } catch (error) {
@@ -166,7 +176,7 @@ app.get("/Get/ProjectList", async (req, res) => {
 });
 app.get("/Get/TaskList", async (req, res) => {
   try {
-    const TaskList = await AddTask.find({});
+    const TaskList = await Task.find({});
 
     res.json(TaskList);
   } catch (error) {
@@ -175,9 +185,18 @@ app.get("/Get/TaskList", async (req, res) => {
 });
 app.get("/Get/ListDeveloper", async (req, res) => {
   try {
-    const ListDeveloper = await AddDeveloper.find({ Position: "Developer" });
+    const ListDeveloper = await User.find({ Position: "Developer" });
 
     res.json(ListDeveloper);
+  } catch (error) {
+    res.status(500);
+  }
+});
+app.get("/Edit/GetTaskById/:TaskId", async (req, res) => {
+  try {
+    const task = await Task.find({ _id: req.params.TaskId });
+
+    res.json(task);
   } catch (error) {
     res.status(500);
   }
@@ -191,7 +210,7 @@ app.patch("/Edit/EditTask/:TaskId", async (req, res) => {
       Total_Developers,
       Task_Discription
     } = await req.body;
-    await AddTask.findByIdAndUpdate(
+    await Task.findByIdAndUpdate(
       {
         _id: req.params.TaskId
       },
@@ -211,7 +230,7 @@ app.patch("/Edit/EditTask/:TaskId", async (req, res) => {
 });
 app.delete("/Delete/DeleteTask/:Id", async (req, res) => {
   try {
-    await AddTask.findByIdAndDelete({ _id: req.params.Id });
+    await Task.findByIdAndDelete({ _id: req.params.Id });
   } catch (error) {}
 });
 

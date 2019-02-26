@@ -6,16 +6,12 @@ import DeveloperRegistration from "./Container/DeveloperRegistration";
 import Projects from "./Components/Project/Projects";
 import Home from "./Home";
 import "./bootstrap.css";
-import AddTask from "./Components/Project/AddTask";
+import AddTask from "./Components/Project/Task";
 import AdminProfile from "./Components/Admin/AdminProfile";
 import ListProject from "./Components/Project/ListProject";
 import DeveloperProfile from "./Components/Developer/DeveloperProfile";
 import ListTask from "./Components/Project/ListTask";
 class App extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <div className="App">

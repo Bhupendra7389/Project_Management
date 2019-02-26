@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 
-class AddTask extends Component {
+class Task extends Component {
   constructor() {
     super();
     this.state = {
@@ -138,4 +138,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(AddTask);
+)(Task);

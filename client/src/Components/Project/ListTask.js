@@ -18,7 +18,7 @@ class ListTask extends Component {
     };
   }
   handleClose = () => {
-    this.setState({ show: false });
+    this.setState({ show: false, showEdit: false });
   };
   // handleSubmit = e => {
   //   e.preventDefault();
@@ -38,7 +38,7 @@ class ListTask extends Component {
   //   }
   //   this.setState({ testName: "", description: "" });
   // };
-  handleEdit = () => {
+  handleUpdate = () => {
     var formData = {
       Task_Name: this.state.Task_Name,
       Start_Date: this.state.Start_Date,
@@ -70,6 +70,12 @@ class ListTask extends Component {
       [e.target.name]: e.target.value
     });
   };
+  handleShowForm = e => {
+    this.setState({ showEdit: true, Id: e.target.value });
+
+    this.props.getTaskById(e.target.value);
+  };
+
   handleTaskDelete = e => {
     this.props.DeleteTask(e.target.value);
   };
@@ -184,7 +190,7 @@ class ListTask extends Component {
                     ) : (
                       <button
                         className="btn btn-primary "
-                        onClick={this.handleEdit}
+                        onClick={this.handleUpdate}
                       >
                         UPDATE
                       </button>
@@ -215,7 +221,7 @@ class ListTask extends Component {
                       onChange={this.onChange}
                       className="form-control"
                       placeholder="Title..."
-                      value={this.state.Task_Name}
+                      value={this.props.getTask.Task_Name}
                     />
                     <br />
                     <input
@@ -257,7 +263,7 @@ class ListTask extends Component {
 
                     <button
                       className="badge-success "
-                      onClick={this.handleEdit}
+                      onClick={this.handleUpdate}
                     >
                       EDIT
                     </button>
@@ -347,6 +353,14 @@ class ListTask extends Component {
                     >
                       DELETE
                     </Button>
+                    ...
+                    <Button
+                      variant="btn btn-success"
+                      onClick={this.handleShowForm}
+                      value={post._id}
+                    >
+                      EDIT
+                    </Button>
                   </div>
                 </div>
               </ul>
@@ -362,12 +376,14 @@ const mapDispatchToProps = dispatch => {
     ListTask: () => dispatch({ type: "LISTTASK" }),
     AddTask: task => dispatch({ type: "ADDTASK", task }),
     EditTask: editTask => dispatch({ type: "EDITTASK", editTask }),
-    DeleteTask: id => dispatch({ type: "DELETETASK", id })
+    DeleteTask: id => dispatch({ type: "DELETETASK", id }),
+    getTaskById: id => dispatch({ type: "GETTASKBYID", id })
   };
 };
 const mapStateToProps = state => {
   return {
-    getListTask: state.TaskList
+    getListTask: state.TaskList,
+    getTask: state.Task
   };
 };
 export default connect(
