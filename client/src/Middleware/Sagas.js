@@ -14,6 +14,7 @@ import getTaskById from "./SagaMethods/GetTaskById";
 import inviteDeveloper from "./SagaMethods/InviteDeveloper";
 import invitedByProject from "./SagaMethods/InvitedByProject";
 import invitesById from "./SagaMethods/InvitesById";
+import invitesResponse from "./SagaMethods/InviteResponse";
 export default function* rootSaga() {
   yield all([
     yield takeLatest("DEVELOPERREGISTRATION", userRegistration),
@@ -28,6 +29,7 @@ export default function* rootSaga() {
     yield takeLatest("GETTASKBYID", getTaskById),
     yield takeLatest("INVITEDEVELOPER", inviteDeveloper),
     yield takeLatest("INVITEDBYPROJECT", invitedByProject),
-    yield takeLatest("INVITESBYID", invitesById)
+    yield takeLatest("INVITESBYID", invitesById),
+    yield takeLatest("INVITERESPONSE", invitesResponse)
   ]);
 }

@@ -35,6 +35,15 @@ app.post("/Invite/Developer", async (req, res) => {
 
   res.send();
 });
+app.patch("/Invite/InviteResponse/:ProjectId", async (req, res) => {
+  const { Workers } = req.body;
+  console.log(Workers);
+  await Project.findByIdAndUpdate(
+    { _id: req.params.ProjectId },
+    { $push: { Workers } }
+  );
+  res.send("Done");
+});
 app.get("/Get/InvitedByProject/:DeveloperId", async (req, res) => {
   const project = await Invite.find({ DeveloperId: req.params.DeveloperId });
   res.json(project);

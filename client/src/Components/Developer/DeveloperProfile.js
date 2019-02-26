@@ -10,6 +10,14 @@ class DeveloperProfile extends Component {
       Name: ""
     };
   }
+  handleResponse = async e => {
+    const User = {
+      ProjectId: e.target.value,
+      DeveloperEmail: localStorage.getItem("Email")
+    };
+    console.log(User);
+    await this.props.InviteResponse(User);
+  };
   closeSubModal = () => {
     this.setState({ subModelShow: false });
   };
@@ -101,6 +109,10 @@ class DeveloperProfile extends Component {
                       <br />
                       {invite.Project_Discription}
                       <br />
+                      <button value={invite._id} onClick={this.handleResponse}>
+                        ACCEPT
+                      </button>
+                      <br />
                       <button onClick={this.closeSubModal}>CLOSE</button>
                     </div>
                   </ul>
@@ -146,7 +158,8 @@ class DeveloperProfile extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     InvitedByProject: id => dispatch({ type: "INVITEDBYPROJECT", id }),
-    InvitesById: id => dispatch({ type: "INVITESBYID", id })
+    InvitesById: id => dispatch({ type: "INVITESBYID", id }),
+    InviteResponse: user => dispatch({ type: "INVITERESPONSE", user })
   };
 };
 const mapStateToProps = state => {
