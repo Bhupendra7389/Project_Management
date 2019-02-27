@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-
 class DeveloperLogin extends Component {
   constructor() {
     super();
@@ -65,17 +63,4 @@ class DeveloperLogin extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    DeveloperLogin: developer =>
-      dispatch({
-        type: "DEVELOPERLOGIN",
-        developer
-      })
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(DeveloperLogin);
+export default DeveloperLogin;

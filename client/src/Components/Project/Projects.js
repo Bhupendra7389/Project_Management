@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+
 import { Redirect, Link } from "react-router-dom";
 class Projects extends Component {
   constructor() {
@@ -106,12 +106,4 @@ class Projects extends Component {
     }
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    AddProject: project => dispatch({ type: "ADDPROJECT", project })
-  };
-};
-export default connect(
-  null,
-  mapDispatchToProps
-)(Projects);
+export default Projects;

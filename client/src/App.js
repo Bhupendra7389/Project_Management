@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Switch, Link, Route } from "react-router-dom";
 import "./App.css";
-import DeveloperLogin from "./Components/Developer/Login";
+import DeveloperLogin from "./Container/Login";
 import DeveloperRegistration from "./Container/DeveloperRegistration";
-import Projects from "./Components/Project/Projects";
+import Projects from "./Container/Projects";
 import Home from "./Home";
 import "./bootstrap.css";
-import AddTask from "./Components/Project/Task";
-import AdminProfile from "./Components/Admin/AdminProfile";
-import ListProject from "./Components/Project/ListProject";
-import DeveloperProfile from "./Components/Developer/DeveloperProfile";
-import ListTask from "./Components/Project/ListTask";
+import AddTask from "./Container/Task";
+import AdminProfile from "./Container/AdiminProfile";
+import ListProject from "./Container/ListProject";
+import DeveloperProfile from "./Container/DeveloperProfile";
+import ListTask from "./Container/ListTask";
 class App extends Component {
   render() {
     return (

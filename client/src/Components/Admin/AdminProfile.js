@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 
 class AdminProfile extends Component {
   constructor(props) {
@@ -83,13 +82,5 @@ class AdminProfile extends Component {
     }
   }
 }
-const mapStateToProps = state => {
-  return {
-    Token: state.DeveloperData
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  null
-)(AdminProfile);
+export default AdminProfile;

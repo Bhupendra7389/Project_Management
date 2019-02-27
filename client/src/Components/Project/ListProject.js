@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
-
 class ListProject extends Component {
   constructor() {
     super();
     this.state = {
-      Show: false,
       Project_Id: "",
       Developer_Id: ""
     };
@@ -15,7 +12,6 @@ class ListProject extends Component {
     this.setState({ Show: false });
   };
   inviteDeveloper = async e => {
-    console.log(e.target.value);
     await this.setState({
       Project_Id: e.target.value,
       Show: true
@@ -97,6 +93,21 @@ class ListProject extends Component {
                         </div>
                       </div>
                     </div>
+                    <div className="row justify-content-start">
+                      <div className="col p-1 border border-danger">
+                        <label>Developers</label>
+                        <div>
+                          <p>
+                            {post.Workers.map(get => (
+                              <b key={Math.random()}>
+                                {get}
+                                <br />
+                              </b>
+                            ))}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -115,6 +126,7 @@ class ListProject extends Component {
                       </li>
 
                       <button
+                        className="badge btn-success"
                         value={developer._id}
                         id={post._id}
                         onClick={this.handleInvite}
@@ -134,7 +146,7 @@ class ListProject extends Component {
                   <button
                     onClick={this.inviteDeveloper}
                     value={post._id}
-                    className="badge-success"
+                    className="badge btn-success"
                   >
                     Invite Developers
                   </button>
@@ -147,20 +159,5 @@ class ListProject extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    ListProject: () => dispatch({ type: "LISTPROJECT" }),
-    ListDeveloper: () => dispatch({ type: "LISTDEVELOPER" }),
-    InviteDeveloper: Ids => dispatch({ type: "INVITEDEVELOPER", Ids })
-  };
-};
-const mapStateToProps = state => {
-  return {
-    getListProject: state.ProjectList,
-    getListDeveloper: state.ListDeveloper
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ListProject);
+
+export default ListProject;

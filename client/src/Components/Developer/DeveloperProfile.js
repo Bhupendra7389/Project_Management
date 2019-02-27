@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 
 class DeveloperProfile extends Component {
@@ -11,11 +10,12 @@ class DeveloperProfile extends Component {
     };
   }
   handleResponse = async e => {
+    this.setState({ subModelShow: false });
     const User = {
       ProjectId: e.target.value,
       DeveloperEmail: localStorage.getItem("Email")
     };
-    console.log(User);
+
     await this.props.InviteResponse(User);
   };
   closeSubModal = () => {
@@ -40,8 +40,7 @@ class DeveloperProfile extends Component {
   };
 
   render() {
-    // console.log(this.props.Projects.length && this.props.Projects[0].ProjectId);
-    if (localStorage.getItem("Name")) {
+    if (localStorage.getItem("Token")) {
       return (
         <div className="container">
           <nav className="nav justify-content-end nav nav-tabs">
@@ -109,11 +108,20 @@ class DeveloperProfile extends Component {
                       <br />
                       {invite.Project_Discription}
                       <br />
-                      <button value={invite._id} onClick={this.handleResponse}>
+                      <button
+                        className="badge btn-primary"
+                        value={invite._id}
+                        onClick={this.handleResponse}
+                      >
                         ACCEPT
                       </button>
-                      <br />
-                      <button onClick={this.closeSubModal}>CLOSE</button>
+                      ...
+                      <button
+                        className="badge btn-danger"
+                        onClick={this.closeSubModal}
+                      >
+                        CLOSE
+                      </button>
                     </div>
                   </ul>
                 ))}
@@ -133,7 +141,10 @@ class DeveloperProfile extends Component {
                       </div>
                     </ul>
                   ))}
-                <button className="badge-primary" onClick={this.handleClose}>
+                <button
+                  className="badge btn-primary"
+                  onClick={this.handleClose}
+                >
                   CLOSE
                 </button>
               </Modal>
@@ -145,32 +156,9 @@ class DeveloperProfile extends Component {
     }
     return (
       <div>
-        <div>
-          <h1>Session Out</h1>
-        </div>
-        <Link className="btn btn-danger" to="/DeveloperLog">
-          Log-In
-        </Link>
+        <Redirect to="/Developerlog" />
       </div>
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    InvitedByProject: id => dispatch({ type: "INVITEDBYPROJECT", id }),
-    InvitesById: id => dispatch({ type: "INVITESBYID", id }),
-    InviteResponse: user => dispatch({ type: "INVITERESPONSE", user })
-  };
-};
-const mapStateToProps = state => {
-  return {
-    Token: state.DeveloperData,
-    Projects: state.InvitedDeveloper,
-    InviteFor: state.Projects
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeveloperProfile);
+export default DeveloperProfile;

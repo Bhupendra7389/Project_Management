@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { Modal, Button } from "react-bootstrap";
@@ -14,7 +13,8 @@ class ListTask extends Component {
       Submission_Date: "",
       Total_Developers: [],
       Task_Discription: "",
-      Id: ""
+      Id: "",
+      Comment: []
     };
   }
   handleClose = () => {
@@ -70,8 +70,20 @@ class ListTask extends Component {
       [e.target.name]: e.target.value
     });
   };
+  handleComment = e => {
+    const comment = {
+      Id: e.target.value,
+      Comment: this.state.Comment
+    };
+    this.props.Comment(comment);
+    this.setState({ Comment: "" });
+  };
   handleShowForm = e => {
-    this.setState({ showEdit: true, Id: e.target.value });
+    this.setState({
+      showEdit: true,
+      Id: e.target.value,
+      data: this.props.editTask
+    });
 
     this.props.getTaskById(e.target.value);
   };
@@ -202,6 +214,7 @@ class ListTask extends Component {
             </div>
           </div>
         </Modal>
+
         <Modal
           show={this.state.showEdit}
           onHide={this.handleClose}
@@ -221,7 +234,7 @@ class ListTask extends Component {
                       onChange={this.onChange}
                       className="form-control"
                       placeholder="Title..."
-                      value={this.props.getTask.Task_Name}
+                      value={this.state.Task_Name}
                     />
                     <br />
                     <input
@@ -274,6 +287,7 @@ class ListTask extends Component {
             </div>
           </div>
         </Modal>
+
         <div className="container -fluid">
           <h1>Task List</h1>
 
@@ -322,8 +336,9 @@ class ListTask extends Component {
                           </p>
                         </div>
                       </div>
-                    </div>
-                    <div className="row justify-content-start">
+
+                      <br />
+
                       <div className="col p-1 border border-danger">
                         <label>Task Assigned To</label>
                         <div>
@@ -334,10 +349,40 @@ class ListTask extends Component {
                       </div>
                     </div>
                     <br />
+                    <div className="row justify-content-start">
+                      <div className="col p-1 border border-danger">
+                        <label>Comments</label>
+                        <div>
+                          {post.Task_Comment.map(comment => (
+                            <ul
+                              className="p-2 m-1 border border-danger"
+                              key={Math.random()}
+                            >
+                              <b>{comment}</b>
+                              <br />
+                            </ul>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <div className="row justify-content-start">
+                      <div className="col ">
+                        <textarea
+                          className="form-control"
+                          placeholder="Comments..."
+                          type="text"
+                          name="Comment"
+                          onChange={this.onChange}
+                          value={this.state.Comment}
+                        />
+                      </div>
+                    </div>
+                    <br />
                     <Button className="badge-success" onClick={this.handleShow}>
                       ADDTASK
                     </Button>
-                    .....
+                    ...
                     <Button
                       variant="badge-warning"
                       onClick={this.handleShowButton}
@@ -345,7 +390,7 @@ class ListTask extends Component {
                     >
                       UPDATE
                     </Button>
-                    .....
+                    ...
                     <Button
                       variant="btn btn-danger"
                       onClick={this.handleTaskDelete}
@@ -361,6 +406,14 @@ class ListTask extends Component {
                     >
                       EDIT
                     </Button>
+                    ...
+                    <Button
+                      variant="btn btn-success"
+                      onClick={this.handleComment}
+                      value={post._id}
+                    >
+                      COMMENT
+                    </Button>
                   </div>
                 </div>
               </ul>
@@ -371,22 +424,4 @@ class ListTask extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    ListTask: () => dispatch({ type: "LISTTASK" }),
-    AddTask: task => dispatch({ type: "ADDTASK", task }),
-    EditTask: editTask => dispatch({ type: "EDITTASK", editTask }),
-    DeleteTask: id => dispatch({ type: "DELETETASK", id }),
-    getTaskById: id => dispatch({ type: "GETTASKBYID", id })
-  };
-};
-const mapStateToProps = state => {
-  return {
-    getListTask: state.TaskList,
-    getTask: state.Task
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ListTask);
+export default ListTask;

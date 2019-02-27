@@ -35,14 +35,27 @@ app.post("/Invite/Developer", async (req, res) => {
 
   res.send();
 });
-app.patch("/Invite/InviteResponse/:ProjectId", async (req, res) => {
-  const { Workers } = req.body;
-  console.log(Workers);
-  await Project.findByIdAndUpdate(
-    { _id: req.params.ProjectId },
-    { $push: { Workers } }
-  );
-  res.send("Done");
+app.put("/Invite/InviteResponse/:ProjectId", async (req, res) => {
+  try {
+    await Project.findOneAndUpdate(
+      { _id: req.params.ProjectId },
+      { $push: { Workers: req.body.DeveloperEmail } }
+    );
+    res.send("Done");
+  } catch {
+    console.log("Error");
+  }
+});
+app.put("/Add/Comment/:TaskId", async (req, res) => {
+  try {
+    await Task.findOneAndUpdate(
+      { _id: req.params.TaskId },
+      { $push: { Task_Comment: req.body.Comment } }
+    );
+    res.send("Done");
+  } catch {
+    console.log("Error");
+  }
 });
 app.get("/Get/InvitedByProject/:DeveloperId", async (req, res) => {
   const project = await Invite.find({ DeveloperId: req.params.DeveloperId });

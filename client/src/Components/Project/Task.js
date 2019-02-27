@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 
 class Task extends Component {
@@ -130,12 +129,4 @@ class Task extends Component {
     }
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    AddTask: task => dispatch({ type: "ADDTASK", task })
-  };
-};
-export default connect(
-  null,
-  mapDispatchToProps
-)(Task);
+export default Task;

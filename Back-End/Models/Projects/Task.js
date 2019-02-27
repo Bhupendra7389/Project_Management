@@ -5,7 +5,8 @@ const Task = new mongoose.Schema({
   Start_Date: { type: Date, require: true },
   Submission_Date: { type: Date, required: true },
   Total_Developers: { type: String, required: true },
-  Task_Discription: { type: String, required: true }
+  Task_Discription: { type: String, required: true },
+  Task_Comment: [{ type: String }]
 });
 
 module.exports = mongoose.model("Task", Task);

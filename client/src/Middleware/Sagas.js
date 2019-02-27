@@ -1,9 +1,7 @@
 import { takeLatest, all } from "redux-saga/effects";
-
 import userRegistration from "./SagaMethods/Registration";
 import addTask from "./SagaMethods/AddTask";
 import addProject from "./SagaMethods/AddProject";
-
 import userLogin from "./SagaMethods/Login";
 import listProject from "./SagaMethods/ListProject";
 import listTask from "./SagaMethods/ListTask";
@@ -15,6 +13,7 @@ import inviteDeveloper from "./SagaMethods/InviteDeveloper";
 import invitedByProject from "./SagaMethods/InvitedByProject";
 import invitesById from "./SagaMethods/InvitesById";
 import invitesResponse from "./SagaMethods/InviteResponse";
+import commentOnTask from "./SagaMethods/CommentOnTask";
 export default function* rootSaga() {
   yield all([
     yield takeLatest("DEVELOPERREGISTRATION", userRegistration),
@@ -30,6 +29,7 @@ export default function* rootSaga() {
     yield takeLatest("INVITEDEVELOPER", inviteDeveloper),
     yield takeLatest("INVITEDBYPROJECT", invitedByProject),
     yield takeLatest("INVITESBYID", invitesById),
-    yield takeLatest("INVITERESPONSE", invitesResponse)
+    yield takeLatest("INVITERESPONSE", invitesResponse),
+    yield takeLatest("COMMENT", commentOnTask)
   ]);
 }
