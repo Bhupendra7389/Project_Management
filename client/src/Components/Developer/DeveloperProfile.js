@@ -91,7 +91,6 @@ class DeveloperProfile extends Component {
           </div>
           <div className="row">
             <div className="col">
-              <p>Invited By</p>
               <Modal
                 show={this.state.subModelShow}
                 onHide={this.handleClose}

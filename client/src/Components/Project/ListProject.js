@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
 class ListProject extends Component {
   constructor() {
     super();
@@ -28,6 +29,9 @@ class ListProject extends Component {
 
     this.props.InviteDeveloper(values);
   };
+  addTask = e => {
+    // this.props.AddTask(e);
+  };
   componentWillMount() {
     this.props.ListProject();
     this.props.ListDeveloper();
@@ -36,6 +40,15 @@ class ListProject extends Component {
   render() {
     return (
       <div>
+        <nav className="nav bg-light">
+          {" "}
+          <li className="nav-item">
+            <Link to="/AdminProfile" className="nav-link active">
+              Profile
+            </Link>
+          </li>
+        </nav>
+
         <div className="container -fluid">
           <h1>Project List</h1>
           {this.props.getListProject.map(post => (
@@ -145,6 +158,15 @@ class ListProject extends Component {
                 <div>
                   <button
                     onClick={this.inviteDeveloper}
+                    value={post._id}
+                    className="badge btn-success"
+                  >
+                    Invite Developers
+                  </button>
+                </div>
+                <div>
+                  <button
+                    onClick={this.addTask}
                     value={post._id}
                     className="badge btn-success"
                   >

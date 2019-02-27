@@ -44,6 +44,12 @@ class AdminProfile extends Component {
               </li>
               ...
               <li className="nav item">
+                <Link to="/ProjectList" className="nav-link active">
+                  Projects
+                </Link>
+              </li>
+              ...
+              <li className="nav item">
                 <button onClick={this.handleLogout} className="nav-link active">
                   Log-Out
                 </button>

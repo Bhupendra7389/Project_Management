@@ -22,11 +22,6 @@ class App extends Component {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/ProjectList" className="nav-link active">
-                Projects
-              </Link>
-            </li>
           </nav>
           <Switch>
             <Route path="/DeveloperProfile" component={DeveloperProfile} />
