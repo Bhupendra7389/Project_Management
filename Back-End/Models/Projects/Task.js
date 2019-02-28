@@ -6,6 +6,7 @@ const Task = new mongoose.Schema({
   Submission_Date: { type: Date, required: true },
   Total_Developers: { type: String, required: true },
   Task_Discription: { type: String, required: true },
+  Project_Id: "",
   Task_Comment: [{ type: String }]
 });
 

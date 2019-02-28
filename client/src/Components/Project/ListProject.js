@@ -1,16 +1,33 @@
 import React, { Component } from "react";
 import { Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 class ListProject extends Component {
   constructor() {
     super();
     this.state = {
+      Task_Name: "",
+      Start_Date: "",
+      Submission_Date: "",
+      Total_Developers: [],
+      Task_Discription: "",
       Project_Id: "",
-      Developer_Id: ""
+      Developer_Id: "",
+      Id: ""
     };
   }
+  handleTask = e => {
+    this.setState({ Id: e.target.value, Redirect: true });
+  };
+  handleShow = e => {
+    this.setState({ Id: e.target.value, show: true });
+  };
+  onChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
   handleClose = () => {
-    this.setState({ Show: false });
+    this.setState({ Show: false, show: false });
   };
   inviteDeveloper = async e => {
     await this.setState({
@@ -29,8 +46,24 @@ class ListProject extends Component {
 
     this.props.InviteDeveloper(values);
   };
-  addTask = e => {
-    // this.props.AddTask(e);
+  handleClick = async () => {
+    var formData = {
+      Task_Name: this.state.Task_Name,
+      Start_Date: this.state.Start_Date,
+      Submission_Date: this.state.Submission_Date,
+      Total_Developers: this.state.Total_Developers,
+      Task_Discription: this.state.Task_Discription,
+      Project_Id: this.state.Id
+    };
+    await this.props.AddTask(formData);
+    this.setState({
+      Task_Name: "",
+      Start_Date: "",
+      Submission_Date: "",
+      Total_Developers: [],
+      Task_Discription: ""
+    });
+    this.handleClose();
   };
   componentWillMount() {
     this.props.ListProject();
@@ -38,8 +71,91 @@ class ListProject extends Component {
   }
 
   render() {
+    if (this.state.Redirect) {
+      return (
+        <Redirect to={{ pathname: "TaskList", state: { id: this.state.Id } }} />
+      );
+    }
     return (
       <div>
+        <Modal
+          show={this.state.show}
+          onHide={this.handleClose}
+          aria-labelledby="contained-modal-title-vcenter"
+        >
+          <div>
+            <nav className="nav bg-light" />
+            <div className="container">
+              <div className="row">
+                <div className="col-lg" />
+                <div className="col-lg m-5 p-5">
+                  <div className="form-group shadow-textarea">
+                    <h4>Task Details</h4>
+                    <input
+                      type="text"
+                      name="Task_Name"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="Title..."
+                      value={this.state.Task_Name}
+                    />
+                    <br />
+                    <input
+                      type="date"
+                      name="Start_Date"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="../../...."
+                      value={this.state.Start_Date}
+                    />
+                    <br />
+                    <input
+                      type="date"
+                      name="Submission_Date"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="../../...."
+                      value={this.state.Submission_Date}
+                    />
+                    <br />
+                    <textarea
+                      className="form-control"
+                      type="text"
+                      name="Total_Developers"
+                      onChange={this.onChange}
+                      placeholder="Task Assign To"
+                      value={this.state.Total_Developers}
+                    />
+                    <br />
+                    <textarea
+                      className="form-control"
+                      type="text"
+                      name="Task_Discription"
+                      onChange={this.onChange}
+                      placeholder="Task_Discription"
+                      value={this.state.Task_Discription}
+                    />
+                    <br />
+                    <button
+                      className="badge btn-primary "
+                      onClick={this.handleClick}
+                    >
+                      SUBMIT
+                    </button>
+                    ...
+                    <button
+                      className="badge btn-success "
+                      onClick={this.handleClose}
+                    >
+                      CLOSE
+                    </button>
+                  </div>
+                </div>
+                <div className="col-lg" />
+              </div>
+            </div>
+          </div>
+        </Modal>
         <nav className="nav bg-light">
           {" "}
           <li className="nav-item">
@@ -155,23 +271,40 @@ class ListProject extends Component {
                   </button>
                 </Modal>
 
-                <div>
-                  <button
-                    onClick={this.inviteDeveloper}
-                    value={post._id}
-                    className="badge btn-success"
-                  >
-                    Invite Developers
-                  </button>
-                </div>
-                <div>
-                  <button
-                    onClick={this.addTask}
-                    value={post._id}
-                    className="badge btn-success"
-                  >
-                    Invite Developers
-                  </button>
+                <div className="row">
+                  {localStorage.getItem("Position") === "Admin" ? (
+                    <div className="col">
+                      <button
+                        onClick={this.inviteDeveloper}
+                        value={post._id}
+                        className="badge btn-success"
+                      >
+                        Invite Developers
+                      </button>
+                    </div>
+                  ) : null}
+                  <div className="col">
+                    <div>
+                      <button
+                        onClick={this.handleShow}
+                        value={post._id}
+                        className="badge btn-warning"
+                      >
+                        ADD-TASK
+                      </button>
+                    </div>
+                  </div>
+                  <div className="col">
+                    <div>
+                      <button
+                        onClick={this.handleTask}
+                        value={post._id}
+                        className="badge btn-primary"
+                      >
+                        TASKS
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </ul>
             </ul>

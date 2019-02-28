@@ -1,10 +1,15 @@
 import DeveloperProfile from "../Components/Developer/DeveloperProfile";
 import { connect } from "react-redux";
+import {
+  invitedByProject,
+  invitesById,
+  inviteResponse
+} from "../Actions/DeveloperProfile";
 const mapDispatchToProps = dispatch => {
   return {
-    InvitedByProject: id => dispatch({ type: "INVITEDBYPROJECT", id }),
-    InvitesById: id => dispatch({ type: "INVITESBYID", id }),
-    InviteResponse: user => dispatch({ type: "INVITERESPONSE", user })
+    InvitedByProject: id => dispatch(invitedByProject(id)),
+    InvitesById: id => dispatch(invitesById(id)),
+    InviteResponse: user => dispatch(inviteResponse(user))
   };
 };
 const mapStateToProps = state => {

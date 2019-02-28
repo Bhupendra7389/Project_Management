@@ -6,7 +6,7 @@ import DeveloperRegistration from "./Container/DeveloperRegistration";
 import Projects from "./Container/Projects";
 import Home from "./Home";
 import "./bootstrap.css";
-import AddTask from "./Container/Task";
+
 import AdminProfile from "./Container/AdiminProfile";
 import ListProject from "./Container/ListProject";
 import DeveloperProfile from "./Container/DeveloperProfile";
@@ -29,7 +29,7 @@ class App extends Component {
             <Route path="/Home" component={Home} />
             <Route path="/DeveloperReg" component={DeveloperRegistration} />
             <Route path="/DeveloperLog" component={DeveloperLogin} />
-            <Route path="/AddTask" component={AddTask} />
+
             <Route path="/AdminProfile" component={AdminProfile} />
             <Route path="/ProjectList" component={ListProject} />
             <Route path="/TaskList" component={ListTask} />

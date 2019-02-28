@@ -10,3 +10,9 @@ export function inviteDeveloper(Ids) {
     Ids
   };
 }
+export function addTask(value) {
+  return {
+    type: "ADDTASK",
+    value
+  };
+}

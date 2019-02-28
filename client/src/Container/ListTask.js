@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
 import ListTask from "../Components/Project/ListTask";
+import { addTask } from "../Actions/ListProjectActions";
 const mapDispatchToProps = dispatch => {
   return {
-    ListTask: () => dispatch({ type: "LISTTASK" }),
-    AddTask: task => dispatch({ type: "ADDTASK", task }),
+    ListTask: project_Id => dispatch({ type: "LISTTASK", project_Id }),
+    AddTask: task => dispatch(addTask(task)),
     EditTask: editTask => dispatch({ type: "EDITTASK", editTask }),
     DeleteTask: id => dispatch({ type: "DELETETASK", id }),
     getTaskById: id => dispatch({ type: "GETTASKBYID", id }),

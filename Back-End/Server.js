@@ -58,7 +58,9 @@ app.put("/Add/Comment/:TaskId", async (req, res) => {
   }
 });
 app.get("/Get/InvitedByProject/:DeveloperId", async (req, res) => {
-  const project = await Invite.find({ DeveloperId: req.params.DeveloperId });
+  const project = await Invite.find({
+    DeveloperId: req.params.DeveloperId
+  });
   res.json(project);
 });
 app.get("/Invite/InvitesById/:ProjectId", async (req, res) => {
@@ -138,14 +140,16 @@ app.post("/Add/Task", async (req, res) => {
       Start_Date,
       Submission_Date,
       Total_Developers,
-      Task_Discription
+      Task_Discription,
+      Project_Id
     } = await req.body;
     const task = new Task({
       Task_Name,
       Start_Date,
       Submission_Date,
       Total_Developers,
-      Task_Discription
+      Task_Discription,
+      Project_Id
     });
     task.save((error, user) => {
       if (error) {
@@ -196,9 +200,10 @@ app.get("/Get/ProjectList", async (req, res) => {
     res.status(500);
   }
 });
-app.get("/Get/TaskList", async (req, res) => {
+app.get("/Get/TaskList/:Project_Id", async (req, res) => {
   try {
-    const TaskList = await Task.find({});
+    console.log(req.params.Project_Id);
+    const TaskList = await Task.find({ Project_Id: req.params.Project_Id });
 
     res.json(TaskList);
   } catch (error) {

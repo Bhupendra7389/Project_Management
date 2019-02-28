@@ -26,20 +26,8 @@ class AdminProfile extends Component {
               </li>
               ...
               <li className="nav item">
-                <Link to="/AddTask" className="nav-link active">
-                  Add-Task
-                </Link>
-              </li>
-              ...
-              <li className="nav item">
                 <Link to="/Projects" className="nav-link active">
                   Add-Projects
-                </Link>
-              </li>
-              ...
-              <li className="nav item">
-                <Link to="/TaskList" className="nav-link active">
-                  Task
                 </Link>
               </li>
               ...

@@ -12,7 +12,8 @@ class ListTask extends Component {
       Total_Developers: [],
       Task_Discription: "",
       Id: "",
-      Comment: []
+      Comment: [],
+      Project_Id: ""
     };
   }
   handleClose = () => {
@@ -57,8 +58,8 @@ class ListTask extends Component {
     this.setState({ show: false });
   };
 
-  handleShow = () => {
-    this.setState({ show: true, Show_Button: true });
+  handleShow = e => {
+    this.setState({ Id: e.target.value, show: true, Show_Button: true });
   };
   handleShowButton = e => {
     this.setState({ show: true, Show_Button: false, Id: e.target.value });
@@ -95,7 +96,8 @@ class ListTask extends Component {
       Start_Date: this.state.Start_Date,
       Submission_Date: this.state.Submission_Date,
       Total_Developers: this.state.Total_Developers,
-      Task_Discription: this.state.Task_Discription
+      Task_Discription: this.state.Task_Discription,
+      Project_Id: this.state.Id
     };
 
     this.props.AddTask(formData);
@@ -109,9 +111,12 @@ class ListTask extends Component {
     this.setState({ show: false });
   };
 
-  componentWillMount() {
-    this.props.ListTask();
-  }
+  componentDidMount = async () => {
+    if (this.state.Project_Id === "") {
+      await this.setState({ Project_Id: this.props.location.state.id });
+    }
+    this.props.ListTask(this.state.Project_Id);
+  };
 
   render() {
     if (localStorage.getItem("Token")) {
@@ -297,6 +302,17 @@ class ListTask extends Component {
                     <div className="container">
                       <div className="row justify-content-start">
                         <div className="col p-1 border border-danger">
+                          <label>Project Id</label>
+                          <div>
+                            <p>
+                              <b>{post.Project_Id}</b>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <br />
+                      <div className="row justify-content-start">
+                        <div className="col p-1 border border-danger">
                           <label>Task title</label>
                           <div>
                             <p>
@@ -382,12 +398,13 @@ class ListTask extends Component {
                       <Button
                         className="badge-success"
                         onClick={this.handleShow}
+                        value={post.Project_Id}
                       >
                         ADDTASK
                       </Button>
                       ...
                       <Button
-                        variant="badge-warning"
+                        className="badge-warning"
                         onClick={this.handleShowButton}
                         value={post._id}
                       >
@@ -395,7 +412,7 @@ class ListTask extends Component {
                       </Button>
                       ...
                       <Button
-                        variant="btn btn-danger"
+                        className="badge-danger"
                         onClick={this.handleTaskDelete}
                         value={post._id}
                       >
@@ -403,7 +420,7 @@ class ListTask extends Component {
                       </Button>
                       ...
                       <Button
-                        variant="btn btn-success"
+                        className="badge-success"
                         onClick={this.handleShowForm}
                         value={post._id}
                       >
@@ -411,7 +428,7 @@ class ListTask extends Component {
                       </Button>
                       ...
                       <Button
-                        variant="btn btn-success"
+                        className="badge-warning"
                         onClick={this.handleComment}
                         value={post._id}
                       >

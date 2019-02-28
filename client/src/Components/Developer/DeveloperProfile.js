@@ -52,14 +52,8 @@ class DeveloperProfile extends Component {
               </li>
               ...
               <li className="nav item">
-                <Link to="/AddTask" className="nav-link active">
-                  Add-Task
-                </Link>
-              </li>
-              ...
-              <li className="nav item">
-                <Link to="/TaskList" className="nav-link active">
-                  Task
+                <Link to="/ProjectList" className="nav-link active">
+                  Projects
                 </Link>
               </li>
               ...
