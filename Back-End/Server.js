@@ -52,7 +52,7 @@ app.put("/Add/Comment/:TaskId", async (req, res) => {
       { _id: req.params.TaskId },
       { $push: { Task_Comment: req.body.Comment } }
     );
-    res.send("Done");
+    res.json({ id: req.params.TaskId });
   } catch {
     console.log("Error");
   }
@@ -200,10 +200,9 @@ app.get("/Get/ProjectList", async (req, res) => {
     res.status(500);
   }
 });
-app.get("/Get/TaskList/:Project_Id", async (req, res) => {
+app.get("/Get/TaskList", async (req, res) => {
   try {
-    console.log(req.params.Project_Id);
-    const TaskList = await Task.find({ Project_Id: req.params.Project_Id });
+    const TaskList = await Task.find({});
 
     res.json(TaskList);
   } catch (error) {

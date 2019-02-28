@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Link, Route } from "react-router-dom";
 import "./App.css";
 import DeveloperLogin from "./Container/Login";
-import DeveloperRegistration from "./Container/DeveloperRegistration";
+import DeveloperRegistration from "./Container/Registration";
 import Projects from "./Container/Projects";
 import Home from "./Home";
 import "./bootstrap.css";

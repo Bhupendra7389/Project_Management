@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 class ListProject extends Component {
   constructor() {
     super();
@@ -15,8 +15,13 @@ class ListProject extends Component {
       Id: ""
     };
   }
-  handleTask = e => {
-    this.setState({ Id: e.target.value, Redirect: true });
+  handleTask = async e => {
+    localStorage.setItem("Project", e.target.value);
+    await this.setState({ Id: e.target.value });
+    this.props.history.push({
+      pathname: "TaskList",
+      state: { id: this.state.Id }
+    });
   };
   handleShow = e => {
     this.setState({ Id: e.target.value, show: true });
@@ -71,11 +76,6 @@ class ListProject extends Component {
   }
 
   render() {
-    if (this.state.Redirect) {
-      return (
-        <Redirect to={{ pathname: "TaskList", state: { id: this.state.Id } }} />
-      );
-    }
     return (
       <div>
         <Modal

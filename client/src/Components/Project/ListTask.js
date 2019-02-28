@@ -84,7 +84,7 @@ class ListTask extends Component {
       data: this.props.editTask
     });
 
-    await this.props.getTaskById(this.state.Id);
+    await this.props.GetTaskById(this.state.Id);
   };
 
   handleTaskDelete = e => {
@@ -111,11 +111,14 @@ class ListTask extends Component {
     this.setState({ show: false });
   };
 
-  componentDidMount = async () => {
-    if (this.state.Project_Id === "") {
-      await this.setState({ Project_Id: this.props.location.state.id });
-    }
-    this.props.ListTask(this.state.Project_Id);
+  // componentWillReceiveProps = async () => {
+  //   console.log(this.props.location.state.id);
+  //   await this.setState({ Project_Id: this.props.location.state.id });
+
+  //   this.props.ListTask(this.props.location.state.id);
+  // };
+  componentDidMount = () => {
+    this.props.ListTask();
   };
 
   render() {
@@ -279,7 +282,7 @@ class ListTask extends Component {
                       <br />
 
                       <button
-                        className="badge-success "
+                        className="badge btn-success "
                         onClick={this.handleUpdate}
                       >
                         EDIT
@@ -396,7 +399,7 @@ class ListTask extends Component {
                       </div>
                       <br />
                       <Button
-                        className="badge-success"
+                        className="badge btn-success"
                         onClick={this.handleShow}
                         value={post.Project_Id}
                       >
@@ -404,7 +407,7 @@ class ListTask extends Component {
                       </Button>
                       ...
                       <Button
-                        className="badge-warning"
+                        className="badge btn-warning"
                         onClick={this.handleShowButton}
                         value={post._id}
                       >
@@ -412,7 +415,7 @@ class ListTask extends Component {
                       </Button>
                       ...
                       <Button
-                        className="badge-danger"
+                        className="badge btn-danger"
                         onClick={this.handleTaskDelete}
                         value={post._id}
                       >
@@ -420,7 +423,7 @@ class ListTask extends Component {
                       </Button>
                       ...
                       <Button
-                        className="badge-success"
+                        className="badge btn-success"
                         onClick={this.handleShowForm}
                         value={post._id}
                       >
@@ -428,7 +431,7 @@ class ListTask extends Component {
                       </Button>
                       ...
                       <Button
-                        className="badge-warning"
+                        className="badge btn-warning"
                         onClick={this.handleComment}
                         value={post._id}
                       >

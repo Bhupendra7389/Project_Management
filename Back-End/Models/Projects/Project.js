@@ -5,7 +5,7 @@ const Project = new mongoose.Schema({
   Start_Date: { type: Date, require: true },
   Submission_Date: { type: Date, required: true },
   Project_Discription: { type: String, required: true },
-  Workers: [{ type: String, unique: true }]
+  Workers: [{ type: String }]
 });
 
 module.exports = mongoose.model("Project", Project);

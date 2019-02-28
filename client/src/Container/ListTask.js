@@ -1,14 +1,21 @@
 import { connect } from "react-redux";
 import ListTask from "../Components/Project/ListTask";
 import { addTask } from "../Actions/ListProjectActions";
+import {
+  listTask,
+  editTask,
+  deleteTask,
+  getTaskById,
+  comment
+} from "../Actions/ListTask";
 const mapDispatchToProps = dispatch => {
   return {
-    ListTask: project_Id => dispatch({ type: "LISTTASK", project_Id }),
+    ListTask: project_Id => dispatch(listTask(project_Id)),
     AddTask: task => dispatch(addTask(task)),
-    EditTask: editTask => dispatch({ type: "EDITTASK", editTask }),
-    DeleteTask: id => dispatch({ type: "DELETETASK", id }),
-    getTaskById: id => dispatch({ type: "GETTASKBYID", id }),
-    Comment: comment => dispatch({ type: "COMMENT", comment })
+    EditTask: edit => dispatch(editTask(edit)),
+    DeleteTask: id => dispatch(deleteTask(id)),
+    GetTaskById: id => dispatch(getTaskById(id)),
+    Comment: post => dispatch(comment(post))
   };
 };
 const mapStateToProps = state => {
