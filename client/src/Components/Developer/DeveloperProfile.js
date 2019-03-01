@@ -10,6 +10,7 @@ class DeveloperProfile extends Component {
       Id: ""
     };
   }
+
   handleResponse = async e => {
     const User = {
       ProjectId: e.target.value,
@@ -35,6 +36,7 @@ class DeveloperProfile extends Component {
     localStorage.clear();
     this.props.history.push("/DeveloperLog");
   };
+
   componentWillMount = () => {
     this.props.InvitedByProject(localStorage.getItem("_id"));
   };
@@ -77,6 +79,7 @@ class DeveloperProfile extends Component {
               </li>
             </div>
           </nav>
+
           <h3>Profile</h3>
 
           <div className="row">
