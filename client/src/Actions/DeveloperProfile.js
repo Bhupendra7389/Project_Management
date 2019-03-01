@@ -16,3 +16,9 @@ export function inviteResponse(user) {
     user
   };
 }
+export function deleteDeveloperInvite(user) {
+  return {
+    type: "DELETEDEVELOPERINVITE",
+    user
+  };
+}

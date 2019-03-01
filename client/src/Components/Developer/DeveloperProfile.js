@@ -6,17 +6,21 @@ class DeveloperProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: ""
+      Name: "",
+      Id: ""
     };
   }
   handleResponse = async e => {
-    this.setState({ subModelShow: false });
     const User = {
       ProjectId: e.target.value,
+      DeveloperId: this.state.Id,
       DeveloperEmail: localStorage.getItem("Email")
     };
+    console.log(User);
 
-    await this.props.InviteResponse(User);
+    this.props.InviteResponse(User);
+    await this.props.DeleteDeveloperInvite(User);
+    this.setState({ subModelShow: false });
   };
   closeSubModal = () => {
     this.setState({ subModelShow: false });
@@ -35,7 +39,7 @@ class DeveloperProfile extends Component {
     this.props.InvitedByProject(localStorage.getItem("_id"));
   };
   handleInvites = e => {
-    this.setState({ subModelShow: true });
+    this.setState({ subModelShow: true, Id: e.target.id });
     this.props.InvitesById(e.target.value);
   };
 
@@ -136,6 +140,7 @@ class DeveloperProfile extends Component {
                       <div className="badge btn-danger">
                         <button
                           value={postData.ProjectId}
+                          id={postData.DeveloperId}
                           onClick={this.handleInvites}
                         >
                           ONPROJECT

@@ -13,8 +13,18 @@ router.post("/Invite/Developer", async (req, res) => {
   } catch {
     console.error(500);
   }
-
-  res.send();
+});
+router.delete("/Delete/DeleteDeveloperInvite/:Data", async (req, res) => {
+  try {
+    // console.log(req.params.Data);
+    // const { ProjectId, DeveloperId } = await req.body;
+    let user = await Invite.findOneAndDelete({
+      ProjectId: req.params.Data
+    });
+    res.json(user);
+  } catch {
+    console.error("Internal Error");
+  }
 });
 router.get("/Get/InvitedByProject/:DeveloperId", async (req, res) => {
   const project = await Invite.find({

@@ -14,7 +14,10 @@ class AdminProfile extends Component {
   };
 
   render() {
-    if (localStorage.getItem("Name") && localStorage.getItem("Token")) {
+    if (
+      localStorage.getItem("Token") &&
+      localStorage.getItem("Position") === "Admin"
+    ) {
       return (
         <div className="container">
           <nav className="nav justify-content-end nav nav-tabs">

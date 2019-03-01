@@ -168,7 +168,13 @@ class ListProject extends Component {
                   Profile
                 </Link>
               </li>
-            ) : null}
+            ) : (
+              <li className="nav-item">
+                <Link to="/DeveloperProfile" className="nav-link active">
+                  Profile
+                </Link>
+              </li>
+            )}
           </nav>
 
           <div className="container -fluid">
