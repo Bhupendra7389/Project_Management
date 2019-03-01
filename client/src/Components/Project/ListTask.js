@@ -19,24 +19,7 @@ class ListTask extends Component {
   handleClose = () => {
     this.setState({ show: false, showEdit: false });
   };
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   const data = {};
-  //   if (this.state.testName !== "") {
-  //     data.testName = this.state.testName;
-  //   }
-  //   if (this.state.description !== "") {
-  //     data.description = this.state.description;
-  //   }
-  //   if (data.description || data.testName) {
-  //     const id = this.props.test._id;
-  //     this.props.editTest(id, data);
-  //     this.editMode();
-  //   } else {
-  //     this.editMode();
-  //   }
-  //   this.setState({ testName: "", description: "" });
-  // };
+
   handleUpdate = () => {
     var formData = {
       Task_Name: this.state.Task_Name,
@@ -111,14 +94,8 @@ class ListTask extends Component {
     this.setState({ show: false });
   };
 
-  // componentWillReceiveProps = async () => {
-  //   console.log(this.props.location.state.id);
-  //   await this.setState({ Project_Id: this.props.location.state.id });
-
-  //   this.props.ListTask(this.props.location.state.id);
-  // };
   componentDidMount = () => {
-    this.props.ListTask();
+    this.props.ListTask(this.props.history);
   };
 
   render() {

@@ -40,31 +40,41 @@ class DeveloperProfile extends Component {
   };
 
   render() {
-    if (localStorage.getItem("Token")) {
+    if (
+      localStorage.getItem("Token") &&
+      localStorage.getItem("Position") === "Developer"
+    ) {
       return (
         <div className="container">
           <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
               <li className="nav item">
-                <Link to="/DeveloperProfile" className="nav-link active">
+                <Link
+                  to="/DeveloperProfile"
+                  className="nav-link active btn-success"
+                >
                   Profile
                 </Link>
               </li>
               ...
               <li className="nav item">
-                <Link to="/ProjectList" className="nav-link active">
+                <Link to="/ProjectList" className="nav-link active btn-success">
                   Projects
                 </Link>
               </li>
               ...
               <li className="nav item">
-                <button onClick={this.handleLogout} className="nav-link active">
+                <button
+                  onClick={this.handleLogout}
+                  className="nav-link active btn-success"
+                >
                   Log-Out
                 </button>
               </li>
             </div>
           </nav>
           <h3>Profile</h3>
+
           <div className="row">
             <div className="col">
               <p>Name:-{localStorage.getItem("Name")}</p>
@@ -123,7 +133,7 @@ class DeveloperProfile extends Component {
                 {this.props.Projects.length &&
                   this.props.Projects.map(postData => (
                     <ul key={postData._id}>
-                      <div>
+                      <div className="badge btn-danger">
                         <button
                           value={postData.ProjectId}
                           onClick={this.handleInvites}
@@ -141,7 +151,9 @@ class DeveloperProfile extends Component {
                   CLOSE
                 </button>
               </Modal>
-              <button onClick={this.handleShow}>Invite's</button>
+              <button className="badge btn-warning" onClick={this.handleShow}>
+                Invite's
+              </button>
             </div>
           </div>
         </div>

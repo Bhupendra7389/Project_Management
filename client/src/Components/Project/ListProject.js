@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 class ListProject extends Component {
   constructor() {
     super();
@@ -16,8 +16,8 @@ class ListProject extends Component {
     };
   }
   handleTask = async e => {
-    localStorage.setItem("Project", e.target.value);
-    await this.setState({ Id: e.target.value });
+    localStorage.setItem("Project_Id", e.target.value);
+
     this.props.history.push({
       pathname: "TaskList",
       state: { id: this.state.Id }
@@ -76,242 +76,254 @@ class ListProject extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Modal
-          show={this.state.show}
-          onHide={this.handleClose}
-          aria-labelledby="contained-modal-title-vcenter"
-        >
-          <div>
-            <nav className="nav bg-light" />
-            <div className="container">
-              <div className="row">
-                <div className="col-lg" />
-                <div className="col-lg m-5 p-5">
-                  <div className="form-group shadow-textarea">
-                    <h4>Task Details</h4>
-                    <input
-                      type="text"
-                      name="Task_Name"
-                      onChange={this.onChange}
-                      className="form-control"
-                      placeholder="Title..."
-                      value={this.state.Task_Name}
-                    />
-                    <br />
-                    <input
-                      type="date"
-                      name="Start_Date"
-                      onChange={this.onChange}
-                      className="form-control"
-                      placeholder="../../...."
-                      value={this.state.Start_Date}
-                    />
-                    <br />
-                    <input
-                      type="date"
-                      name="Submission_Date"
-                      onChange={this.onChange}
-                      className="form-control"
-                      placeholder="../../...."
-                      value={this.state.Submission_Date}
-                    />
-                    <br />
-                    <textarea
-                      className="form-control"
-                      type="text"
-                      name="Total_Developers"
-                      onChange={this.onChange}
-                      placeholder="Task Assign To"
-                      value={this.state.Total_Developers}
-                    />
-                    <br />
-                    <textarea
-                      className="form-control"
-                      type="text"
-                      name="Task_Discription"
-                      onChange={this.onChange}
-                      placeholder="Task_Discription"
-                      value={this.state.Task_Discription}
-                    />
-                    <br />
-                    <button
-                      className="badge btn-primary "
-                      onClick={this.handleClick}
-                    >
-                      SUBMIT
-                    </button>
-                    ...
-                    <button
-                      className="badge btn-success "
-                      onClick={this.handleClose}
-                    >
-                      CLOSE
-                    </button>
+    if (
+      localStorage.getItem("Token") &&
+      localStorage.getItem("Token") !== "undefined"
+    ) {
+      return (
+        <div>
+          <Modal
+            show={this.state.show}
+            onHide={this.handleClose}
+            aria-labelledby="contained-modal-title-vcenter"
+          >
+            <div>
+              <nav className="nav bg-light" />
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg" />
+                  <div className="col-lg m-5 p-5">
+                    <div className="form-group shadow-textarea">
+                      <h4>Task Details</h4>
+                      <input
+                        type="text"
+                        name="Task_Name"
+                        onChange={this.onChange}
+                        className="form-control"
+                        placeholder="Title..."
+                        value={this.state.Task_Name}
+                      />
+                      <br />
+                      <input
+                        type="date"
+                        name="Start_Date"
+                        onChange={this.onChange}
+                        className="form-control"
+                        placeholder="../../...."
+                        value={this.state.Start_Date}
+                      />
+                      <br />
+                      <input
+                        type="date"
+                        name="Submission_Date"
+                        onChange={this.onChange}
+                        className="form-control"
+                        placeholder="../../...."
+                        value={this.state.Submission_Date}
+                      />
+                      <br />
+                      <textarea
+                        className="form-control"
+                        type="text"
+                        name="Total_Developers"
+                        onChange={this.onChange}
+                        placeholder="Task Assign To"
+                        value={this.state.Total_Developers}
+                      />
+                      <br />
+                      <textarea
+                        className="form-control"
+                        type="text"
+                        name="Task_Discription"
+                        onChange={this.onChange}
+                        placeholder="Task_Discription"
+                        value={this.state.Task_Discription}
+                      />
+                      <br />
+                      <button
+                        className="badge btn-primary "
+                        onClick={this.handleClick}
+                      >
+                        SUBMIT
+                      </button>
+                      ...
+                      <button
+                        className="badge btn-success "
+                        onClick={this.handleClose}
+                      >
+                        CLOSE
+                      </button>
+                    </div>
                   </div>
+                  <div className="col-lg" />
                 </div>
-                <div className="col-lg" />
               </div>
             </div>
-          </div>
-        </Modal>
-        <nav className="nav bg-light">
-          {" "}
-          <li className="nav-item">
-            <Link to="/AdminProfile" className="nav-link active">
-              Profile
-            </Link>
-          </li>
-        </nav>
+          </Modal>
+          <nav className="nav bg-light">
+            {" "}
+            {localStorage.getItem("Position") === "Admin" ? (
+              <li className="nav-item">
+                <Link to="/AdminProfile" className="nav-link active">
+                  Profile
+                </Link>
+              </li>
+            ) : null}
+          </nav>
 
-        <div className="container -fluid">
-          <h1>Project List</h1>
-          {this.props.getListProject.map(post => (
-            <ul key={post._id}>
-              <ul className="lighten-3 m-2">
-                <div className="p-3 border border-primary">
-                  <div className="container">
-                    <div className="row justify-content-start">
-                      <div className="col p-1 border border-danger">
-                        <label>Project title</label>
-                        <div>
-                          <p>
-                            <b>{post.Project_Name}</b>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="row justify-content-start">
-                      <div className="col p-1 border border-danger">
-                        <label>Project Start</label>
-                        <div>
-                          <b>{post.Start_Date}</b>
+          <div className="container -fluid">
+            <h1>Project List</h1>
+            {this.props.getListProject.map(post => (
+              <ul key={post._id}>
+                <ul className="lighten-3 m-2">
+                  <div className="p-3 border border-primary">
+                    <div className="container">
+                      <div className="row justify-content-start">
+                        <div className="col p-1 border border-danger">
+                          <label>Project title</label>
+                          <div>
+                            <p>
+                              <b>{post.Project_Name}</b>
+                            </p>
+                          </div>
                         </div>
                       </div>
                       <hr />
-                      <div className="col p-1 border border-danger">
-                        <label>Project Submit</label>
-                        <div>
-                          <p>
-                            <b>{post.Submission_Date}</b>
-                          </p>
+                      <div className="row justify-content-start">
+                        <div className="col p-1 border border-danger">
+                          <label>Project Start</label>
+                          <div>
+                            <b>{post.Start_Date}</b>
+                          </div>
+                        </div>
+                        <hr />
+                        <div className="col p-1 border border-danger">
+                          <label>Project Submit</label>
+                          <div>
+                            <p>
+                              <b>{post.Submission_Date}</b>
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <br />
-                    <div className="row justify-content-start">
-                      <div className="col p-1 border border-danger">
-                        <label>Project Id</label>
-                        <div>
-                          <p>
-                            <b>{post._id}</b>
-                          </p>
+                      <br />
+                      <div className="row justify-content-start">
+                        <div className="col p-1 border border-danger">
+                          <label>Project Id</label>
+                          <div>
+                            <p>
+                              <b>{post._id}</b>
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <br />
-                    <div className="row justify-content-start">
-                      <div className="col p-1 border border-danger">
-                        <label>Project Details</label>
-                        <div>
-                          <p>
-                            <b>{post.Project_Discription}</b>
-                          </p>
+                      <br />
+                      <div className="row justify-content-start">
+                        <div className="col p-1 border border-danger">
+                          <label>Project Details</label>
+                          <div>
+                            <p>
+                              <b>{post.Project_Discription}</b>
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="row justify-content-start">
-                      <div className="col p-1 border border-danger">
-                        <label>Developers</label>
-                        <div>
-                          <p>
-                            {post.Workers.map(get => (
-                              <b key={Math.random()}>
-                                {get}
-                                <br />
-                              </b>
-                            ))}
-                          </p>
+                      <div className="row justify-content-start">
+                        <div className="col p-1 border border-danger">
+                          <label>Developers</label>
+                          <div>
+                            <p>
+                              {post.Workers.map(get => (
+                                <b key={Math.random()}>
+                                  {get}
+                                  <br />
+                                </b>
+                              ))}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <Modal
-                  className="container"
-                  show={this.state.Show}
-                  onHide={this.handleClose}
-                >
-                  {this.props.getListDeveloper.map(developer => (
-                    <div key={developer._id}>
-                      <br />
-                      <li>
-                        Name:{developer.Name}
+                  <Modal
+                    className="container"
+                    show={this.state.Show}
+                    onHide={this.handleClose}
+                  >
+                    {this.props.getListDeveloper.map(developer => (
+                      <div key={developer._id}>
                         <br />
-                        Email:{developer.Email}
-                      </li>
+                        <li>
+                          Name:{developer.Name}
+                          <br />
+                          Email:{developer.Email}
+                        </li>
 
-                      <button
-                        className="badge btn-success"
-                        value={developer._id}
-                        id={post._id}
-                        onClick={this.handleInvite}
-                      >
-                        Invite
-                      </button>
-                      <br />
-                    </div>
-                  ))}
-                  <br />
-                  <button onClick={this.handleClose} className="badge-primary">
-                    Done
-                  </button>
-                </Modal>
+                        <button
+                          className="badge btn-success"
+                          value={developer._id}
+                          id={post._id}
+                          onClick={this.handleInvite}
+                        >
+                          Invite
+                        </button>
+                        <br />
+                      </div>
+                    ))}
+                    <br />
+                    <button
+                      onClick={this.handleClose}
+                      className="badge-primary"
+                    >
+                      Done
+                    </button>
+                  </Modal>
 
-                <div className="row">
-                  {localStorage.getItem("Position") === "Admin" ? (
+                  <div className="row">
+                    {localStorage.getItem("Position") === "Admin" ? (
+                      <div className="col">
+                        <button
+                          onClick={this.inviteDeveloper}
+                          value={post._id}
+                          className="badge btn-success"
+                        >
+                          Invite Developers
+                        </button>
+                      </div>
+                    ) : null}
                     <div className="col">
-                      <button
-                        onClick={this.inviteDeveloper}
-                        value={post._id}
-                        className="badge btn-success"
-                      >
-                        Invite Developers
-                      </button>
+                      <div>
+                        <button
+                          onClick={this.handleShow}
+                          value={post._id}
+                          className="badge btn-warning"
+                        >
+                          ADD-TASK
+                        </button>
+                      </div>
                     </div>
-                  ) : null}
-                  <div className="col">
-                    <div>
-                      <button
-                        onClick={this.handleShow}
-                        value={post._id}
-                        className="badge btn-warning"
-                      >
-                        ADD-TASK
-                      </button>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div>
-                      <button
-                        onClick={this.handleTask}
-                        value={post._id}
-                        className="badge btn-primary"
-                      >
-                        TASKS
-                      </button>
+                    <div className="col">
+                      <div>
+                        <button
+                          onClick={this.handleTask}
+                          value={post._id}
+                          className="badge btn-primary"
+                        >
+                          TASKS
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ul>
               </ul>
-            </ul>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <Redirect to="/DeveloperLog" />;
+    }
   }
 }
 

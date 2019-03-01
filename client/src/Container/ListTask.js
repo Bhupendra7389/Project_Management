@@ -10,7 +10,7 @@ import {
 } from "../Actions/ListTask";
 const mapDispatchToProps = dispatch => {
   return {
-    ListTask: project_Id => dispatch(listTask(project_Id)),
+    ListTask: history => dispatch(listTask(history)),
     AddTask: task => dispatch(addTask(task)),
     EditTask: edit => dispatch(editTask(edit)),
     DeleteTask: id => dispatch(deleteTask(id)),
