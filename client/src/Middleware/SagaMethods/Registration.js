@@ -15,7 +15,7 @@ export default function* userRegistration(action) {
   let User = yield axios.post("/Register/UserRegistration", action.developer);
   if (User !== Error) {
     yield showNotification({
-      data: "Developer Logged-In Successful",
+      data: "User Registered Successfully",
       type: "success"
     });
     action.developer.history.push("/DeveloperLog");

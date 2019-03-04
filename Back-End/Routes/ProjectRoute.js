@@ -26,13 +26,13 @@ router.post("/Add/Project", async (req, res) => {
       Submission_Date,
       Project_Discription
     });
-    project.save((error, user) => {
+    project.save((error, project) => {
       if (error) {
         res.send(error);
-      } else if (!user) {
+      } else if (!project) {
         res.send("Data not found");
       } else {
-        res.status(200).send(user);
+        res.status(200).send(project);
       }
     });
   } catch (error) {
