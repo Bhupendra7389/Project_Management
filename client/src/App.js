@@ -11,6 +11,8 @@ import AdminProfile from "./Container/AdiminProfile";
 import ListProject from "./Container/ListProject";
 import DeveloperProfile from "./Container/DeveloperProfile";
 import ListTask from "./Container/ListTask";
+import DifferentLabelProjects from "./Container/DifferentLabelProjects";
+
 class App extends Component {
   render() {
     return (
@@ -33,6 +35,7 @@ class App extends Component {
             <Route path="/AdminProfile" component={AdminProfile} />
             <Route path="/ProjectList" component={ListProject} />
             <Route path="/TaskList" component={ListTask} />
+            <Route path="/ProjectsLabel" component={DifferentLabelProjects} />
           </Switch>
         </div>
       </div>

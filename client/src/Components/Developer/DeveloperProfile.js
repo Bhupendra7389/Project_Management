@@ -68,25 +68,25 @@ class DeveloperProfile extends Component {
         <div className="container">
           <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
-              <li className="nav item">
+              <li className="nav ml-2 justify-content-end nav nav-tabs">
                 <Link
                   to="/DeveloperProfile"
-                  className="nav-link active btn-success"
+                  className="nav-link active btn-primary"
                 >
                   Profile
                 </Link>
               </li>
-              ...
-              <li className="nav item">
-                <Link to="/ProjectList" className="nav-link active btn-success">
+
+              <li className="nav ml-2 justify-content-end nav nav-tabs">
+                <Link to="/ProjectList" className="nav-link active btn-primary">
                   Projects
                 </Link>
               </li>
-              ...
-              <li className="nav item">
+
+              <li className="nav ml-2 justify-content-end nav nav-tabs">
                 <button
                   onClick={this.handleLogout}
-                  className="nav-link active btn-success"
+                  className="nav-link active btn-primary"
                 >
                   Log-Out
                 </button>
@@ -139,7 +139,7 @@ class DeveloperProfile extends Component {
                       >
                         ACCEPT
                       </button>
-                      ...
+
                       <button
                         className="badge btn-danger"
                         onClick={this.closeSubModal}

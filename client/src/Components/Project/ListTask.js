@@ -20,7 +20,6 @@ class ListTask extends Component {
   handleClose = () => {
     this.setState({ show: false, showEdit: false });
   };
-
   handleUpdate = () => {
     var formData = {
       Task_Name: this.state.Task_Name,
@@ -30,7 +29,6 @@ class ListTask extends Component {
       Task_Discription: this.state.Task_Discription,
       Id: this.state.Id
     };
-
     this.props.EditTask(formData);
     this.setState({
       Task_Name: "",
@@ -70,7 +68,6 @@ class ListTask extends Component {
 
     await this.props.GetTaskById(this.state.Id);
   };
-
   handleTaskDelete = async e => {
     await this.props.DeleteTask(e.target.value);
     await this.props.ListTask(this.props.history);
@@ -84,7 +81,6 @@ class ListTask extends Component {
       Task_Discription: this.state.Task_Discription,
       Project_Id: this.state.Id
     };
-
     this.props.AddTask(formData);
     this.setState({
       Task_Name: "",
@@ -95,7 +91,6 @@ class ListTask extends Component {
     });
     this.setState({ show: false });
   };
-
   componentDidMount = () => {
     this.props.ListTask(this.props.history);
   };
@@ -105,15 +100,22 @@ class ListTask extends Component {
       return (
         <div>
           <nav className="nav bg-light">
-            {localStorage.getItem("Position") === "Developer" ? (
-              <li className="nav-item">
-                <Link to="/DeveloperProfile" className="nav-link active">
+            {" "}
+            {localStorage.getItem("Position") === "Admin" ? (
+              <li className="nav justify-content-end nav nav-tabs">
+                <Link
+                  to="/AdminProfile"
+                  className="nav-link active btn-primary"
+                >
                   Profile
                 </Link>
               </li>
             ) : (
-              <li className="nav-item">
-                <Link to="/AdminProfile" className="nav-link active">
+              <li className="nav justify-content-end nav nav-tabs">
+                <Link
+                  to="/DeveloperProfile"
+                  className="nav-link active btn-primary"
+                >
                   Profile
                 </Link>
               </li>
@@ -177,7 +179,6 @@ class ListTask extends Component {
                         value={this.state.Task_Discription}
                       />
                       <br />
-
                       {this.state.Show_Button ? (
                         <button
                           className="btn btn-primary "
@@ -200,7 +201,6 @@ class ListTask extends Component {
               </div>
             </div>
           </Modal>
-
           <Modal
             show={this.state.showEdit}
             onHide={this.handleClose}
@@ -259,7 +259,6 @@ class ListTask extends Component {
                         value={this.state.Task_Discription}
                       />
                       <br />
-
                       <button
                         className="badge btn-success "
                         onClick={this.handleUpdate}
@@ -273,17 +272,15 @@ class ListTask extends Component {
               </div>
             </div>
           </Modal>
-
-          <div className="container -fluid">
-            <h1>Task List</h1>
-
+          <div className="container -fluid ">
+            <h1 className="font-italic ">Task List</h1>
             {this.props.getListTask.map(post => (
               <ul key={post._id}>
                 <ul className="lighten-3 m-2">
-                  <div className="p-3 border border-primary">
+                  <div className="p-3 alert alert-danger">
                     <div className="container">
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-success">
                           <label>Project Id</label>
                           <div>
                             <p>
@@ -292,9 +289,8 @@ class ListTask extends Component {
                           </div>
                         </div>
                       </div>
-                      <br />
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-info">
                           <label>Task title</label>
                           <div>
                             <p>
@@ -303,18 +299,14 @@ class ListTask extends Component {
                           </div>
                         </div>
                       </div>
-                      <hr />
-                      <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                      <div className="row justify-content-md-center">
+                        <div className="col md-1 p-1 alert alert-info">
                           <label>Task Start</label>
                           <div>
                             <b>{post.Start_Date}</b>
                           </div>
                         </div>
-
-                        <hr />
-
-                        <div className="col p-1 border border-danger">
+                        <div className="col ml-md-4 p-1 alert alert-info">
                           <label>Task Submit</label>
                           <div>
                             <p>
@@ -323,9 +315,8 @@ class ListTask extends Component {
                           </div>
                         </div>
                       </div>
-                      <br />
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-info">
                           <label>Task Details</label>
                           <div>
                             <p>
@@ -333,10 +324,7 @@ class ListTask extends Component {
                             </p>
                           </div>
                         </div>
-
-                        <br />
-
-                        <div className="col p-1 border border-danger">
+                        <div className="col ml-4 p-1 alert alert-info">
                           <label>Task Assigned To</label>
                           <div>
                             <p>
@@ -345,14 +333,13 @@ class ListTask extends Component {
                           </div>
                         </div>
                       </div>
-                      <br />
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-warning">
                           <label>Comments</label>
                           <div>
                             {post.Task_Comment.map(comment => (
                               <ul
-                                className="p-2 m-1 border border-danger"
+                                className="p-2 m-1 alert alert-dark"
                                 key={Math.random()}
                               >
                                 <b>{comment}</b>
@@ -362,7 +349,6 @@ class ListTask extends Component {
                           </div>
                         </div>
                       </div>
-                      <br />
                       <div className="row justify-content-start">
                         <div className="col ">
                           <textarea
@@ -376,7 +362,7 @@ class ListTask extends Component {
                           />
                         </div>
                       </div>
-                      <br />
+
                       <Button
                         className="badge btn-success"
                         onClick={this.handleShow}
@@ -384,33 +370,30 @@ class ListTask extends Component {
                       >
                         ADDTASK
                       </Button>
-                      ...
+
                       <Button
-                        className="badge btn-warning"
+                        className="ml-3 badge btn-warning"
                         onClick={this.handleShowButton}
                         value={post._id}
                       >
                         UPDATE
                       </Button>
-                      ...
                       <Button
-                        className="badge btn-danger"
+                        className="ml-3 badge btn-danger"
                         onClick={this.handleTaskDelete}
                         value={post._id}
                       >
                         DELETE
                       </Button>
-                      ...
                       <Button
-                        className="badge btn-success"
+                        className="ml-3 badge btn-success"
                         onClick={this.handleShowForm}
                         value={post._id}
                       >
                         EDIT
                       </Button>
-                      ...
                       <Button
-                        className="badge btn-warning"
+                        className="ml-3 badge btn-warning"
                         onClick={this.handleComment}
                         value={post._id}
                       >

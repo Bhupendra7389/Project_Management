@@ -155,9 +155,9 @@ class ListProject extends Component {
                       >
                         SUBMIT
                       </button>
-                      ...
+
                       <button
-                        className="badge btn-success "
+                        className="ml-3 badge btn-success "
                         onClick={this.handleClose}
                       >
                         CLOSE
@@ -172,29 +172,49 @@ class ListProject extends Component {
           <nav className="nav bg-light">
             {" "}
             {localStorage.getItem("Position") === "Admin" ? (
-              <li className="nav-item">
-                <Link to="/AdminProfile" className="nav-link active">
+              <li className="nav justify-content-end nav nav-tabs">
+                <Link
+                  to="/AdminProfile"
+                  className="nav-link active btn-primary"
+                >
                   Profile
                 </Link>
+                <nav className="nav bg-light">
+                  <li className="nav-item">
+                    <Link to="/ProjectsLabel" className="nav-link active">
+                      Labels
+                    </Link>
+                  </li>
+                </nav>
               </li>
             ) : (
-              <li className="nav-item">
-                <Link to="/DeveloperProfile" className="nav-link active">
+              <li className="nav justify-content-end nav nav-tabs">
+                <Link
+                  to="/DeveloperProfile"
+                  className="nav-link active btn-primary"
+                >
                   Profile
                 </Link>
+                <nav className="nav bg-light">
+                  <li className="nav-item">
+                    <Link to="/ProjectsLabel" className="nav-link active">
+                      Labels
+                    </Link>
+                  </li>
+                </nav>
               </li>
             )}
           </nav>
 
-          <div className="container -fluid">
+          <div className="container -fluid ">
             <h1>Project List</h1>
             {this.props.getListProject.map(post => (
               <ul key={post._id}>
                 <ul className="lighten-3 m-2">
-                  <div className="p-3 border border-primary">
+                  <div className="p-3  alert alert-danger">
                     <div className="container">
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-success">
                           <label>Project title</label>
                           <div>
                             <p>
@@ -203,16 +223,16 @@ class ListProject extends Component {
                           </div>
                         </div>
                       </div>
-                      <hr />
+
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-info">
                           <label>Project Start</label>
                           <div>
                             <b>{post.Start_Date}</b>
                           </div>
                         </div>
                         <hr />
-                        <div className="col p-1 border border-danger">
+                        <div className="col ml-5 p-1 alert alert-info">
                           <label>Project Submit</label>
                           <div>
                             <p>
@@ -221,9 +241,9 @@ class ListProject extends Component {
                           </div>
                         </div>
                       </div>
-                      <br />
+
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-info">
                           <label>Project Id</label>
                           <div>
                             <p>
@@ -232,9 +252,9 @@ class ListProject extends Component {
                           </div>
                         </div>
                       </div>
-                      <br />
+
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-info">
                           <label>Project Details</label>
                           <div>
                             <p>
@@ -244,7 +264,7 @@ class ListProject extends Component {
                         </div>
                       </div>
                       <div className="row justify-content-start">
-                        <div className="col p-1 border border-danger">
+                        <div className="col p-1 alert alert-info">
                           <label>Developers</label>
                           <div>
                             <p>
@@ -258,7 +278,7 @@ class ListProject extends Component {
                           </div>
                         </div>
                       </div>
-                      <br />
+
                       {localStorage.getItem("Position") === "Developer" ? (
                         <div className="row justify-content-start">
                           <div className="col">
