@@ -12,7 +12,8 @@ class ListProject extends Component {
       Task_Discription: "",
       Project_Id: "",
       Developer_Id: "",
-      Id: ""
+      Id: "",
+      Project_Status: ""
     };
   }
   handleTask = async e => {
@@ -39,6 +40,14 @@ class ListProject extends Component {
       Project_Id: e.target.value,
       Show: true
     });
+  };
+  handleLabel = async e => {
+    const projectStatus = {
+      ProjectId: e.target.value,
+      ProjectStatus: this.state.Project_Status
+    };
+
+    await this.props.ProjectStatus(projectStatus);
   };
   handleInvite = async e => {
     await this.setState({
@@ -249,6 +258,46 @@ class ListProject extends Component {
                           </div>
                         </div>
                       </div>
+                      <br />
+                      {localStorage.getItem("Position") === "Developer" ? (
+                        <div className="row justify-content-start">
+                          <div className="col">
+                            <select
+                              className="form-control"
+                              name="Project_Status"
+                              onChange={this.onChange}
+                            >
+                              <option value="In-Processing">
+                                In-Processing
+                              </option>
+                              <option value="Under-Testing">
+                                Under-Testing
+                              </option>
+                              <option value="Complete">Complete</option>
+                            </select>
+                            <div className="col">
+                              <button
+                                className="badge btn-success"
+                                value={post._id}
+                                onClick={this.handleLabel}
+                              >
+                                STATUS
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="row justify-content-start">
+                          <div className="col p-1 border border-danger">
+                            <label>Project Status</label>
+                            <div>
+                              <p>
+                                <b>{post.Project_Status}</b>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 

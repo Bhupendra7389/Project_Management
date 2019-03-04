@@ -9,7 +9,7 @@ function* showNotification(user) {
     type: user.type,
     layout: "topRight",
     text: user.data,
-    timeout: 3000
+    timeout: 1000
   }).show();
 }
 export default function* commentOnTask(action) {
@@ -19,7 +19,7 @@ export default function* commentOnTask(action) {
   );
   if (task) {
     yield showNotification({
-      data: "User Commented",
+      data: "User Commented on Task",
       type: "success"
     });
   }

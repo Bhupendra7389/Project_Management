@@ -10,7 +10,7 @@ export default function* editTask(action) {
   );
   if (user) {
     yield showNotification({
-      data: "Task Updated",
+      data: "Task Updated Successfully",
       type: "success"
     });
     yield put({ type: "LISTTASK" });
@@ -22,6 +22,6 @@ function* showNotification(user) {
     type: user.type,
     layout: "topRight",
     text: user.data,
-    timeout: 3000
+    timeout: 1000
   }).show();
 }

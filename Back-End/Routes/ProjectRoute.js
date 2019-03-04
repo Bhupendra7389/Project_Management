@@ -50,6 +50,18 @@ router.put("/Invite/InviteResponse/:ProjectId", async (req, res) => {
     console.log("Error");
   }
 });
+router.put("/Update/ProjectStatus/:ProjectId", async (req, res) => {
+  console.log(req.body.ProjectStatus);
+  try {
+    let projectStatus = await Project.findByIdAndUpdate(
+      { _id: req.params.ProjectId },
+      { Project_Status: req.body.ProjectStatus }
+    );
+    res.send(projectStatus);
+  } catch {
+    console.log("Error");
+  }
+});
 router.get("/Invite/InvitesById/:ProjectId", async (req, res) => {
   try {
     let project = await Project.find({ _id: req.params.ProjectId });

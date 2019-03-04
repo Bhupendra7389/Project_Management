@@ -3,12 +3,17 @@ import Noty from "noty";
 import "../../../node_modules/noty/lib/noty.css";
 import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
 export default function* addProject(action) {
-  let project = yield axios.post("/Add/Project", action.project).then(res => {
-    return res.data;
-  });
-  if (project) {
+  let status = yield axios
+    .put(
+      "/Update/ProjectStatus/" + action.ProjectStatus.ProjectId,
+      action.ProjectStatus
+    )
+    .then(res => {
+      return res.data;
+    });
+  if (status) {
     yield showNotification({
-      data: "Project Added Successfully",
+      data: "Status Updated",
       type: "success"
     });
   }

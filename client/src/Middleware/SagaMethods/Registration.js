@@ -8,7 +8,7 @@ function* showNotification(user) {
     type: user.type,
     layout: "topRight",
     text: user.data,
-    timeout: 3000
+    timeout: 1000
   }).show();
 }
 export default function* userRegistration(action) {

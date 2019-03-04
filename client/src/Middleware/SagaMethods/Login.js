@@ -9,7 +9,7 @@ function* showNotification(user) {
     type: user.type,
     layout: "topRight",
     text: user.data,
-    timeout: 3000
+    timeout: 1000
   }).show();
 }
 
@@ -27,13 +27,13 @@ export default function* userLogin(action) {
     localStorage.getItem("Position") === "Developer"
   ) {
     yield showNotification({
-      data: "Developer Logged-In Successful",
+      data: "Developer Logged-In Successfully",
       type: "success"
     });
     action.developer.history.push("/DeveloperProfile");
   } else if (localStorage.getItem("Position") === "Admin") {
     yield showNotification({
-      data: "Admin Logged-In Successful",
+      data: "Admin Logged-In Successfully",
       type: "success"
     });
     action.developer.history.push("/AdminProfile");
