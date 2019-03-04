@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
-import Noty from "noty";
-import "../../../node_modules/noty/lib/noty.css";
-import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
 
 class ListTask extends Component {
   constructor() {
@@ -22,15 +19,6 @@ class ListTask extends Component {
   }
   handleClose = () => {
     this.setState({ show: false, showEdit: false });
-  };
-  showNotification = user => {
-    new Noty({
-      theme: "bootstrap-v4",
-      type: user.type,
-      layout: "topRight",
-      text: user.data,
-      timeout: 3000
-    }).show();
   };
 
   handleUpdate = () => {
@@ -52,7 +40,6 @@ class ListTask extends Component {
       Task_Discription: ""
     });
     this.setState({ show: false });
-    this.showNotification({ data: " Task Update Successful", type: "success" });
   };
 
   handleShow = e => {
@@ -73,7 +60,6 @@ class ListTask extends Component {
     };
     this.props.Comment(comment);
     this.setState({ Comment: "" });
-    this.showNotification({ data: "Comment Added", type: "success" });
   };
   handleShowForm = async e => {
     await this.setState({
@@ -85,9 +71,9 @@ class ListTask extends Component {
     await this.props.GetTaskById(this.state.Id);
   };
 
-  handleTaskDelete = e => {
-    this.props.DeleteTask(e.target.value);
-    this.showNotification("Task Deleted");
+  handleTaskDelete = async e => {
+    await this.props.DeleteTask(e.target.value);
+    await this.props.ListTask(this.props.history);
   };
   handleClick = () => {
     var formData = {
@@ -108,10 +94,6 @@ class ListTask extends Component {
       Task_Discription: ""
     });
     this.setState({ show: false });
-    this.showNotification({
-      data: " Task Added Successful",
-      type: "success"
-    });
   };
 
   componentDidMount = () => {

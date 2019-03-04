@@ -1,5 +1,17 @@
 import axios from "axios";
 import { put } from "redux-saga/effects";
+import Noty from "noty";
+import "../../../node_modules/noty/lib/noty.css";
+import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
+function* showNotification(user) {
+  yield new Noty({
+    theme: "bootstrap-v4",
+    type: user.type,
+    layout: "topRight",
+    text: user.data,
+    timeout: 3000
+  }).show();
+}
 
 export default function* userLogin(action) {
   let Data = yield axios.post("/Login/UserLogin", action.developer);
@@ -14,10 +26,22 @@ export default function* userLogin(action) {
     localStorage.getItem("Token") &&
     localStorage.getItem("Position") === "Developer"
   ) {
+    yield showNotification({
+      data: "Developer Logged-In Successful",
+      type: "success"
+    });
     action.developer.history.push("/DeveloperProfile");
   } else if (localStorage.getItem("Position") === "Admin") {
+    yield showNotification({
+      data: "Admin Logged-In Successful",
+      type: "success"
+    });
     action.developer.history.push("/AdminProfile");
   } else {
+    yield showNotification({
+      data: "Wrong Email-Id or Password",
+      type: "error"
+    });
     action.developer.history.push("/DeveloperLog");
   }
   yield put({ type: "DEVELOPERSENDDATA", payload: Data.data });

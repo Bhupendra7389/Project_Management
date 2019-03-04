@@ -5,21 +5,21 @@ require("mongoose");
 router.post("/Invite/Developer", async (req, res) => {
   try {
     const { ProjectId, DeveloperId } = await req.body;
-    const invite = new Invite({
+    let invite = new Invite({
       ProjectId,
       DeveloperId
     });
     invite.save();
+    res.json(invite);
   } catch {
     console.error(500);
   }
 });
-router.delete("/Delete/DeleteDeveloperInvite/:Data", async (req, res) => {
+router.post("/Delete/DeleteDeveloperInvite", async (req, res) => {
   try {
-    // console.log(req.params.Data);
-    // const { ProjectId, DeveloperId } = await req.body;
     let user = await Invite.findOneAndDelete({
-      ProjectId: req.params.Data
+      ProjectId: req.body.ProjectId,
+      DeveloperId: req.body.DeveloperId
     });
     res.json(user);
   } catch {

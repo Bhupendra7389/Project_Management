@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Modal } from "react-bootstrap";
-
+import Noty from "noty";
+import "../../../node_modules/noty/lib/noty.css";
+import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
 class DeveloperProfile extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +12,15 @@ class DeveloperProfile extends Component {
       Id: ""
     };
   }
+  showNotification = user => {
+    new Noty({
+      theme: "bootstrap-v4",
+      type: user.type,
+      layout: "topRight",
+      text: user.data,
+      timeout: 3000
+    }).show();
+  };
 
   handleResponse = async e => {
     const User = {
@@ -17,11 +28,10 @@ class DeveloperProfile extends Component {
       DeveloperId: this.state.Id,
       DeveloperEmail: localStorage.getItem("Email")
     };
-    console.log(User);
-
-    this.props.InviteResponse(User);
+    await this.props.InviteResponse(User);
     await this.props.DeleteDeveloperInvite(User);
-    this.setState({ subModelShow: false });
+    await this.props.InvitedByProject(localStorage.getItem("_id"));
+    await this.setState({ subModelShow: false });
   };
   closeSubModal = () => {
     this.setState({ subModelShow: false });
@@ -34,6 +44,10 @@ class DeveloperProfile extends Component {
   };
   handleLogout = () => {
     localStorage.clear();
+    this.showNotification({
+      data: "Logged-Out Successful",
+      type: "success"
+    });
     this.props.history.push("/DeveloperLog");
   };
 

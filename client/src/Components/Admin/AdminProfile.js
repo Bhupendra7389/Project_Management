@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Noty from "noty";
 import "../../../node_modules/noty/lib/noty.css";
 import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
+
 class AdminProfile extends Component {
   constructor(props) {
     super(props);
@@ -19,10 +20,14 @@ class AdminProfile extends Component {
       timeout: 3000
     }).show();
   };
+
   handleLogout = () => {
     localStorage.clear();
+    this.showNotification({
+      data: "Logged-Out Successful",
+      type: "success"
+    });
     this.props.history.push("/DeveloperLog");
-    this.showNotification({ data: " Logged-Out Successful", type: "success" });
   };
 
   render() {
