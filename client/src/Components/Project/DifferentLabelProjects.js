@@ -29,8 +29,8 @@ class DifferentLabelProjects extends Component {
   render() {
     return (
       <div>
+        <br />
         <div className="container-drag row">
-          <br />
           <div
             className="wip col"
             onDragOver={e => this.onDragOver(e)}

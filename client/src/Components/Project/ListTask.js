@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
+import Select from "react-select";
 
 class ListTask extends Component {
   constructor() {
@@ -46,8 +47,8 @@ class ListTask extends Component {
   handleShowButton = e => {
     this.setState({ show: true, Show_Button: false, Id: e.target.value });
   };
-  onChange = e => {
-    this.setState({
+  onChange = async e => {
+    await this.setState({
       [e.target.name]: e.target.value
     });
   };
@@ -91,11 +92,18 @@ class ListTask extends Component {
     });
     this.setState({ show: false });
   };
-  componentDidMount = () => {
-    this.props.ListTask(this.props.history);
+  componentDidMount = async () => {
+    await this.props.ListTask(this.props.history);
+    await this.props.InvitesById(localStorage.getItem("Project_Id"));
   };
 
   render() {
+    const DeveloperOptions = [
+      { value: "chocolate", label: "Chocolate" },
+      { value: "strawberry", label: "Strawberry" },
+      { value: "vanilla", label: "Vanilla" }
+    ];
+
     if (localStorage.getItem("Token")) {
       return (
         <div>
@@ -161,6 +169,16 @@ class ListTask extends Component {
                         value={this.state.Submission_Date}
                       />
                       <br />
+
+                      <Select
+                        isMulti
+                        name="Total_Developers"
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        options={DeveloperOptions}
+                        onChange={this.onChange}
+                      />
+
                       <textarea
                         className="form-control"
                         type="text"

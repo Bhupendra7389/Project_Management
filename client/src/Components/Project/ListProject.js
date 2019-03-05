@@ -190,7 +190,10 @@ class ListProject extends Component {
                 </Link>
                 <nav className="nav bg-light">
                   <li className="nav-item">
-                    <Link to="/ProjectsLabel" className="nav-link active">
+                    <Link
+                      to="/ProjectsLabel"
+                      className="ml-2 nav-link active btn-primary"
+                    >
                       Labels
                     </Link>
                   </li>
