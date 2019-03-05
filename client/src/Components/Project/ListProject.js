@@ -179,13 +179,6 @@ class ListProject extends Component {
                 >
                   Profile
                 </Link>
-                <nav className="nav bg-light">
-                  <li className="nav-item">
-                    <Link to="/ProjectsLabel" className="nav-link active">
-                      Labels
-                    </Link>
-                  </li>
-                </nav>
               </li>
             ) : (
               <li className="nav justify-content-end nav nav-tabs">
