@@ -7,6 +7,7 @@ const ProjectRoute = require("./Routes/ProjectRoute");
 const InviteRouter = require("./Routes/InviteRoute");
 const UserRouter = require("./Routes/UserRoute");
 const TaskRouter = require("./Routes/TaskRoute");
+const Notifications = require("./Routes/NotificationsRoute");
 var cors = require("cors");
 require("./Models/Mongo");
 app.use(bodyParser.json()).use(morgan());

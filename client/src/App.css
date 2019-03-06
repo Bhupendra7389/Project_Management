@@ -1,7 +1,9 @@
 .App {
   text-align: center;
   width: 100%;
-  margin: 10px auto;
+
+  margin-bottom: 5px auto;
+  margin-top: 5px auto;
 }
 
 .container-drag {

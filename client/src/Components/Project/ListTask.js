@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
-// import Select from "react-select";
-
 class ListTask extends Component {
   constructor() {
     super();
@@ -44,12 +42,7 @@ class ListTask extends Component {
   handleShow = e => {
     this.setState({ Id: e.target.value, show: true, Show_Button: true });
   };
-  handleDevelopers = e => {
-    console.log(e);
-    this.setState({
-      Total_Developers: e
-    });
-  };
+
   handleShowButton = e => {
     this.setState({ show: true, Show_Button: false, Id: e.target.value });
   };
@@ -72,7 +65,6 @@ class ListTask extends Component {
       Id: e.target.value,
       data: this.props.editTask
     });
-
     await this.props.GetTaskById(this.state.Id);
   };
   handleTaskDelete = async e => {
@@ -105,12 +97,8 @@ class ListTask extends Component {
   };
 
   render() {
-    // console.log(this.state.Total_Developers.value);
-    // const skillOptions = [
-    //   { value: "chocolate", label: "Chocolate" },
-    //   { value: "strawberry", label: "Strawberry" },
-    //   { value: "vanilla", label: "Vanilla" }
-    // ];
+    console.log(this.props.getTask);
+
     if (localStorage.getItem("Token")) {
       return (
         <div>
@@ -186,17 +174,6 @@ class ListTask extends Component {
                         value={this.state.Submission_Date}
                       />
                       <br />
-
-                      {/* <Select
-                        defaultValue={[skillOptions[2], skillOptions[3]]}
-                        isMulti
-                        name="Total_Developers"
-                        value={this.state.Total_Developers}
-                        options={skillOptions}
-                        className="basic-multi-select"
-                        classNamePrefix="select"
-                        onChange={this.handleDevelopers}
-                      /> */}
 
                       <textarea
                         className="form-control"
