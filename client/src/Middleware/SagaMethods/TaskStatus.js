@@ -2,12 +2,9 @@ import axios from "axios";
 import Noty from "noty";
 import "../../../node_modules/noty/lib/noty.css";
 import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
-export default function* projectStatus(action) {
+export default function* taskStatus(action) {
   let status = yield axios
-    .put(
-      "/Update/ProjectStatus/" + action.ProjectStatus.ProjectId,
-      action.ProjectStatus
-    )
+    .put("/Update/TaskStatus/" + action.TaskStatus.TaskId, action.TaskStatus)
     .then(res => {
       return res.data;
     });

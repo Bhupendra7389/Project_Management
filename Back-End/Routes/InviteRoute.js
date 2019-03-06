@@ -1,16 +1,20 @@
 var express = require("express");
 var router = express.Router();
 var Invite = require("../Models/Invite/Invite");
-require("mongoose");
 router.post("/Invite/Developer", async (req, res) => {
   try {
-    const { ProjectId, DeveloperId } = await req.body;
-    let invite = new Invite({
-      ProjectId,
-      DeveloperId
-    });
-    invite.save();
-    res.json(invite);
+    const { ProjectId, DeveloperId } = req.body;
+    //console.log(Project.find({ _id: ProjectId }));
+    if (ProjectId && DeveloperId) {
+      let invite = new Invite({
+        ProjectId,
+        DeveloperId
+      });
+      invite.save();
+      res.json(invite);
+    } else {
+      null;
+    }
   } catch {
     console.error(500);
   }

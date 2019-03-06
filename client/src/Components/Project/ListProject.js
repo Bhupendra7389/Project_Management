@@ -169,7 +169,7 @@ class ListProject extends Component {
               </div>
             </div>
           </Modal>
-          <nav className="nav bg-light">
+          <nav className="nav-tabs">
             {" "}
             {localStorage.getItem("Position") === "Admin" ? (
               <li className="nav justify-content-end nav nav-tabs">

@@ -19,3 +19,9 @@ export function getTaskById(id) {
 export function comment(comment) {
   return { type: "COMMENT", comment };
 }
+export function taskStatus(TaskStatus) {
+  return {
+    type: "TASKSTATUS",
+    TaskStatus
+  };
+}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
-import Select from "react-select";
+// import Select from "react-select";
 
 class ListTask extends Component {
   constructor() {
@@ -44,6 +44,12 @@ class ListTask extends Component {
   handleShow = e => {
     this.setState({ Id: e.target.value, show: true, Show_Button: true });
   };
+  handleDevelopers = e => {
+    console.log(e);
+    this.setState({
+      Total_Developers: e
+    });
+  };
   handleShowButton = e => {
     this.setState({ show: true, Show_Button: false, Id: e.target.value });
   };
@@ -80,7 +86,8 @@ class ListTask extends Component {
       Submission_Date: this.state.Submission_Date,
       Total_Developers: this.state.Total_Developers,
       Task_Discription: this.state.Task_Discription,
-      Project_Id: this.state.Id
+      Project_Id: this.state.Id,
+      DeveloperOptions: []
     };
     this.props.AddTask(formData);
     this.setState({
@@ -98,16 +105,16 @@ class ListTask extends Component {
   };
 
   render() {
-    const DeveloperOptions = [
-      { value: "chocolate", label: "Chocolate" },
-      { value: "strawberry", label: "Strawberry" },
-      { value: "vanilla", label: "Vanilla" }
-    ];
-
+    // console.log(this.state.Total_Developers.value);
+    // const skillOptions = [
+    //   { value: "chocolate", label: "Chocolate" },
+    //   { value: "strawberry", label: "Strawberry" },
+    //   { value: "vanilla", label: "Vanilla" }
+    // ];
     if (localStorage.getItem("Token")) {
       return (
         <div>
-          <nav className="nav bg-light">
+          <nav className="nav-tabs">
             {" "}
             {localStorage.getItem("Position") === "Admin" ? (
               <li className="nav justify-content-end nav nav-tabs">
@@ -126,6 +133,16 @@ class ListTask extends Component {
                 >
                   Profile
                 </Link>
+                <nav className="nav bg-light">
+                  <li className="nav-item">
+                    <Link
+                      to="/TasksLabel"
+                      className="ml-2 nav-link active btn-primary"
+                    >
+                      Labels
+                    </Link>
+                  </li>
+                </nav>
               </li>
             )}
           </nav>
@@ -170,14 +187,16 @@ class ListTask extends Component {
                       />
                       <br />
 
-                      <Select
+                      {/* <Select
+                        defaultValue={[skillOptions[2], skillOptions[3]]}
                         isMulti
                         name="Total_Developers"
+                        value={this.state.Total_Developers}
+                        options={skillOptions}
                         className="basic-multi-select"
                         classNamePrefix="select"
-                        options={DeveloperOptions}
-                        onChange={this.onChange}
-                      />
+                        onChange={this.handleDevelopers}
+                      /> */}
 
                       <textarea
                         className="form-control"

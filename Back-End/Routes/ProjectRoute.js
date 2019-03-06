@@ -1,8 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var Project = require("../Models/Projects/Project");
-require("mongoose");
-
 router.get("/Get/ProjectList", async (req, res) => {
   try {
     const ProjectList = await Project.find({});

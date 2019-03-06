@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  width: 95%;
-  margin: 15px auto;
+  width: 100%;
+  margin: 10px auto;
 }
 
 .container-drag {
@@ -34,7 +34,7 @@
 
 .droppable {
   position: absolute;
-  width: 400px;
+  width: 420px;
   height: 100vh;
   right: 0;
   top: 10;
@@ -43,11 +43,11 @@
 }
 .droppableNew {
   position: absolute;
-  width: 400px;
+  width: 420px;
   height: 100vh;
   right: 0;
   top: 10;
-  background-color: #742c2c;
+  background-color: #6db92f63;
   border-left: 1px dotted;
 }
 

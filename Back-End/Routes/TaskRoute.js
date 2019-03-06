@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const Task = require("../Models/Projects/Task");
-require("mongoose");
 router.put("/Add/Comment/:TaskId", async (req, res) => {
   try {
     let comment = await Task.findOneAndUpdate(
@@ -97,5 +96,16 @@ router.delete("/Delete/DeleteTask/:Id", async (req, res) => {
     let task = await Task.findByIdAndDelete({ _id: req.params.Id });
     res.json(task);
   } catch (error) {}
+});
+router.put("/Update/TaskStatus/:TaskId", async (req, res) => {
+  try {
+    let taskStatus = await Task.findByIdAndUpdate(
+      { _id: req.params.TaskId },
+      { Task_Status: req.body.TaskStatus }
+    );
+    res.send(taskStatus);
+  } catch {
+    console.log("Error");
+  }
 });
 module.exports = router;

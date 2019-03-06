@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 var User = require("../Models/Register");
 const jwt = require("jsonwebtoken");
-require("mongoose");
 const secretKey = "AdminUser";
 router.post("/Register/UserRegistration", async (req, res) => {
   try {
