@@ -73,6 +73,8 @@ class DeveloperProfile extends Component {
   };
 
   render() {
+    const NumberData = this.props.Noty.length;
+
     if (
       localStorage.getItem("Token") &&
       localStorage.getItem("Position") === "Developer"
@@ -136,7 +138,8 @@ class DeveloperProfile extends Component {
                 onClick={this.handleNotifications}
                 className="ml-2 btn btn-primary"
               >
-                Notifications <span className="badge badge-light">9</span>
+                Notifications{" "}
+                <span className="badge badge-light">{NumberData}</span>
               </button>
             </div>
           </nav>

@@ -24,6 +24,7 @@ router.delete("/Delete/Notification/:NotyId", async (req, res) => {
     let Noty = await Notifications.findByIdAndDelete({
       _id: req.params.NotyId
     });
+
     res.json(Noty);
   } catch (error) {}
 });
