@@ -5,7 +5,8 @@ const initialState = {
   TaskList: [],
   Task: [],
   InvitedDeveloper: [],
-  Projects: []
+  Projects: [],
+  Notificatios: []
 };
 const reducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -38,6 +39,10 @@ const reducer = (state = initialState, action) => {
     }
     case "INVITESBYPROJECT": {
       newState.Projects = action.payload;
+      break;
+    }
+    case "GETALLNOTIFICATIONS": {
+      newState.Notificatios = action.payload;
       break;
     }
     default:

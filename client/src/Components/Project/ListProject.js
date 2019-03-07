@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
+import Select from "react-select";
 class ListProject extends Component {
   constructor() {
     super();
@@ -16,6 +17,9 @@ class ListProject extends Component {
       Project_Status: ""
     };
   }
+  handleChange = Total_Developers => {
+    this.setState({ Total_Developers });
+  };
   handleTask = async e => {
     localStorage.setItem("Project_Id", e.target.value);
 
@@ -24,8 +28,9 @@ class ListProject extends Component {
       state: { id: this.state.Id }
     });
   };
-  handleShow = e => {
-    this.setState({ Id: e.target.value, show: true });
+  handleShow = async e => {
+    await this.setState({ Id: e.target.value, show: true });
+    this.props.InvitesById(this.state.Id);
   };
   onChange = e => {
     this.setState({
@@ -69,7 +74,9 @@ class ListProject extends Component {
       Task_Discription: this.state.Task_Discription,
       Project_Id: this.state.Id
     };
-    await this.props.AddTask(formData);
+    if (this.state.Id && this.state.Id !== "undefined") {
+      await this.props.AddTask(formData);
+    }
     this.setState({
       Task_Name: "",
       Start_Date: "",
@@ -89,6 +96,16 @@ class ListProject extends Component {
       localStorage.getItem("Token") &&
       localStorage.getItem("Token") !== "undefined"
     ) {
+      const options = {
+        Values: [
+          this.props.getProject.map(project => {
+            return {
+              value: project.Workers,
+              label: project.Workers
+            };
+          })
+        ]
+      };
       return (
         <div>
           <Modal
@@ -131,14 +148,24 @@ class ListProject extends Component {
                         value={this.state.Submission_Date}
                       />
                       <br />
-                      <textarea
+                      <Select
+                        defaultValue={[options.Values[4], options.Values[5]]}
+                        value={this.state.Total_Developers}
+                        isMulti
+                        options={options.Values[0]}
+                        name="Total_Developers"
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        onChange={this.handleChange}
+                      />
+                      {/* <textarea
                         className="form-control"
                         type="text"
                         name="Total_Developers"
                         onChange={this.onChange}
                         placeholder="Task Assign To"
                         value={this.state.Total_Developers}
-                      />
+                      /> */}
                       <br />
                       <textarea
                         className="form-control"

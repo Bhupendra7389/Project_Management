@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Noty from "noty";
 import "../../../node_modules/noty/lib/noty.css";
 import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
+import { Modal } from "react-bootstrap";
 
 class AdminProfile extends Component {
   constructor(props) {
@@ -11,6 +12,14 @@ class AdminProfile extends Component {
       Name: ""
     };
   }
+  handleClose = () => {
+    this.setState({ show: false });
+  };
+  handleNotifications = () => {
+    this.setState({
+      show: true
+    });
+  };
   showNotification = user => {
     new Noty({
       theme: "bootstrap-v4",
@@ -29,6 +38,9 @@ class AdminProfile extends Component {
     });
     this.props.history.push("/DeveloperLog");
   };
+  componentDidMount = () => {
+    this.props.GetNotifications();
+  };
 
   render() {
     if (
@@ -37,6 +49,13 @@ class AdminProfile extends Component {
     ) {
       return (
         <div className="container">
+          <Modal
+            show={this.state.show}
+            onHide={this.handleClose}
+            aria-labelledby="contained-modal-title-vcenter"
+          >
+            <h1>Hello</h1>
+          </Modal>
           <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
               <li className="nav justify-content-end nav nav-tabs">
@@ -66,6 +85,23 @@ class AdminProfile extends Component {
                   Log-Out
                 </button>
               </li>
+
+              <nav className="ml-3 navbar navbar-light nav nav-tabs">
+                <a
+                  className="navbar-brand"
+                  onClick={this.handleNotifications}
+                  href="#"
+                >
+                  <img
+                    // src="/docs/4.0/assets/brand/bootstrap-solid.svg"
+                    width="30"
+                    height="30"
+                    className=" d-inline-block align-top"
+                    alt=""
+                  />
+                  Notifiactions
+                </a>
+              </nav>
             </div>
           </nav>
           <h3>Profile</h3>

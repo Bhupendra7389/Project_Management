@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
+import Select from "react-select";
 class ListTask extends Component {
   constructor() {
     super();
@@ -19,12 +20,20 @@ class ListTask extends Component {
   handleClose = () => {
     this.setState({ show: false, showEdit: false });
   };
+  handleChange = Total_Developers => {
+    this.setState({ Total_Developers });
+  };
   handleUpdate = () => {
+    const Data = {
+      Values: this.state.Total_Developers.map(post => {
+        return post.value;
+      })
+    };
     var formData = {
       Task_Name: this.state.Task_Name,
       Start_Date: this.state.Start_Date,
       Submission_Date: this.state.Submission_Date,
-      Total_Developers: this.state.Total_Developers,
+      Total_Developers: Data.Values,
       Task_Discription: this.state.Task_Discription,
       Id: this.state.Id
     };
@@ -72,14 +81,19 @@ class ListTask extends Component {
     await this.props.ListTask(this.props.history);
   };
   handleClick = () => {
+    const Data = {
+      Values: this.state.Total_Developers.map(post => {
+        return post.value;
+      })
+    };
+
     var formData = {
       Task_Name: this.state.Task_Name,
       Start_Date: this.state.Start_Date,
       Submission_Date: this.state.Submission_Date,
-      Total_Developers: this.state.Total_Developers,
+      Total_Developers: Data.Values,
       Task_Discription: this.state.Task_Discription,
-      Project_Id: this.state.Id,
-      DeveloperOptions: []
+      Project_Id: this.state.Id
     };
     this.props.AddTask(formData);
     this.setState({
@@ -97,7 +111,28 @@ class ListTask extends Component {
   };
 
   render() {
-    console.log(this.props.getTask);
+    // const options1 = [
+    //   { value: "chocolate", label: "Chocolate" },
+    //   { value: "strawberry", label: "Strawberry" },
+    //   { value: "vanilla", label: "Vanilla" }
+    // ];
+    // const Data = {
+    //   Values: this.state.Total_Developers.map(post => {
+    //     return post.value;
+    //   })
+    // };
+    const options = {
+      Values: [
+        this.props.getProject.map(project => {
+          return {
+            value: project.Workers,
+            label: project.Workers
+          };
+        })
+      ]
+    };
+    // console.log(options1);
+    // console.log(options.Values);
 
     if (localStorage.getItem("Token")) {
       return (
@@ -174,15 +209,25 @@ class ListTask extends Component {
                         value={this.state.Submission_Date}
                       />
                       <br />
+                      <Select
+                        defaultValue={[options.Values[4], options.Values[5]]}
+                        value={this.state.Total_Developers}
+                        isMulti
+                        options={options.Values[0]}
+                        name="Total_Developers"
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        onChange={this.handleChange}
+                      />
 
-                      <textarea
+                      {/* <textarea
                         className="form-control"
                         type="text"
                         name="Total_Developers"
                         onChange={this.onChange}
                         placeholder="Task Assign To"
                         value={this.state.Total_Developers}
-                      />
+                      /> */}
                       <br />
                       <textarea
                         className="form-control"
@@ -255,13 +300,15 @@ class ListTask extends Component {
                         value={this.state.Submission_Date}
                       />
                       <br />
-                      <textarea
-                        className="form-control"
-                        type="text"
+                      <Select
+                        defaultValue={[options.Values[4], options.Values[5]]}
+                        value={this.state.Total_Developers}
+                        isMulti
+                        options={options.Values[0]}
                         name="Total_Developers"
-                        onChange={this.onChange}
-                        placeholder="Task Assign To"
-                        value={this.props.getTask}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        onChange={this.handleChange}
                       />
                       <br />
                       <textarea
@@ -342,7 +389,13 @@ class ListTask extends Component {
                           <label>Task Assigned To</label>
                           <div>
                             <p>
-                              <b>{post.Total_Developers}</b>
+                              <b>
+                                {post.Total_Developers.map(Developer => (
+                                  <b key={Math.random()} className="ml-3">
+                                    {Developer}
+                                  </b>
+                                ))}
+                              </b>
                             </p>
                           </div>
                         </div>
@@ -351,6 +404,9 @@ class ListTask extends Component {
                         <div className="col p-1 alert alert-warning">
                           <label>Comments</label>
                           <div>
+                            {/* {this.state.Total_Developers.map(post => (
+                              <h1>{post.value}</h1>
+                            ))} */}
                             {post.Task_Comment.map(comment => (
                               <ul
                                 className="p-2 m-1 alert alert-dark"

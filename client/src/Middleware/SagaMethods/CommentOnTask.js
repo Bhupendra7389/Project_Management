@@ -17,6 +17,10 @@ export default function* commentOnTask(action) {
     "/Add/Comment/" + action.comment.Id,
     action.comment
   );
+  yield axios.post("/Add/Notification", {
+    Noty: "New Comment Added on Task",
+    Task_Name: task.data._id
+  });
   if (task) {
     yield showNotification({
       data: "User Commented on Task",

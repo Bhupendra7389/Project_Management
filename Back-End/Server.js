@@ -15,6 +15,7 @@ app.use(bodyParser.json()).use(morgan());
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/", Notifications);
 
 app.use("/", ProjectRoute);
 app.use("/", InviteRouter);

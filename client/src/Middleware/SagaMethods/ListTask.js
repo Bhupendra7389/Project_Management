@@ -10,6 +10,8 @@ export default function* listTask(action) {
     );
     yield put({ type: "GETLISTTASK", payload: List.data });
   } else {
-    action.history.push("/ProjectList");
+    if (action.history) {
+      action.history.push("/ProjectList");
+    }
   }
 }
