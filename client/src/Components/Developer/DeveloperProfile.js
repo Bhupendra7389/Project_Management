@@ -50,9 +50,22 @@ class DeveloperProfile extends Component {
     });
     this.props.history.push("/DeveloperLog");
   };
+  handleNotifications = () => {
+    this.setState({
+      show: true
+    });
+  };
+  deleteNotification = e => {
+    console.log("noty1", e.target.value);
+    this.props.DeleteNotification(e.target.value);
+  };
+  handleClose = () => {
+    this.setState({ show: false });
+  };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.props.InvitedByProject(localStorage.getItem("_id"));
+    this.props.GetNotifications();
   };
   handleInvites = e => {
     this.setState({ subModelShow: true, Id: e.target.id });
@@ -66,6 +79,34 @@ class DeveloperProfile extends Component {
     ) {
       return (
         <div className="container">
+          <Modal
+            show={this.state.show}
+            onHide={this.handleClose}
+            aria-labelledby="contained-modal-title-vcenter"
+          >
+            <div>
+              {this.props.Noty.map(Post => (
+                <p key={Post._id} className="alert alert-info">
+                  <b>Task-Id:-{Post._id}</b>
+                  <br />
+                  <b>{Post.Notifications}</b>
+                  <button
+                    onClick={this.deleteNotification}
+                    value={Post._id}
+                    className="ml-5 badge btn-badge"
+                  >
+                    Done
+                  </button>
+                </p>
+              ))}
+              <button
+                className="ml-3 mb-2 badge btn-danger"
+                onClick={this.handleClose}
+              >
+                CLOSE
+              </button>
+            </div>
+          </Modal>
           <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
               <li className="nav ml-2 justify-content-end nav nav-tabs">
@@ -91,6 +132,12 @@ class DeveloperProfile extends Component {
                   Log-Out
                 </button>
               </li>
+              <button
+                onClick={this.handleNotifications}
+                className="ml-2 btn btn-primary"
+              >
+                Notifications <span className="badge badge-light">9</span>
+              </button>
             </div>
           </nav>
 

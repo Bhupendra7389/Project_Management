@@ -6,20 +6,24 @@ import {
   inviteResponse,
   deleteDeveloperInvite
 } from "../Actions/DeveloperProfile";
+import { getNotifications, deleteNotification } from "../Actions/AdminProfile";
 const mapDispatchToProps = dispatch => {
   return {
     InvitedByProject: id => dispatch(invitedByProject(id)),
     InvitesById: id => dispatch(invitesById(id)),
     InviteResponse: user => dispatch(inviteResponse(user)),
     DeleteDeveloperInvite: userValue =>
-      dispatch(deleteDeveloperInvite(userValue))
+      dispatch(deleteDeveloperInvite(userValue)),
+    GetNotifications: () => dispatch(getNotifications()),
+    DeleteNotification: Id => dispatch(deleteNotification(Id))
   };
 };
 const mapStateToProps = state => {
   return {
     Token: state.DeveloperData,
     Projects: state.InvitedDeveloper,
-    InviteFor: state.Projects
+    InviteFor: state.Projects,
+    Noty: state.Notifications
   };
 };
 

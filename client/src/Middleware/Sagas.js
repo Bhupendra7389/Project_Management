@@ -18,6 +18,7 @@ import deleteDeveloperInvite from "./SagaMethods/DeleteDeveloperInvite";
 import projectStatus from "./SagaMethods/ProjectStatus";
 import taskStatus from "./SagaMethods/TaskStatus";
 import getNotifications from "./SagaMethods/GetNotifications";
+import deleteNotification from "./SagaMethods/DeleteNotification";
 export default function* rootSaga() {
   yield all([
     yield takeLatest("DEVELOPERREGISTRATION", userRegistration),
@@ -38,6 +39,7 @@ export default function* rootSaga() {
     yield takeLatest("DELETEDEVELOPERINVITE", deleteDeveloperInvite),
     yield takeLatest("PROJECTSTATUS", projectStatus),
     yield takeLatest("TASKSTATUS", taskStatus),
-    yield takeLatest("GETNOTIFICATIONS", getNotifications)
+    yield takeLatest("GETNOTIFICATIONS", getNotifications),
+    yield takeLatest("DELETENOTIFICATION", deleteNotification)
   ]);
 }

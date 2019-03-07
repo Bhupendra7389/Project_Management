@@ -20,6 +20,10 @@ class AdminProfile extends Component {
       show: true
     });
   };
+  deleteNotification = e => {
+    console.log("noty1", e.target.value);
+    this.props.DeleteNotification(e.target.value);
+  };
   showNotification = user => {
     new Noty({
       theme: "bootstrap-v4",
@@ -54,7 +58,28 @@ class AdminProfile extends Component {
             onHide={this.handleClose}
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <h1>Hello</h1>
+            <div>
+              {this.props.Noty.map(Post => (
+                <p key={Post._id} className="alert alert-info">
+                  <b>Task-Id:-{Post._id}</b>
+                  <br />
+                  <b>{Post.Notifications}</b>
+                  <button
+                    onClick={this.deleteNotification}
+                    value={Post._id}
+                    className="ml-5 badge btn-badge"
+                  >
+                    Done
+                  </button>
+                </p>
+              ))}
+              <button
+                className="ml-3 mb-2 badge btn-danger"
+                onClick={this.handleClose}
+              >
+                CLOSE
+              </button>
+            </div>
           </Modal>
           <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
@@ -86,22 +111,12 @@ class AdminProfile extends Component {
                 </button>
               </li>
 
-              <nav className="ml-3 navbar navbar-light nav nav-tabs">
-                <a
-                  className="navbar-brand"
-                  onClick={this.handleNotifications}
-                  href="#"
-                >
-                  <img
-                    // src="/docs/4.0/assets/brand/bootstrap-solid.svg"
-                    width="30"
-                    height="30"
-                    className=" d-inline-block align-top"
-                    alt=""
-                  />
-                  Notifiactions
-                </a>
-              </nav>
+              <button
+                onClick={this.handleNotifications}
+                className="ml-2 btn btn-primary"
+              >
+                Notifications <span className="badge badge-light">9</span>
+              </button>
             </div>
           </nav>
           <h3>Profile</h3>

@@ -3,3 +3,9 @@ export function getNotifications() {
     type: "GETNOTIFICATIONS"
   };
 }
+export function deleteNotification(id) {
+  return {
+    type: "DELETENOTIFICATION",
+    id
+  };
+}

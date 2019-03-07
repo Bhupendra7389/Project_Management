@@ -13,9 +13,17 @@ router.post("/Add/Notification", async (req, res) => {
     console.error("Internal Error");
   }
 });
-router.get("/GET/NOTIFICATIONS", (req, res) => {
+router.get("/Get/Notifications", async (req, res) => {
   try {
-    let Noty = Notifications.find({});
+    let Noty = await Notifications.find({});
+    res.json(Noty);
+  } catch (error) {}
+});
+router.delete("/Delete/Notification/:NotyId", async (req, res) => {
+  try {
+    let Noty = await Notifications.findByIdAndDelete({
+      _id: req.params.NotyId
+    });
     res.json(Noty);
   } catch (error) {}
 });

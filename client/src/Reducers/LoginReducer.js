@@ -6,7 +6,7 @@ const initialState = {
   Task: [],
   InvitedDeveloper: [],
   Projects: [],
-  Notificatios: []
+  Notifications: []
 };
 const reducer = (state = initialState, action) => {
   const newState = { ...state };
@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
       break;
     }
     case "GETALLNOTIFICATIONS": {
-      newState.Notificatios = action.payload;
+      newState.Notifications = action.payload;
       break;
     }
     default:
