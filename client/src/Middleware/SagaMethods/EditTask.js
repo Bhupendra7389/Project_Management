@@ -8,8 +8,8 @@ export default function* editTask(action) {
     "/Edit/EditTask/" + action.editTask.Id,
     action.editTask
   );
-  yield axios.post("/Add/Notification", {
-    Noty: "Task Updated",
+  yield axios.put("/Add/Notification", {
+    Notification: "Task Updated",
     Task_Name: user.data._id
   });
   if (user) {

@@ -5,9 +5,9 @@ import "../../../node_modules/noty/lib/noty.css";
 import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
 export default function* addTask(action) {
   let user = yield axios.post("/Add/Task", action.Value);
-  console.log(user.data._id);
-  yield axios.post("/Add/Notification", {
-    Noty: "New Task Added",
+
+  yield axios.put("/Add/Notification", {
+    Notification: "New Task Added",
     Task_Name: user.data._id
   });
   if (user) {

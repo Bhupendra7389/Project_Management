@@ -14,8 +14,7 @@ const mapDispatchToProps = dispatch => {
     InviteResponse: user => dispatch(inviteResponse(user)),
     DeleteDeveloperInvite: userValue =>
       dispatch(deleteDeveloperInvite(userValue)),
-    GetNotifications: () => dispatch(getNotifications()),
-    DeleteNotification: Id => dispatch(deleteNotification(Id))
+    GetNotifications: Id => dispatch(getNotifications(Id))
   };
 };
 const mapStateToProps = state => {

@@ -4,7 +4,6 @@ var Invite = require("../Models/Invite/Invite");
 router.post("/Invite/Developer", async (req, res) => {
   try {
     const { ProjectId, DeveloperId } = req.body;
-    //console.log(Project.find({ _id: ProjectId }));
     if (ProjectId && DeveloperId) {
       let invite = new Invite({
         ProjectId,

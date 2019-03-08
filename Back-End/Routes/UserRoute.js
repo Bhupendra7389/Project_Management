@@ -3,6 +3,29 @@ var router = express.Router();
 var User = require("../Models/Register");
 const jwt = require("jsonwebtoken");
 const secretKey = "AdminUser";
+
+router.put("/Add/Notification", async (req, res) => {
+  try {
+    let user = await User.updateMany({
+      $push: {
+        Notifications: {
+          Notification: req.body.Notification,
+          Task_Name: req.body.Task_Name
+        }
+      }
+    });
+
+    await res.json(user);
+  } catch {
+    console.error("Internal Error");
+  }
+});
+router.get("/Get/Notifications/:UserId", async (req, res) => {
+  try {
+    let Noty = await User.findOne({ _id: req.params.UserId });
+    res.json(Noty);
+  } catch (error) {}
+});
 router.post("/Register/UserRegistration", async (req, res) => {
   try {
     const { Email, Password, Name, Position } = await req.body;

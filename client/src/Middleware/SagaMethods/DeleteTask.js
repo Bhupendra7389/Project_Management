@@ -4,8 +4,8 @@ import "../../../node_modules/noty/lib/noty.css";
 import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
 export default function* deleteTask(action) {
   let user = yield axios.delete("/Delete/DeleteTask/" + action.id);
-  yield axios.post("/Add/Notification", {
-    Noty: "Task Removed",
+  yield axios.put("/Add/Notification", {
+    Notification: "Task Removed",
     Task_Name: user.data._id
   });
   if (user) {

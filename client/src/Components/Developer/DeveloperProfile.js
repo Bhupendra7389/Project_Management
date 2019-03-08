@@ -55,14 +55,10 @@ class DeveloperProfile extends Component {
       show: true
     });
   };
-  deleteNotification = e => {
-    console.log("noty1", e.target.value);
-    this.props.DeleteNotification(e.target.value);
-  };
 
-  componentDidMount = () => {
-    this.props.InvitedByProject(localStorage.getItem("_id"));
-    this.props.GetNotifications();
+  componentDidMount = async () => {
+    await this.props.InvitedByProject(localStorage.getItem("_id"));
+    await this.props.GetNotifications(localStorage.getItem("_id"));
   };
   handleInvites = e => {
     this.setState({ subModelShow: true, Id: e.target.id });
@@ -76,34 +72,40 @@ class DeveloperProfile extends Component {
     ) {
       return (
         <div className="container">
-          <Modal
-            show={this.state.show}
-            onHide={this.handleClose}
-            aria-labelledby="contained-modal-title-vcenter"
-          >
-            <div>
-              {this.props.Noty.map(Post => (
-                <p key={Post._id} className="alert alert-info">
-                  <b>Task-Id:-{Post.Task_Name}</b>
-                  <br />
-                  <b>{Post.Notifications}</b>
-                  <button
-                    onClick={this.deleteNotification}
-                    value={Post._id}
-                    className="ml-5 badge btn-badge"
-                  >
-                    Done
-                  </button>
-                </p>
-              ))}
-              <button
-                className="ml-3 mb-2 badge btn-danger"
-                onClick={this.handleClose}
-              >
-                CLOSE
-              </button>
-            </div>
-          </Modal>
+          {this.props.Noty.Notifications ? (
+            <Modal
+              show={this.state.show}
+              onHide={this.handleClose}
+              aria-labelledby="contained-modal-title-vcenter"
+            >
+              <div>
+                {this.props.Noty.Notifications.map(Post => (
+                  <div key={Post._id}>
+                    {Post.Status !== "Complete" ? (
+                      <p className="alert alert-info">
+                        <b>Task-Id:-{Post.Task_Name}</b>
+                        <br />
+                        <b>{Post.Notification}</b>
+                        <button
+                          onClick={this.deleteNotification}
+                          value={Post._id}
+                          className="ml-5 badge btn-badge"
+                        >
+                          Done
+                        </button>
+                      </p>
+                    ) : null}
+                  </div>
+                ))}
+                <button
+                  className="ml-3 mb-2 badge btn-danger"
+                  onClick={this.handleClose}
+                >
+                  CLOSE
+                </button>
+              </div>
+            </Modal>
+          ) : null}
           <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
               <li className="nav ml-2 justify-content-end nav nav-tabs">
@@ -135,7 +137,9 @@ class DeveloperProfile extends Component {
                 className="ml-2 nav-link active btn-primary"
               >
                 <span className="badge badge-danger badge-pill">
-                  {this.props.Noty.length}
+                  {this.props.Noty.Notifications
+                    ? this.props.Noty.Notifications.length
+                    : null}
                 </span>
               </button>
             </div>

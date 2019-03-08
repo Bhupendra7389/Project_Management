@@ -7,7 +7,13 @@ const User = new mongoose.Schema({
   Email: { type: String, require: true, unique: true },
   Password: { type: String, require: true },
   Name: { type: String, required: true },
-  Position: { type: String, required: true }
+  Position: { type: String, required: true },
+  Notifications: [
+    {
+      Task_Name: "",
+      Notification: ""
+    }
+  ]
 });
 User.pre("save", function(next) {
   if (this.isNew || this.isModified("password")) {

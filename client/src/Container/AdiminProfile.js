@@ -13,9 +13,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    GetNotifications: () => dispatch(getNotifications()),
-    DeleteNotification: Id => dispatch(deleteNotification(Id)),
-    ChangeInNotification: Id => dispatch(changeInNotification(Id))
+    GetNotifications: Id => dispatch(getNotifications(Id))
   };
 };
 

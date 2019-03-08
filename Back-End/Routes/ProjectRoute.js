@@ -63,7 +63,6 @@ router.put("/Update/ProjectStatus/:ProjectId", async (req, res) => {
 router.get("/Invite/InvitesById/:ProjectId", async (req, res) => {
   try {
     let project = await Project.find({ _id: req.params.ProjectId });
-    console.log(project);
     res.json(project);
   } catch (error) {
     res.status(error);
