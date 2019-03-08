@@ -111,16 +111,6 @@ class ListTask extends Component {
   };
 
   render() {
-    // const options1 = [
-    //   { value: "chocolate", label: "Chocolate" },
-    //   { value: "strawberry", label: "Strawberry" },
-    //   { value: "vanilla", label: "Vanilla" }
-    // ];
-    // const Data = {
-    //   Values: this.state.Total_Developers.map(post => {
-    //     return post.value;
-    //   })
-    // };
     const options = {
       Values: [
         this.props.getProject.map(project => {
@@ -131,8 +121,6 @@ class ListTask extends Component {
         })
       ]
     };
-    // console.log(options1);
-    // console.log(options.Values);
 
     if (localStorage.getItem("Token")) {
       return (
@@ -220,14 +208,6 @@ class ListTask extends Component {
                         onChange={this.handleChange}
                       />
 
-                      {/* <textarea
-                        className="form-control"
-                        type="text"
-                        name="Total_Developers"
-                        onChange={this.onChange}
-                        placeholder="Task Assign To"
-                        value={this.state.Total_Developers}
-                      /> */}
                       <br />
                       <textarea
                         className="form-control"
@@ -404,9 +384,6 @@ class ListTask extends Component {
                         <div className="col p-1 alert alert-warning">
                           <label>Comments</label>
                           <div>
-                            {/* {this.state.Total_Developers.map(post => (
-                              <h1>{post.value}</h1>
-                            ))} */}
                             {post.Task_Comment.map(comment => (
                               <ul
                                 className="p-2 m-1 alert alert-dark"

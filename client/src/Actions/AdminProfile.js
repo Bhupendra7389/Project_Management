@@ -9,3 +9,9 @@ export function deleteNotification(id) {
     id
   };
 }
+export function changeInNotification(id) {
+  return {
+    type: "CHANGEINNOTIFICATION",
+    id
+  };
+}

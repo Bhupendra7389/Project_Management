@@ -37,7 +37,7 @@ class DeveloperProfile extends Component {
     this.setState({ subModelShow: false });
   };
   handleClose = () => {
-    this.setState({ Show: false, subModelShow: false });
+    this.setState({ Show: false, subModelShow: false, show: false });
   };
   handleShow = () => {
     this.setState({ Show: true });
@@ -59,9 +59,6 @@ class DeveloperProfile extends Component {
     console.log("noty1", e.target.value);
     this.props.DeleteNotification(e.target.value);
   };
-  handleClose = () => {
-    this.setState({ show: false });
-  };
 
   componentDidMount = () => {
     this.props.InvitedByProject(localStorage.getItem("_id"));
@@ -73,8 +70,6 @@ class DeveloperProfile extends Component {
   };
 
   render() {
-    const NumberData = this.props.Noty.length;
-
     if (
       localStorage.getItem("Token") &&
       localStorage.getItem("Position") === "Developer"
@@ -89,7 +84,7 @@ class DeveloperProfile extends Component {
             <div>
               {this.props.Noty.map(Post => (
                 <p key={Post._id} className="alert alert-info">
-                  <b>Task-Id:-{Post._id}</b>
+                  <b>Task-Id:-{Post.Task_Name}</b>
                   <br />
                   <b>{Post.Notifications}</b>
                   <button
@@ -134,12 +129,14 @@ class DeveloperProfile extends Component {
                   Log-Out
                 </button>
               </li>
+
               <button
                 onClick={this.handleNotifications}
-                className="ml-2 btn btn-primary"
+                className="ml-2 nav-link active btn-primary"
               >
-                Notifications{" "}
-                <span className="badge badge-light">{NumberData}</span>
+                <span className="badge badge-danger badge-pill">
+                  {this.props.Noty.length}
+                </span>
               </button>
             </div>
           </nav>

@@ -28,4 +28,16 @@ router.delete("/Delete/Notification/:NotyId", async (req, res) => {
     res.json(Noty);
   } catch (error) {}
 });
+router.put("/Update/Notification/:NotyId", async (req, res) => {
+  try {
+    let Noty = await Notifications.findByIdAndUpdate(
+      {
+        _id: req.params.NotyId
+      },
+      { Status: "Complete" }
+    );
+
+    res.json(Noty);
+  } catch (error) {}
+});
 module.exports = router;

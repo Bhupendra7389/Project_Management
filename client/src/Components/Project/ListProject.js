@@ -66,11 +66,16 @@ class ListProject extends Component {
     this.props.InviteDeveloper(values);
   };
   handleClick = async () => {
+    const Data = {
+      Values: this.state.Total_Developers.map(post => {
+        return post.value;
+      })
+    };
     var formData = {
       Task_Name: this.state.Task_Name,
       Start_Date: this.state.Start_Date,
       Submission_Date: this.state.Submission_Date,
-      Total_Developers: this.state.Total_Developers,
+      Total_Developers: Data.Values,
       Task_Discription: this.state.Task_Discription,
       Project_Id: this.state.Id
     };
@@ -158,14 +163,7 @@ class ListProject extends Component {
                         classNamePrefix="select"
                         onChange={this.handleChange}
                       />
-                      {/* <textarea
-                        className="form-control"
-                        type="text"
-                        name="Total_Developers"
-                        onChange={this.onChange}
-                        placeholder="Task Assign To"
-                        value={this.state.Total_Developers}
-                      /> */}
+
                       <br />
                       <textarea
                         className="form-control"

@@ -22,7 +22,7 @@ class AdminProfile extends Component {
   };
   deleteNotification = e => {
     console.log("noty1", e.target.value);
-    this.props.DeleteNotification(e.target.value);
+    this.props.ChangeInNotification(e.target.value);
   };
   showNotification = user => {
     new Noty({
@@ -60,18 +60,22 @@ class AdminProfile extends Component {
           >
             <div>
               {this.props.Noty.map(Post => (
-                <p key={Post._id} className="alert alert-info">
-                  <b>Task-Id:-{Post._id}</b>
-                  <br />
-                  <b>{Post.Notifications}</b>
-                  <button
-                    onClick={this.deleteNotification}
-                    value={Post._id}
-                    className="ml-5 badge btn-badge"
-                  >
-                    Done
-                  </button>
-                </p>
+                <div key={Post._id}>
+                  {Post.Status !== "Complete" ? (
+                    <p className="alert alert-info">
+                      <b>Task-Id:-{Post.Task_Name}</b>
+                      <br />
+                      <b>{Post.Notifications}</b>
+                      <button
+                        onClick={this.deleteNotification}
+                        value={Post._id}
+                        className="ml-5 badge btn-badge"
+                      >
+                        Done
+                      </button>
+                    </p>
+                  ) : null}
+                </div>
               ))}
               <button
                 className="ml-3 mb-2 badge btn-danger"
@@ -115,7 +119,10 @@ class AdminProfile extends Component {
                 onClick={this.handleNotifications}
                 className="ml-2 btn btn-primary"
               >
-                Notifications <span className="badge badge-light">9</span>
+                Notifications{" "}
+                <span className="badge badge-light">
+                  {this.props.Noty.length}
+                </span>
               </button>
             </div>
           </nav>
