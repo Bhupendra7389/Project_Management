@@ -20,6 +20,24 @@ router.put("/Add/Notification", async (req, res) => {
     console.error("Internal Error");
   }
 });
+router.post("/Remove/Notification", async (req, res) => {
+  try {
+    let user = await User.findOneAndUpdate(
+      { _id: req.body.UserId },
+      {
+        $pull: {
+          Notifications: {
+            Task_Name: req.body.Task_Name
+          }
+        }
+      }
+    );
+
+    await res.json(user);
+  } catch {
+    console.error("Internal Error");
+  }
+});
 router.get("/Get/Notifications/:UserId", async (req, res) => {
   try {
     let Noty = await User.findOne({ _id: req.params.UserId });
