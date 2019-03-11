@@ -162,7 +162,7 @@ class ListTask extends Component {
             onHide={this.handleClose}
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <div>
+            <div className="bg">
               <nav className="nav bg-light" />
               <div className="container">
                 <div className="row">
@@ -245,7 +245,7 @@ class ListTask extends Component {
             onHide={this.handleClose}
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <div>
+            <div className="bg">
               <nav className="nav bg-light" />
               <div className="container">
                 <div className="row">
@@ -318,7 +318,7 @@ class ListTask extends Component {
             {this.props.getListTask.map(post => (
               <ul key={post._id}>
                 <ul className="lighten-3 m-2">
-                  <div className="p-3 alert alert-danger">
+                  <div className="p-3 bg">
                     <div className="container">
                       <div className="row justify-content-start">
                         <div className="col p-1 alert alert-success">

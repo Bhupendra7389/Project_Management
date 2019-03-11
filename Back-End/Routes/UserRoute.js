@@ -22,12 +22,12 @@ router.put("/Add/Notification", async (req, res) => {
 });
 router.post("/Remove/Notification", async (req, res) => {
   try {
-    let user = await User.findOneAndUpdate(
+    let user = await User.updateOne(
       { _id: req.body.UserId },
       {
         $pull: {
           Notifications: {
-            Task_Name: req.body.Task_Name
+            _id: req.body.NotificationId
           }
         }
       }

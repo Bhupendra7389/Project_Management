@@ -17,7 +17,7 @@ import DifferentLabelTask from "./Container/DifferentLabelTask";
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App bg">
         <div>
           <nav className="nav bg-dark">
             <li className="nav-item">

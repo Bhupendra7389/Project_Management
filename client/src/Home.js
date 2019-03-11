@@ -18,19 +18,23 @@ class Home extends Component {
   render() {
     if (!localStorage.getItem("Token")) {
       return (
-        <div>
+        <div className="bg">
           <nav className="nav justify-content-end nav  ">
-            <li className="nav-item">
-              <Link to="/Developerlog" className="nav-link active">
+            <li className="nav justify-content-end nav nav-tabs">
+              <Link to="/Developerlog" className="nav-link active btn-primary">
                 Log-In
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/DeveloperReg" className="nav-link active">
+            <li className="nav justify-content-end">
+              <Link
+                to="/DeveloperReg"
+                className="ml-3 mr-3 nav-link active btn-primary"
+              >
                 Register
               </Link>
             </li>
           </nav>
+
           <h1>Project Management</h1>
         </div>
       );

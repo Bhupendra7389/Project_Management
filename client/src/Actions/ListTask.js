@@ -14,6 +14,7 @@ export function deleteTask(id) {
   return { type: "DELETETASK", id };
 }
 export function getTaskById(id) {
+  console.log(id);
   return { type: "GETTASKBYID", id };
 }
 export function comment(comment) {

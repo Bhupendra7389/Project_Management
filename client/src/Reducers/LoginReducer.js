@@ -45,6 +45,7 @@ const reducer = (state = initialState, action) => {
       newState.Notifications = action.payload;
       break;
     }
+
     default:
   }
   return newState;

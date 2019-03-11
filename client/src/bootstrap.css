@@ -582,6 +582,17 @@
     max-height: 340px;
     overflow-y: scroll;
   }
+  .bg{
+    background-image: url('https://mdbootstrap.com/img/Photos/Others/background.jpg');
+     border-image-repeat:  "no-repeat"; 
+    
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+     
+  }
+  
   
   .container {
     width: 80%;
@@ -589,6 +600,7 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    /* background-color: #20c997 */
    
   }
   

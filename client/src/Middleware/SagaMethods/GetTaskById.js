@@ -6,6 +6,7 @@ export default function* getTaskById(action) {
   let task = yield axios.get(
     "http://localhost:8081/Edit/GetTaskById/" + action.id
   );
+  console.log(task.data);
 
   yield put({ type: "TASKBYID", payload: task.data });
 }

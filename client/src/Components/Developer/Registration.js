@@ -34,7 +34,7 @@ class DeveloperRegistration extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="container">
           <div className="row">
             <div className="col-lg" />
             <div className="col-lg m-5 p-5">
@@ -73,7 +73,7 @@ class DeveloperRegistration extends Component {
                   name="Position"
                   onChange={this.onChange}
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     Designation...
                   </option>
                   <option value="Developer">Developer</option>

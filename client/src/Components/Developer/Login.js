@@ -30,7 +30,7 @@ class DeveloperLogin extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="container">
           <div className="row">
             <div className="col-lg" />
             <div className="col-lg m-5 p-5">

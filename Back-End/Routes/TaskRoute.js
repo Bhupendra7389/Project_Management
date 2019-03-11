@@ -54,7 +54,6 @@ router.get("/Get/TaskList/:Project_Id", async (req, res) => {
     res.status(500);
   }
 });
-
 router.get("/Edit/GetTaskById/:TaskId", async (req, res) => {
   try {
     const task = await Task.find({ _id: req.params.TaskId });

@@ -4,6 +4,7 @@ import Noty from "noty";
 import "../../../node_modules/noty/lib/noty.css";
 import "../../../node_modules/noty/lib/themes/bootstrap-v4.css";
 import { Modal } from "react-bootstrap";
+import "../../bootstrap.css";
 
 class AdminProfile extends Component {
   constructor(props) {
@@ -15,12 +16,22 @@ class AdminProfile extends Component {
   handleClose = () => {
     this.setState({ show: false });
   };
+  handleCloseTaskDetail = () => {
+    this.setState({ showDetail: false });
+  };
   handleNotifications = () => {
     this.setState({
       show: true
     });
   };
-
+  deleteNotification = async e => {
+    const Ids = {
+      UserId: localStorage.getItem("_id"),
+      NotificationId: e.target.value
+    };
+    await this.props.DeleteNotification(Ids);
+    await this.props.GetNotifications(localStorage.getItem("_id"));
+  };
   showNotification = user => {
     new Noty({
       theme: "bootstrap-v4",
@@ -30,7 +41,10 @@ class AdminProfile extends Component {
       timeout: 1000
     }).show();
   };
-
+  showTaskDetail = e => {
+    this.setState({ showDetail: true });
+    this.props.ShowTaskDetail(e.target.value);
+  };
   handleLogout = () => {
     localStorage.clear();
     this.showNotification({
@@ -49,7 +63,7 @@ class AdminProfile extends Component {
       localStorage.getItem("Position") === "Admin"
     ) {
       return (
-        <div className="container">
+        <div className="container ">
           {this.props.Noty.Notifications ? (
             <Modal
               show={this.state.show}
@@ -59,20 +73,25 @@ class AdminProfile extends Component {
               <div>
                 {this.props.Noty.Notifications.map(Post => (
                   <div key={Post._id}>
-                    {Post.Status !== "Complete" ? (
-                      <p className="alert alert-info">
-                        <b>Task-Id:-{Post.Task_Name}</b>
-                        <br />
-                        <b>{Post.Notification}</b>
-                        <button
-                          onClick={this.deleteNotification}
-                          value={Post._id}
-                          className="ml-5 badge btn-badge"
-                        >
-                          Done
-                        </button>
-                      </p>
-                    ) : null}
+                    <p className="alert alert-info">
+                      <b>Task-Id:-{Post.Task_Name}</b>
+                      <br />
+                      <b>{Post.Notification}</b>
+                      <button
+                        onClick={this.deleteNotification}
+                        value={Post._id}
+                        className="ml-5 badge btn-badge"
+                      >
+                        DONE
+                      </button>
+                      <button
+                        onClick={this.showTaskDetail}
+                        value={Post.Task_Name}
+                        className="ml-5 badge btn-badge"
+                      >
+                        SHOWDETAILS
+                      </button>
+                    </p>
                   </div>
                 ))}
                 <button
@@ -84,6 +103,32 @@ class AdminProfile extends Component {
               </div>
             </Modal>
           ) : null}
+          <Modal
+            show={this.state.showDetail}
+            onHide={this.handleCloseTaskDetail}
+            aria-labelledby="contained-modal-title-vcenter"
+          >
+            <div className="bg-warning">
+              {this.props.TaskDetail.map(Detail => (
+                <div key={Detail._id} className="ml-3 mt-2 mb-2 ">
+                  Title:-<b>{Detail.Task_Name}</b>
+                  <br />
+                  Start-Date:-<b>{Detail.Start_Date}</b>
+                  <br />
+                  Submission-Date:-<b>{Detail.Submission_Date}</b>
+                  <br />
+                  Task-Details:-<b>{Detail.Task_Discription}</b>
+                </div>
+              ))}
+            </div>
+            <button
+              className="close"
+              aria-label="Close"
+              onClick={this.handleCloseTaskDetail}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </Modal>
           <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">
               <li className="nav justify-content-end nav nav-tabs">

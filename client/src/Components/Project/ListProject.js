@@ -118,7 +118,7 @@ class ListProject extends Component {
             onHide={this.handleClose}
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <div>
+            <div className="bg">
               <nav className="nav bg-light" />
               <div className="container">
                 <div className="row">
@@ -230,9 +230,9 @@ class ListProject extends Component {
           <div className="container -fluid ">
             <h1>Project List</h1>
             {this.props.getListProject.map(post => (
-              <ul key={post._id}>
+              <ul key={post._id} className="bg">
                 <ul className="lighten-3 m-2">
-                  <div className="p-3  alert alert-danger">
+                  <div className="p-3  ">
                     <div className="container">
                       <div className="row justify-content-start">
                         <div className="col p-1 alert alert-success">
@@ -347,33 +347,35 @@ class ListProject extends Component {
                     show={this.state.Show}
                     onHide={this.handleClose}
                   >
-                    {this.props.getListDeveloper.map(developer => (
-                      <div key={developer._id}>
-                        <br />
-                        <li>
-                          Name:{developer.Name}
+                    <div className="bg">
+                      {this.props.getListDeveloper.map(developer => (
+                        <div key={developer._id}>
                           <br />
-                          Email:{developer.Email}
-                        </li>
+                          <li>
+                            Name:{developer.Name}
+                            <br />
+                            Email:{developer.Email}
+                          </li>
 
-                        <button
-                          className="badge btn-success"
-                          value={developer._id}
-                          id={post._id}
-                          onClick={this.handleInvite}
-                        >
-                          Invite
-                        </button>
-                        <br />
-                      </div>
-                    ))}
-                    <br />
-                    <button
-                      onClick={this.handleClose}
-                      className="badge-primary"
-                    >
-                      Done
-                    </button>
+                          <button
+                            className="badge btn-success"
+                            value={developer._id}
+                            id={post._id}
+                            onClick={this.handleInvite}
+                          >
+                            Invite
+                          </button>
+                          <br />
+                        </div>
+                      ))}
+                      <br />
+                      <button
+                        onClick={this.handleClose}
+                        className="badge-primary"
+                      >
+                        Done
+                      </button>
+                    </div>
                   </Modal>
 
                   <div className="row">
