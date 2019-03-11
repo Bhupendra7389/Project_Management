@@ -358,7 +358,7 @@ class ListProject extends Component {
                           </li>
 
                           <button
-                            className="badge btn-success"
+                            className="ml-2 badge btn-success"
                             value={developer._id}
                             id={post._id}
                             onClick={this.handleInvite}
@@ -371,7 +371,7 @@ class ListProject extends Component {
                       <br />
                       <button
                         onClick={this.handleClose}
-                        className="badge-primary"
+                        className=" ml-3 mb-2 badge badge-primary"
                       >
                         Done
                       </button>

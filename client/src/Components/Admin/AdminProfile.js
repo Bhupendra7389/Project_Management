@@ -63,14 +63,14 @@ class AdminProfile extends Component {
       localStorage.getItem("Position") === "Admin"
     ) {
       return (
-        <div className="container ">
+        <div className="container bgprofile">
           {this.props.Noty.Notifications ? (
             <Modal
               show={this.state.show}
               onHide={this.handleClose}
               aria-labelledby="contained-modal-title-vcenter"
             >
-              <div>
+              <div className="bg">
                 {this.props.Noty.Notifications.map(Post => (
                   <div key={Post._id}>
                     <p className="alert alert-info">

@@ -29,7 +29,7 @@ class DeveloperLogin extends Component {
 
   render() {
     return (
-      <div>
+      <div className="bgprofile">
         <div className="container">
           <div className="row">
             <div className="col-lg" />

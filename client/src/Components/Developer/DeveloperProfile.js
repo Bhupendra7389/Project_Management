@@ -86,14 +86,14 @@ class DeveloperProfile extends Component {
       localStorage.getItem("Position") === "Developer"
     ) {
       return (
-        <div className="container ">
+        <div className="container bgprofile">
           {this.props.Noty.Notifications ? (
             <Modal
               show={this.state.show}
               onHide={this.handleClose}
               aria-labelledby="contained-modal-title-vcenter"
             >
-              <div>
+              <div className="bg">
                 {this.props.Noty.Notifications.map(Post => (
                   <div key={Post._id}>
                     <p className="alert alert-info">
@@ -131,7 +131,7 @@ class DeveloperProfile extends Component {
             onHide={this.handleCloseTaskDetail}
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <div className="bg-warning">
+            <div className="bg">
               {this.props.TaskDetail.map(Detail => (
                 <div key={Detail._id} className="ml-3 mt-2 mb-2 ">
                   Title:-<b>{Detail.Task_Name}</b>
@@ -218,57 +218,61 @@ class DeveloperProfile extends Component {
                 onHide={this.handleClose}
                 size="sm"
               >
-                {this.props.InviteFor.map(invite => (
-                  <ul key={invite._id}>
-                    <div>
-                      {invite.Project_Name}
-                      <br />
-                      {invite.Start_Date}
-                      <br />
-                      {invite.Submission_Date}
-                      <br />
-                      {invite.Project_Discription}
-                      <br />
-                      <button
-                        className="badge btn-primary"
-                        value={invite._id}
-                        onClick={this.handleResponse}
-                      >
-                        ACCEPT
-                      </button>
-
-                      <button
-                        className="badge btn-danger"
-                        onClick={this.closeSubModal}
-                      >
-                        CLOSE
-                      </button>
-                    </div>
-                  </ul>
-                ))}
-              </Modal>
-              <Modal size="lg" show={this.state.Show} onHide={this.handleClose}>
-                {this.props.Projects.length &&
-                  this.props.Projects.map(postData => (
-                    <ul key={postData._id}>
-                      <div className="badge btn-danger">
-                        <button
-                          value={postData.ProjectId}
-                          id={postData.DeveloperId}
-                          onClick={this.handleInvites}
-                        >
-                          ONPROJECT
-                        </button>
+                <div className="bg">
+                  {this.props.InviteFor.map(invite => (
+                    <ul key={invite._id}>
+                      <div>
+                        {invite.Project_Name}
                         <br />
+                        {invite.Start_Date}
+                        <br />
+                        {invite.Submission_Date}
+                        <br />
+                        {invite.Project_Discription}
+                        <br />
+                        <button
+                          className="badge btn-primary"
+                          value={invite._id}
+                          onClick={this.handleResponse}
+                        >
+                          ACCEPT
+                        </button>
+
+                        <button
+                          className="badge btn-danger"
+                          onClick={this.closeSubModal}
+                        >
+                          CLOSE
+                        </button>
                       </div>
                     </ul>
                   ))}
-                <button
-                  className="badge btn-primary"
-                  onClick={this.handleClose}
-                >
-                  CLOSE
-                </button>
+                </div>
+              </Modal>
+              <Modal size="lg" show={this.state.Show} onHide={this.handleClose}>
+                <div className="bg">
+                  {this.props.Projects.length &&
+                    this.props.Projects.map(postData => (
+                      <ul key={postData._id}>
+                        <div className="badge btn-danger">
+                          <button
+                            value={postData.ProjectId}
+                            id={postData.DeveloperId}
+                            onClick={this.handleInvites}
+                          >
+                            ONPROJECT
+                          </button>
+                          <br />
+                        </div>
+                      </ul>
+                    ))}
+                  <button
+                    className="badge btn-primary"
+                    onClick={this.handleClose}
+                  >
+                    CLOSE
+                  </button>
+                </div>
               </Modal>
               <button className="badge btn-warning" onClick={this.handleShow}>
                 Invite's

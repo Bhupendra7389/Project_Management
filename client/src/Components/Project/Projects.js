@@ -23,6 +23,7 @@ class Projects extends Component {
       Submission_Date: this.state.Submission_Date,
       Project_Discription: this.state.Project_Discription
     };
+
     this.props.AddProject(formData);
     this.setState({
       Project_Name: "",
@@ -38,9 +39,9 @@ class Projects extends Component {
     ) {
       return (
         <div>
-          <nav className="nav bg-light">
-            <li className="nav-item">
-              <Link to="/AdminProfile" className="nav-link active">
+          <nav className="nav-tabs">
+            <li className="ml-2 mt-2 nav justify-content nav nav-tabs">
+              <Link to="/AdminProfile" className="nav-link active btn-primary">
                 Profile
               </Link>
             </li>
@@ -51,50 +52,52 @@ class Projects extends Component {
               <div className="col-lg" />
               <div className="col-lg m-5 p-5">
                 <div className="form-group shadow-textarea">
-                  <h4>Project Details</h4>
-                  <input
-                    type="text"
-                    name="Project_Name"
-                    onChange={this.onChange}
-                    className="form-control"
-                    placeholder="Title..."
-                    value={this.state.Project_Name}
-                  />
-                  <br />
-                  <input
-                    type="date"
-                    name="Start_Date"
-                    onChange={this.onChange}
-                    className="form-control"
-                    placeholder="../../...."
-                    value={this.state.Start_Date}
-                  />
-                  <br />
-                  <input
-                    type="date"
-                    name="Submission_Date"
-                    onChange={this.onChange}
-                    className="form-control"
-                    placeholder="../../...."
-                    value={this.state.Submission_Date}
-                  />
-                  <br />
-                  <textarea
-                    className="form-control"
-                    type="text"
-                    name="Project_Discription"
-                    onChange={this.onChange}
-                    placeholder="Project_Discription..."
-                    value={this.state.Project_Discription}
-                  />
-                  <br />
+                  <form>
+                    <h4>Project Details</h4>
+                    <input
+                      type="text"
+                      name="Project_Name"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="Title..."
+                      value={this.state.Project_Name}
+                    />
+                    <br />
+                    <input
+                      type="date"
+                      name="Start_Date"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="../../...."
+                      value={this.state.Start_Date}
+                    />
+                    <br />
+                    <input
+                      type="date"
+                      name="Submission_Date"
+                      onChange={this.onChange}
+                      className="form-control"
+                      placeholder="../../...."
+                      value={this.state.Submission_Date}
+                    />
+                    <br />
+                    <textarea
+                      className="form-control"
+                      type="text"
+                      name="Project_Discription"
+                      onChange={this.onChange}
+                      placeholder="Project_Discription..."
+                      value={this.state.Project_Discription}
+                    />
+                    <br />
 
-                  <button
-                    className="btn btn-primary "
-                    onClick={this.handleClick}
-                  >
-                    SUBMIT
-                  </button>
+                    <button
+                      className="btn btn-primary "
+                      onClick={this.handleClick}
+                    >
+                      SUBMIT
+                    </button>
+                  </form>
                 </div>
               </div>
               <div className="col-lg" />
