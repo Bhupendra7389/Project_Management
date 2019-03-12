@@ -71,35 +71,39 @@ class AdminProfile extends Component {
               aria-labelledby="contained-modal-title-vcenter"
             >
               <div className="bg">
-                {this.props.Noty.Notifications.map(Post => (
-                  <div key={Post._id}>
-                    <p className="alert alert-info">
-                      <b>Task-Id:-{Post.Task_Name}</b>
-                      <br />
-                      <b>{Post.Notification}</b>
-                      <button
-                        onClick={this.deleteNotification}
-                        value={Post._id}
-                        className="ml-5 badge btn-badge"
-                      >
-                        DONE
-                      </button>
-                      <button
-                        onClick={this.showTaskDetail}
-                        value={Post.Task_Name}
-                        className="ml-5 badge btn-badge"
-                      >
-                        SHOWDETAILS
-                      </button>
-                    </p>
-                  </div>
-                ))}
                 <button
-                  className="ml-3 mb-2 badge btn-danger"
+                  className="close mr-3 mt-2 "
+                  aria-label="Close"
                   onClick={this.handleClose}
                 >
-                  CLOSE
+                  <span aria-hidden="true">&times;</span>
                 </button>
+                <div className="mt-5">
+                  {this.props.Noty.Notifications.map(Post => (
+                    <div key={Post._id}>
+                      <p className="alert alert-info">
+                        <b>Task-Id:-{Post.Task_Name}</b>
+                        <br />
+                        <b>{Post.Notification}</b>
+                        <br />
+                        <button
+                          onClick={this.showTaskDetail}
+                          value={Post.Task_Name}
+                          className="ml-5 badge btn-badge"
+                        >
+                          SHOWDETAILS
+                        </button>
+                        <button
+                          onClick={this.deleteNotification}
+                          value={Post._id}
+                          className="ml-5 badge btn-badge"
+                        >
+                          DONE
+                        </button>
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Modal>
           ) : null}
@@ -108,7 +112,14 @@ class AdminProfile extends Component {
             onHide={this.handleCloseTaskDetail}
             aria-labelledby="contained-modal-title-vcenter"
           >
-            <div className="bg-warning">
+            <div className="bg">
+              <button
+                className="close mr-3 mt-2"
+                aria-label="Close"
+                onClick={this.handleCloseTaskDetail}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
               {this.props.TaskDetail.map(Detail => (
                 <div key={Detail._id} className="ml-3 mt-2 mb-2 ">
                   Title:-<b>{Detail.Task_Name}</b>
@@ -121,13 +132,6 @@ class AdminProfile extends Component {
                 </div>
               ))}
             </div>
-            <button
-              className="close"
-              aria-label="Close"
-              onClick={this.handleCloseTaskDetail}
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
           </Modal>
           <nav className="nav justify-content-end nav nav-tabs">
             <div className="nav">

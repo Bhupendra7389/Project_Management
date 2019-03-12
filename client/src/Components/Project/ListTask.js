@@ -163,6 +163,13 @@ class ListTask extends Component {
             aria-labelledby="contained-modal-title-vcenter"
           >
             <div className="bg">
+              <button
+                className="close mr-3 mt-2"
+                aria-label="Close"
+                onClick={this.handleClose}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
               <nav className="nav bg-light" />
               <div className="container">
                 <div className="row">
@@ -240,12 +247,20 @@ class ListTask extends Component {
               </div>
             </div>
           </Modal>
+
           <Modal
             show={this.state.showEdit}
             onHide={this.handleClose}
             aria-labelledby="contained-modal-title-vcenter"
           >
             <div className="bg">
+              <button
+                className="close mr-3 mt-2"
+                aria-label="Close"
+                onClick={this.handleClose}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
               <nav className="nav bg-light" />
               <div className="container">
                 <div className="row">
@@ -259,7 +274,7 @@ class ListTask extends Component {
                         onChange={this.onChange}
                         className="form-control"
                         placeholder="Title..."
-                        defaultValue={this.props.getTask.Task_Name}
+                        defaultValue={this.state.Task_Name}
                       />
                       <br />
                       <input
@@ -313,6 +328,7 @@ class ListTask extends Component {
               </div>
             </div>
           </Modal>
+
           <div className="container -fluid ">
             <h1 className="font-italic ">Task List</h1>
             {this.props.getListTask.map(post => (

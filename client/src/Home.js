@@ -4,6 +4,7 @@ import Noty from "noty";
 import "../node_modules/noty/lib/noty.css";
 import "../node_modules/noty/lib/themes/bootstrap-v4.css";
 import "./bootstrap.css";
+import "./App.css";
 
 class Home extends Component {
   showNotification = user => {
@@ -36,23 +37,22 @@ class Home extends Component {
             </li>
           </nav>
           <center>
-            <div class="mt-5 mask rgba-gradient align-items-center container">
-              <div class="container px-md-3 px-sm-0">
-                <div class="row wow fadeIn">
-                  <div class="col-md-12 mb-4 white-text text-center wow fadeIn">
-                    <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5">
-                      <h1>Project Management</h1>
-                    </h3>
-                    <hr class="hr-light my-4 w-75" />
-                    <h5 class="subtext-header mt-2 mb-4">
-                      Learn About the Project Management With the Great
-                      Technical, Functionalities.
+            <div className="mt-5 mask rgba-gradient align-items-center container">
+              <div className="container px-md-3 px-sm-0">
+                <div className="row wow fadeIn">
+                  <div className="col-md-12 mb-4 white-text text-center wow fadeIn">
+                    <h1 className="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5">
+                      Project Management
+                    </h1>
+                    <hr className="hr-light my-4 w-75" />
+                    <h5 className="subtext-header mt-2 mb-4">
+                      Learn About the Project Management System.
                     </h5>
                     <a
                       href="/DeveloperLog"
-                      class="btn btn-rounded btn-outline-white"
+                      className="btn btn-rounded btn-outline-white"
                     >
-                      <icon class="fas fa-home" /> VISIT-US
+                      <i className="fas fa-home"> VISIT-US</i>
                     </a>
                   </div>
                 </div>
