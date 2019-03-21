@@ -225,6 +225,13 @@ class DeveloperProfile extends Component {
                 <div className="bg">
                   {this.props.InviteFor.map(invite => (
                     <ul key={invite._id}>
+                      <button
+                        className="close mr-3 mt-2"
+                        aria-label="Close"
+                        onClick={this.closeSubModal}
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                       <div>
                         {invite.Project_Name}
                         <br />
@@ -241,13 +248,6 @@ class DeveloperProfile extends Component {
                         >
                           ACCEPT
                         </button>
-
-                        <button
-                          className="badge btn-danger"
-                          onClick={this.closeSubModal}
-                        >
-                          CLOSE
-                        </button>
                       </div>
                     </ul>
                   ))}
@@ -255,6 +255,13 @@ class DeveloperProfile extends Component {
               </Modal>
               <Modal size="lg" show={this.state.Show} onHide={this.handleClose}>
                 <div className="bg">
+                  <button
+                    className="close mr-3 mt-2"
+                    aria-label="Close"
+                    onClick={this.handleClose}
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                   {this.props.Projects.length &&
                     this.props.Projects.map(postData => (
                       <ul key={postData._id}>
@@ -270,12 +277,6 @@ class DeveloperProfile extends Component {
                         </div>
                       </ul>
                     ))}
-                  <button
-                    className="badge btn-primary"
-                    onClick={this.handleClose}
-                  >
-                    CLOSE
-                  </button>
                 </div>
               </Modal>
               <button className="badge btn-warning" onClick={this.handleShow}>
